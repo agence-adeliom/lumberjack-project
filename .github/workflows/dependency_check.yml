@@ -1,0 +1,85 @@
+name: Dependency Check
+
+.branches: &branch
+  - main
+  - master
+  - "*.x"
+
+on:
+  pull_request:
+    <<: *branch
+
+  pull_request_target:
+    <<: *branch
+
+permissions:
+  pull-requests: write
+  issues: write
+  repository-projects: write
+  contents: write
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  auto_approve_and_merge:
+    runs-on: ubuntu-latest
+    needs: [ ci ]
+    if: ${{ github.event.pull_request.user.login == 'dependabot[bot]' }}
+    env:
+      PR_URL: ${{github.event.pull_request.html_url}}
+      GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - run: composer config http-basic.gf-composer-proxy.arnaud-ritti.workers.dev licensekey ${{secrets.ORG_GRAVITYFORMS_KEY}}
+      - run: composer config http-basic.auth-acf-composer-proxy.pivvenit.net licensekey ${{secrets.ORG_ACF_PRO_KEY}}
+
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v1.3.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Add a label for direct dependencies
+        continue-on-error: true
+        if: startsWith(steps.metadata.outputs.dependency-type, 'direct')
+        run: gh pr edit "$PR_URL" --add-label "direct"
+      - name: Add a label for indirect dependencies
+        continue-on-error: true
+        if: startsWith(steps.metadata.outputs.dependency-type, 'indirect')
+        run: gh pr edit "$PR_URL" --add-label "indirect"
+      - name: Add a label production dependencies
+        continue-on-error: true
+        if: contains(steps.metadata.outputs.dependency-type, 'production')
+        run: gh pr edit "$PR_URL" --add-label "production"
+      - name: Add a label for development dependencies
+        continue-on-error: true
+        if: contains(steps.metadata.outputs.dependency-type, 'development')
+        run: gh pr edit "$PR_URL" --add-label "development"
+      - name: Add a label for security PRs
+        continue-on-error: true
+        if: steps.metadata.outputs.dependency-type.ghsa-id
+        run: gh pr edit "$PR_URL" --add-label "security"
+
+      - name: Get composer infos for ${{ steps.metadata.outputs.dependency-names }}
+        if: steps.metadata.outputs.package-ecosystem == 'composer'
+        id: package
+        run: |
+          type=$( composer info ${{ steps.metadata.outputs.dependency-names }} --all --format json --no-ansi | jq '.type' )
+          echo "::set-output name=type::$type"
+
+      - name: Enable auto-approve for Dependabot PRs
+        run: gh pr review --approve "$PR_URL"
+
+      - name: Enable auto-merge for Dependabot PRs
+        if: |
+          steps.metadata.outputs.update-type != 'version-update:semver-major'
+          || (steps.package && contains('["wordpress-muplugin", "wordpress-plugin", "wordpress-language"]', steps.package.outputs.type))
+        run: gh pr merge --auto --merge "$PR_URL"
