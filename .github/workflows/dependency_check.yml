@@ -1,16 +1,8 @@
 name: Dependency Check
 
-.branches: &branch
-  - main
-  - master
-  - "*.x"
-
 on:
-  pull_request:
-    <<: *branch
-
-  pull_request_target:
-    <<: *branch
+  pull_request: [main, master, "*.x"]
+  pull_request_target: [main, master, "*.x"]
 
 permissions:
   pull-requests: write

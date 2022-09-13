@@ -1,13 +1,8 @@
 name: CI
 
-.branches: &branch
-  - main
-  - master
-  - "*.x"
-
 on:
   push:
-    <<: *branch
+    branches: [main, master, "*.x"]
 
   workflow_call:
 

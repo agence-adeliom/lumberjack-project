@@ -1,9 +1,7 @@
 name: Sync labels
 on:
   push:
-    branches:
-      - main
-      - master
+    branches: [main, master, "*.x"]
     paths:
       - .github/labels.yml
 jobs:
