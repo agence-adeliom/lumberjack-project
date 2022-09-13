@@ -1,0 +1,4 @@
+*
+!.gitignore
+!bedrock-autoloader.php
+!register-theme-directory.php

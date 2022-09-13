@@ -1,0 +1,31 @@
+{
+    "private": true,
+    "scripts": {
+        "watch": "encore dev --watch",
+        "build:development": "encore dev --progress",
+        "build:production": "encore production --progress",
+        "build:email": "mjml views/emails/template-default.mjml -o views/emails/template-default.html.twig"
+    },
+    "author": "Adeliom",
+    "license": "ISC",
+    "browserslist": [
+        ">0.25%",
+        "not ie 11",
+        "not op_mini all"
+    ],
+    "devDependencies": {
+        "@symfony/webpack-encore": "^3.0.0",
+        "autoprefixer": "^10.4.8",
+        "eslint-webpack-plugin": "^3.2.0",
+        "file-loader": "^6.2.0",
+        "fork-ts-checker-webpack-plugin": "^7.2.13",
+        "glob": "^8.0.3",
+        "mjml": "^4.13.0",
+        "postcss": "^8.4.14",
+        "postcss-import": "^14.1.0",
+        "postcss-loader": "^7.0.1",
+        "tailwind-css-extensions": "^1.0.0",
+        "tailwindcss": "^3.1.6",
+        "ts-loader": "^9.3.1"
+    }
+}

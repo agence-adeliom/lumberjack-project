@@ -1,0 +1,24 @@
+.DS_Store
+# WordPress
+web/wp
+
+# Logs
+*.log
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor/
+/node_modules/
+
+# WP-CLI
+wp-cli.local.yml
+
+.composer
+.idea
+.php-cs-fixer.cache
+.phplint.cache
+.phplint-cache

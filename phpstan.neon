@@ -1,0 +1,21 @@
+parameters:
+    level: 5
+    reportUnmatchedIgnoredErrors: false
+    paths:
+        - web/app/themes/adeliom
+    excludePaths:
+        - node_modules
+        - vendor
+        - web/app/themes/adeliom/node_modules
+    scanDirectories:
+        - web/app
+        - web/wp
+        - config
+    ignoreErrors:
+        - '#Call to an undefined static method Rareloop\\Lumberjack\\Facades\\(.*)::\.*#'
+        - '#Call to an undefined static method Adeliom\\WP\\Extensions\\Facades\\(.*)::\.*#'
+        - '#Access to an undefined property Rareloop\\Lumberjack\\(.*)::\$.*#'
+        - '#Access to an undefined property App\\Providers\\(.*)::\$.*#'
+        - '#Constant WP_(.*) not found.#'
+        - '#Function route invoked with 1 parameter, 0 required.#'
+        - '#Function view invoked with (.*) parameters, 0 required.#'

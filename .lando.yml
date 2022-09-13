@@ -1,0 +1,79 @@
+name: lubmerjack
+recipe: lamp
+config:
+  php: '8.0'
+  composer_version: '2'
+  database: mariadb
+  webroot: web
+
+keys:
+  - id_rsa
+
+services:
+  appserver:
+    build_as_root:
+      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+      - apt-get install -y nodejs
+    overrides:
+      volumes:
+        - ~/.composer/auth.json:/var/www/.composer/auth.json
+
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver
+
+tooling:
+  git:
+    service: appserver
+  npm:
+    service: appserver
+  node:
+    service: appserver
+  npx:
+    service: appserver
+
+  phplint:
+    service: appserver
+  phpcbf:
+    service: appserver
+  phpcs:
+    service: appserver
+  phpstan:
+    service: appserver
+  prettier:
+    service: appserver
+    cmd: npx prettier
+  stylelint:
+    service: appserver
+    cmd: npx stylelint web/app/themes/adeliom/assets/**/*.{scss,pcss,css}
+  eslint:
+    service: appserver
+    cmd: npx eslint --ext .jsx,.js,.tsx,.ts web/app/themes/adeliom/assets/
+
+  wp:
+    service: appserver
+    cmd: vendor/bin/wp
+  deployer:
+    service: appserver
+    cmd: ./dep
+
+  theme:npm:
+    service: appserver
+    dir: /app/web/app/themes/adeliom
+    cmd: npm
+  theme:node:
+    service: appserver
+    dir: /app/web/app/themes/adeliom
+    cmd: node
+  theme:npx:
+    service: appserver
+    dir: /app/web/app/themes/adeliom
+    cmd: npx
+
+events:
+  post-start:
+    - npm install
+    - composer install
+    - cd /app/web/app/themes/adeliom && npm install
+    - cd /app/web/app/themes/adeliom && npm run build:development --if-present

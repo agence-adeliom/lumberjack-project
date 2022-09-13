@@ -1,0 +1,33 @@
+{% extends "layout.html.twig" %}
+
+
+{% block content %}
+    <div class="container mx-auto mb-8">
+        <h1 class="text-3xl mb-2">{{ __('Erreur 404') }}</h1>
+        <h2 class="text-2xl">{{ __('Cette page n\'existe plus.') }}</h2>
+    </div>
+
+    <div class="container mx-auto">
+        <div class="w-full flex flex-col lg:flex-row gap-4">
+            <div class="w-full lg:w-1/2">
+                <div class="text-2xl mb-2">{{ __("Quelques causes probables") }}</div>
+                <ul class="list-disc list-inside">
+                    <li>{{ __("Vous avez mal tapé l'URL dans la barre d'adresse;") }}</li>
+                    <li>{{ __("Vous avez cliqué sur un lien brisé qui pointe vers une page qui n'existe plus;") }}</li>
+                    <li>{{ __("Vous n'avez pas les droits suffisants pour accéder à cette page") }}</li>
+                </ul>
+            </div>
+            <div class="w-full lg:w-1/2">
+                <div class="text-2xl mb-2">{{ __("Pour retrouver votre chemin") }}</div>
+                <ul class="list-disc list-inside">
+                    <li>{{ __("Le plus simple est de repasser par") }} <a class="link"href="{{ site.link }}">{{ __("l'accueil") }}</a>
+                    </li>
+                    <li>{{ __("De faire une recherche via notre moteur de recherche") }}</li>
+                    {# <li>{{ __("Ou encore") }} <a class="link" href="{{ link(const_pages.contact.ID) }}">{{ __("nous contacter") }}</a> {{ __("pour nous le signaler.")}}</li> #}
+                    <li>{{ __("Ou encore") }} <a class="link" href="#">{{ __("nous contacter") }}</a> {{ __("pour nous le signaler.") }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

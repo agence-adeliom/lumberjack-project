@@ -1,0 +1,12 @@
+{% extends "layout.html.twig" %}
+
+{% block content %}
+    <div class="container mx-auto">
+        {% block content_title %}{% endblock %}
+        {% for post in posts %}
+            {% include ['tease/tease-'~post.post_type~'.html.twig', 'tease/tease.html.twig'] %}
+        {% endfor %}
+
+        {% include 'navigations/pagination.html.twig' %}
+    </div>
+{% endblock %}

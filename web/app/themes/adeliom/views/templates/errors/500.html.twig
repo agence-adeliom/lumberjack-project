@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="{{ asset('styles/global.css') }}"/>
+
+{% block content %}
+    <main class="wysiwyg error-500">
+        <div class="wrapper">
+            <img src="{{ asset('images/logo.svg') }}" alt="{{ site.title }}"/>
+
+            <div class="h3">Mince alors…</div>
+            <div class="h4 sub-title">Nous n’avons pas réussi à afficher ce que vous cherchiez.</div>
+
+            <p>Nos équipes en sont informées, tout devrait bientôt rentrer dans l’ordre.</p>
+
+            <p>Vous pouvez dès à présent tenter de recharger la page ou essayer d’y accéder plus tard.</p>
+
+            <p>En cas de besoin, nous restons joignables :</p>
+            <p>Mail : <a href="mailto:xxx@xxxx.com">xxx@xxxx.com</a></p>
+            <p>Tel : <a href="mailto:xxx@xxxx.com">xx xx xx xx xx xx</a></p>
+        </div>
+    </main>
+{% endblock %}

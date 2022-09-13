@@ -1,0 +1,145 @@
+# Désactiver l'affichage du contenu des répertoires
+Options All -Indexes
+# Alternative pour empêcher le listage des répertoires
+IndexIgnore *
+# Masquer les informations du serveur
+ServerSignature Off
+# Encodage par défaut des fichiers textes et HTML
+AddDefaultCharset UTF-8
+
+# Protéger les fichiers .htaccess et .htpasswds
+<FilesMatch "^.*(error_log|wp-config\.php|php.ini|\.[hH][tT][aApP].*)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# Éviter que l'on découvre l'identifiant d'un auteur
+# Merci à Jean-Michel Silone du groupe Facebook WP-Secure https://www.facebook.com/groups/wp.securite/
+<IfModule mod_rewrite.c>
+    RewriteCond %{QUERY_STRING} ^author=([0-9]*)
+    RewriteRule .* - [F]
+</IfModule>
+
+
+# Mise en cache des fichiers dans le navigateur
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+
+    ExpiresByType text/html "access plus 0 seconds"
+    ExpiresByType text/xml "access plus 0 seconds"
+    ExpiresByType application/xml "access plus 0 seconds"
+    ExpiresByType application/json "access plus 0 seconds"
+    ExpiresByType application/pdf "access plus 0 seconds"
+
+    ExpiresByType application/rss+xml "access plus 1 hour"
+    ExpiresByType application/atom+xml "access plus 1 hour"
+
+    ExpiresByType application/x-font-ttf "access plus 1 month"
+    ExpiresByType font/opentype "access plus 1 month"
+    ExpiresByType application/x-font-woff "access plus 1 month"
+    ExpiresByType application/x-font-woff2 "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
+
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+
+    ExpiresByType video/ogg "access plus 1 month"
+    ExpiresByType audio/ogg "access plus 1 month"
+    ExpiresByType video/mp4 "access plus 1 month"
+    ExpiresByType video/webm "access plus 1 month"
+
+    ExpiresByType text/css "access plus 6 month"
+    ExpiresByType application/javascript "access plus 6 month"
+
+    ExpiresByType application/x-shockwave-flash "access plus 1 week"
+    ExpiresByType image/x-icon "access plus 1 week"
+</IfModule>
+
+# En-têtes
+<IfModule mod_headers.c>
+    Header unset ETag
+    Header append Vary User-Agent env=!dont-vary
+    FileETag None
+
+    <FilesMatch "\.(ico|jpe?g|png|gif|swf)$">
+        Header set Cache-Control "public"
+    </FilesMatch>
+    <FilesMatch "\.(css)$">
+        Header set Cache-Control "public"
+    </FilesMatch>
+    <FilesMatch "\.(js)$">
+        Header set Cache-Control "private"
+    </FilesMatch>
+    <FilesMatch "\.(x?html?|php)$">
+        Header set Cache-Control "private, must-revalidate"
+    </FilesMatch>
+
+</IfModule>
+
+# Compressions des fichiers statiques
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/xhtml text/html text/plain text/xml text/javascript application/x-javascript text/css
+    BrowserMatch ^Mozilla/4 gzip-only-text/html
+    BrowserMatch ^Mozilla/4\.0[678] no-gzip
+    BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+    SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+</IfModule>
+
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE font/opentype
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/json
+
+<IfModule mod_rewrite.c>
+    # Protection des fichiers '.*'
+    RewriteEngine on
+    RewriteRule (^\.|/\.) - [F]
+
+    # Protection contre les injections de fichiers
+    RewriteCond %{REQUEST_METHOD} GET
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=(\.\.//?)+ [OR]
+    RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=/([a-z0-9_.]//?)+ [NC]
+    RewriteRule .* - [F]
+
+    # Bloquer l'utilisation de certains scripts
+    RewriteEngine On
+    RewriteBase /
+    RewriteRule ^wp-admin/includes/ - [F,L]
+    RewriteRule !^wp-includes/ - [S=3]
+    RewriteRule ^wp-includes/[^/]+\.php$ - [F,L]
+    RewriteRule ^wp-includes/js/tinymce/langs/.+\.php - [F,L]
+    RewriteRule ^wp-includes/theme-compat/ - [F,L]
+</IfModule>
+
+# Protections diverses (XSS, clickjacking et MIME-Type sniffing)
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header always append X-Frame-Options SAMEORIGIN
+    Header set X-Content-Type-Options: "nosniff"
+</IfModule>
+
+# BEGIN WordPress
+# Les directives (lignes) entre « BEGIN WordPress » et « END WordPress » sont générées
+# dynamiquement, et doivent être modifiées uniquement via les filtres WordPress.
+# Toute modification des directives situées entre ces marqueurs sera surchargée.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress

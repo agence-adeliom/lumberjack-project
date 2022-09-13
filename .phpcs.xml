@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<ruleset name="Adeliom Wordpress Standards">
+  <description>Adeliom Wordpress Coding Standards</description>
+
+  <file>web/app/themes/adeliom</file>
+
+  <exclude-pattern>web/app/themes/adeliom/**/*\.(inc|css|pcss|js)$</exclude-pattern>
+  <exclude-pattern>web/app/themes/adeliom/*\.(inc|css|pcss|js)$</exclude-pattern>
+  <exclude-pattern>*/vendor/*</exclude-pattern>
+  <exclude-pattern>*/node_modules/*</exclude-pattern>
+
+  <arg name="colors"/>
+  <arg value="p"/>
+
+  <!-- Run against a second ruleset -->
+  <rule ref="PSR12">
+    <exclude name="Generic.Files.LineLength"/>
+  </rule>
+</ruleset>

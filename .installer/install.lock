@@ -1,0 +1,11 @@
+{
+    "APP_KEY": "'base64:ZDk4ZDI4NGI3ZTYzNDE4OTgzYWMxOWE2NjU2N2EwZWFmOTU1ZTU3NQ=='",
+    "AUTH_KEY": "'<+)]:=R6(<uSTg_=]oUL#rZfjx1s(*T<`~*?=1Cdg]b#f0z]ywo~D2y9E9J44{No'",
+    "SECURE_AUTH_KEY": "'V`wcxO{U]zdXQXjHm8l!tzGfG%)E84^8SzG4,pIUWQ=|DYQ6%Ex7]Ibl4yb&iaME'",
+    "LOGGED_IN_KEY": "'uw^o6ai\/IN6h4W,XK{}{#Nvz1WJ[~&wPeh`=tCF9|OCc:wi]#Zk{a8eg%ks}bt-:'",
+    "NONCE_KEY": "'y{o[$Gpm]5dQWK6>R%>26(%xYIZzC!mH5ANY\"2!9tK6e2~y54K?H4L.RL_Au[\"\/v'",
+    "AUTH_SALT": "'Qu.eB|i)%w8{ho_UrV(Vb\"RRu0;;dlJjJz|9tL(SG<0:\"\"0]8>mEF2]O41AYt2L{'",
+    "SECURE_AUTH_SALT": "'^eH%t(vm4ucXZz9y0OTO\"uudQ,HP=;kd*p37FZKQlR4Y&zj@1IRO^\"8A6&tD}jKF'",
+    "LOGGED_IN_SALT": "'8s-xn;sCBb!SEvL\"\/TE^Q,.9lk.K33)LfK_Hv#(\/t(~3Ml\/XtGRY#;pD;kV+kH`?'",
+    "NONCE_SALT": "'bzKBu;YbRATgt}Ba$k*~DzXk7\/N,zTLBVSS;}X\";9s5\/1rMRq|X.<Afas\/TX`8`&'"
+}

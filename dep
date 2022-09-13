@@ -1,0 +1,4 @@
+#!/bin/bash
+eval $(ssh-agent -s)
+ssh-add /user/.ssh/id_rsa
+php vendor/bin/deployer.phar $@

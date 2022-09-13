@@ -1,0 +1,29 @@
+.base: &base
+  port: 22
+  hostname: example.com
+  remote_user: example
+  http_user: example
+  identity_file: /user/.ssh/id_rsa
+  forward_agent: true
+  ssh_arguments:
+    - '-o AddKeysToAgent=yes'
+    - '-o UserKnownHostsFile=/dev/null'
+    - '-o StrictHostKeyChecking=no'
+  # Infomaniak options
+  #bin/php: '/opt/php8.0/bin/php -d memory_limit=-1'
+  #bin/composer: '/opt/php8.0/bin/composer2.phar'
+
+
+hosts:
+  production:
+    <<: *base
+    app_env: production
+    deploy_path: ~/sites/prod
+    branch: main
+
+  staging:
+    <<: *base
+    app_env: staging
+    deploy_path: ~/sites/staging
+    branch: develop
+

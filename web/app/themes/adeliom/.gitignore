@@ -1,0 +1,15 @@
+.DS_Store
+vendor/
+node_modules/
+.idea/
+
+dist/
+build/
+mix-manifest.json
+yarn-error.log
+
+### Sass ###
+.sass-cache/
+*.css.map
+*.sass.map
+*.scss.map

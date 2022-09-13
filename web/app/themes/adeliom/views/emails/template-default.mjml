@@ -1,0 +1,166 @@
+<mjml>
+  <mj-head>
+    <mj-title>Adeliom</mj-title>
+    <mj-attributes>
+
+      <mj-all
+        font-family="Arial"
+        padding="0"
+        color="#000000"
+      ></mj-all>
+      <mj-class name="p" font-size="16px" line-height="25px"></mj-class>
+      <mj-class
+        name="h1"
+        font-size="34px"
+        font-weight="bold"
+        line-height="41px"
+        color="#FF9C00"
+      ></mj-class>
+
+      <mj-class
+        name="uptitle"
+        font-size="14px"
+        line-height="17px"
+        text-transform="uppercase"
+        color="#fff"
+        background-color="#0067A0"
+        height="25px"
+        inner-padding="0 5px 0 5px"
+      ></mj-class>
+
+      <mj-button
+        height="40px"
+        font-weight="bold"
+        font-size="16px"
+        inner-padding="0 32px 0 32px"
+        background-color="transparent"
+        border-radius="1000px"
+      ></mj-button>
+
+      <mj-class
+        name="btn-primary"
+        color="#FFFFFF"
+        background-color="#0CC280;"
+        text-align="left"
+      ></mj-class>
+
+       <mj-class
+        name="btn-secondary"
+        color="#242424"
+        background-color="#FFFFFF"
+        text-align="left"
+        border="1px solid #242424"
+      ></mj-class>
+
+
+      <mj-class
+        name="info-text"
+        color="#706B80"
+        font-size="14px"
+        line-height="22px"
+        letter-spacing="0.04"
+      ></mj-class>
+    </mj-attributes>
+  </mj-head>
+
+  <mj-body background-color="#FFFFFF">
+    <mj-section>
+      <mj-column width="100%">
+        <mj-image
+          src="https://independant.io/wp-content/uploads/logo.png"
+          alt="header image"
+          padding="0px"
+          width="200px"
+        ></mj-image>
+      </mj-column>
+    </mj-section>
+
+    <mj-section padding="20px" background-color="#fff">
+      <mj-column>
+
+        <mj-text mj-class="h1" padding-bottom="24px"
+          >{{ title }}</mj-text
+        >
+
+        <mj-text mj-class="p" padding-bottom="40px">
+            {{ content }}
+        </mj-text>
+
+<mj-raw>
+    {% if primaryBtn is defined and primaryBtn %}
+</mj-raw>
+          <mj-button
+            mj-class="btn-primary"
+            href="{{ primaryBtn.url }}"
+            padding-bottom="24px"
+            align="left"
+            >{{ primaryBtn.title }}</mj-button
+          >
+
+<mj-raw>
+  {% endif %}
+</mj-raw>
+
+<mj-raw>
+    {% if secondaryBtn is defined and secondaryBtn %}
+</mj-raw>
+
+           <mj-button
+            mj-class="btn-secondary"
+            href="{{ secondaryBtn.url }}"
+            padding-bottom="24px"
+            align="left"
+            >{{ secondaryBtn.title }}</mj-button>
+
+<mj-raw>
+  {% endif %}
+</mj-raw>
+
+        <mj-divider border-width="1px" padding-bottom="24px" border-style="solid" border-color="#D2D1DB" />
+
+        <mj-text mj-class="p" padding-bottom="24px">Retrouvez-nous sur :</mj-text>
+
+        <mj-table>
+            <tr style="border-bottom:1px solid #ecedee;text-align:left;padding:15px 0;">
+              <a href="">
+                          <img src="" width="50px" style="padding:0 4px;"/>
+              </a>
+            </tr>
+            <tr>
+              <a href="">
+                          <img src="" width="50px" style="padding:0 4px;"/>
+              </a>
+            </tr>
+            <tr>
+              <a href="">
+                          <img src="" width="50px" style="padding:0 4px;"/>
+                     </a>
+            </tr>
+            <tr>
+              <a href="">
+                          <img src="" width="50px" style="padding:0 4px;"/>
+              </a>
+            </tr>
+
+          </mj-table>
+
+      </mj-column>
+    </mj-section>
+
+    <mj-wrapper padding-bottom="100px">
+      <mj-section padding-top="24px" padding-bottom="100px">
+        <mj-column width="100%" padding="0">
+          <mj-text mj-class="info-text"
+            >Ceci est un mail automatique, merci de ne pas y répondre.</mj-text
+          >
+          <mj-text mj-class="info-text"
+            >Pour plus d'information n'hésitez pas à
+            <a href="http://www.ugg.com/" style="color: #13002C;"
+              >nous contacter</a
+            ></mj-text
+          >
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>

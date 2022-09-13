@@ -1,0 +1,23 @@
+{
+    "web/app/themes/adeliom/assets/**/*.{js,jsx,ts,tsx,json}": [
+        "lando prettier --write",
+        "lando eslint --fix"
+    ],
+    "web/app/themes/adeliom/assets/**/*.{css,pcss,scss}": [
+        "lando prettier --write",
+        "lando stylelint --fix"
+    ],
+    "web/app/themes/**/*.{md}": [
+        "lando prettier --write"
+    ],
+    "web/app/themes/**/*.{php}": [
+        "lando phplint --no-ansi",
+        "lando phpcbf --no-colors",
+        "lando phpcs --no-colors"
+    ],
+    "packages/**/*.{php}": [
+        "lando phplint --no-ansi",
+        "lando phpcbf --no-colors",
+        "lando phpcs --no-colors"
+    ]
+}

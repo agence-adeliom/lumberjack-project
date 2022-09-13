@@ -1,0 +1,154 @@
+{
+    "name": "agence-adeliom/lumberjack-project",
+    "description": "A Lumberjack template",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.0.2",
+        "ext-dom": "*",
+        "ext-json": "*",
+        "advanced-custom-fields/advanced-custom-fields-pro": "^5.9",
+        "agence-adeliom/acf-icon-picker": "^1.0",
+        "composer/installers": "^1.0 | ^2.0",
+        "djboris88/timber-debugger": "^1.1",
+        "doctrine/annotations": "^1.6",
+        "koodimonni-language/fr_fr": "*",
+        "oscarotero/env": "^2.1",
+        "rareloop/lumberjack-core": "^5.0",
+        "rareloop/lumberjack-email": "^1.4",
+        "rareloop/lumberjack-validation": "^1.1",
+        "rbdwllr/wordpress-salts-generator": "^0.2.0",
+        "roots/bedrock-autoloader": "^1.0",
+        "roots/bedrock-disallow-indexing": "^2.0",
+        "roots/wordpress": "^6.0",
+        "roots/wp-config": "^1.0",
+        "roots/wp-password-bcrypt": "^1.0",
+        "roots/wp-stage-switcher": "^2.1",
+        "stayallive/wp-sentry": "*",
+        "symfony/dotenv": "^5.4",
+        "symfony/polyfill-php74": "^1.26",
+        "symfony/polyfill-php80": "^1.26",
+        "symfony/polyfill-php81": "^1.26",
+        "symfony/web-link": "^5.4",
+        "vinkla/extended-acf": "^13.0",
+        "vlucas/phpdotenv": "^5.3",
+        "wp-cli/wp-cli-bundle": "*",
+        "wpackagist-plugin/disable-comments": "*",
+        "wpackagist-plugin/seo-by-rank-math": "*",
+        "wpackagist-plugin/wordfence": "*",
+        "wpackagist-plugin/worker": "*"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
+        "deployer/deployer": "^7",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "nunomaduro/phpinsights": "^2.4",
+        "overtrue/phplint": "^4.3",
+        "phpstan/phpstan": "^1.6",
+        "psy/psysh": "^0.11.8",
+        "rector/rector": "^0.14.0",
+        "roave/security-advisories": "dev-latest",
+        "squizlabs/php_codesniffer": "^3.5",
+        "symplify/monorepo-builder": "^11.1",
+        "wp-coding-standards/wpcs": "^2.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Adeliom\\Installer\\": ".installer"
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://auth-acf-composer-proxy.pivvenit.net/wordpress-muplugin/"
+        },
+        {
+            "type": "composer",
+            "url": "https://gf-composer-proxy.arnaud-ritti.workers.dev/wordpress-muplugin/"
+        },
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org",
+            "only": [
+                "wpackagist-plugin/*",
+                "wpackagist-theme/*"
+            ]
+        },
+        {
+            "type": "composer",
+            "url": "https://wp-languages.github.io",
+            "only": [
+                "koodimonni-language/*",
+                "koodimonni-plugin-language/*",
+                "koodimonni-theme-language/*"
+            ]
+        }
+    ],
+    "config": {
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "allow-plugins": {
+            "ffraenz/private-composer-installer": true,
+            "composer/installers": true,
+            "koodimonni/composer-dropin-installer": true,
+            "roots/wordpress-core-installer": true,
+            "pivvenit/acf-pro-installer": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "arnaud-ritti/gravityforms-installer": true
+        }
+    },
+    "extra": {
+        "dropin-paths": {
+            "web/app/languages/": [
+                "vendor:koodimonni-language"
+            ],
+            "web/app/languages/plugins/": [
+                "vendor:koodimonni-plugin-language"
+            ],
+            "web/app/languages/themes/": [
+                "vendor:koodimonni-theme-language"
+            ]
+        },
+        "installer-paths": {
+            "web/app/mu-plugins/{$name}/": [
+                "type:wordpress-muplugin",
+                "roots/wp-stage-switcher",
+                "soberwp/intervention",
+                "agence-adeliom/acf-icon-picker"
+            ],
+            "web/app/plugins/{$name}/": [
+                "type:wordpress-plugin"
+            ],
+            "web/app/themes/{$name}/": [
+                "type:wordpress-theme"
+            ]
+        },
+        "wordpress-install-dir": "web/wp"
+    },
+    "scripts": {
+        "symfony:dump-env": [
+            "Adeliom\\Installer\\Install::dumpEnv"
+        ],
+        "setup": [
+            "Adeliom\\Installer\\Install::buildEnv"
+        ],
+        "package_keys": [
+            "Adeliom\\Installer\\Install::setPackageKeys"
+        ],
+        "pre-install-cmd": [
+            "@package_keys"
+        ],
+        "post-install-cmd": [
+            "@setup"
+        ],
+        "test": [
+            "phplint",
+            "phpcbf",
+            "phpcs",
+            "phpstan"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
