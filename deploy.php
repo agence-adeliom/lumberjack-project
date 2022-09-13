@@ -13,6 +13,7 @@ if($origin = exec("git config --get remote.origin.url")){
 
 set('repository_name', $repo);
 set('repository', 'git@github.com:{{repository_name}}.git');
+set('theme', "adeliom");
 
 
 set('shared_dirs', ['web/app/uploads', 'web/app/sessions']);
@@ -20,7 +21,6 @@ set('writable_dirs', ['web/app/uploads', 'web/app/sessions']);
 set('writable_mode', "chmod");
 set('writable_recursive', true);
 
-set('theme', "adeliom");
 
 // Hosts
 import('.inventory.yaml');

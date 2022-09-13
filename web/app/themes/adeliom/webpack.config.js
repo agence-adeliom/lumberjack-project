@@ -30,7 +30,7 @@ Encore
     .setOutputPath('build/')
     // public path used by the web server to access the output path
     .setPublicPath(`/build`)
-    .setManifestKeyPrefix('')
+    //.setManifestKeyPrefix('')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
     .splitEntryChunks()

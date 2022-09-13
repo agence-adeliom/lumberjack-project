@@ -9,23 +9,6 @@ class Install
 {
     const CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!"#$%&()*+,-./:;<=>?@[]^_`{|}~';
 
-    public static function setPackageKeys(Event $event){
-        if(!is_file(dirname(__DIR__) . "/.env")) {
-            $projectENV = file_get_contents(dirname(__DIR__) . "/.env.example");
-            file_put_contents(dirname(__DIR__) . "/.env", $projectENV);
-        }else{
-            $projectENV = file_get_contents(dirname(__DIR__) . "/.env");
-        }
-
-        foreach ([
-            "ACF_PRO_KEY" => base64_decode("YjNKa1pYSmZhV1E5TkRBMk9UWjhkSGx3WlQxa1pYWmxiRzl3WlhKOFpHRjBaVDB5TURFMExUQTVMVEkySURFek9qVXpPakkx"),
-            "GRAVITYFORMS_KEY" => base64_decode("MDYxNjhkYzA2YzQ1NWRjYWVkNmU0NzM2Y2EzNTBkMjg=")
-         ] as $k => $v){
-            $projectENV = preg_replace('/^'.$k.'=?.+$/m', $k . '=' . $v, $projectENV);
-        }
-        file_put_contents(dirname(__DIR__) . "/.env", $projectENV);
-    }
-
     public static function buildEnv(Event $event)
     {
         if(!is_file(dirname(__DIR__) . "/.env")) {
@@ -47,7 +30,7 @@ class Install
             $projectVars = json_decode(file_get_contents(dirname(__DIR__) . "/.installer/install.lock"));
         }
 
-        foreach (array_merge($projectVars, ["ACF_PRO_KEY" => base64_decode("YjNKa1pYSmZhV1E5TkRBMk9UWjhkSGx3WlQxa1pYWmxiRzl3WlhKOFpHRjBaVDB5TURFMExUQTVMVEkySURFek9qVXpPakkx")]) as $k => $v){
+        foreach ($projectVars as $k => $v){
             $projectENV = preg_replace('/^'.$k.'=?.+$/m', $k . '=' . $v, $projectENV);
         }
         file_put_contents(dirname(__DIR__) . "/.env", $projectENV);
@@ -97,16 +80,22 @@ class Install
         return $salts;
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function generateAppKey(){
-        return "'".'base64:' . base64_encode(sha1(mt_rand(1, 90000) . self::salt(32)))."'";
+        return "'".'base64:' . base64_encode(sha1(random_int(1, 90000) . self::salt(32)))."'";
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function salt($length = 64): string
     {
         $charactersLength = strlen(self::CHARS);
         $randomString = '';
         for ($i = 0; $i < $length; $i++) {
-            $randomString .= self::CHARS[rand(0, $charactersLength - 1)];
+            $randomString .= self::CHARS[random_int(0, $charactersLength - 1)];
         }
         return "'".$randomString."'";
     }

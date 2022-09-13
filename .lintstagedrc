@@ -7,10 +7,10 @@
         "lando prettier --write",
         "lando stylelint --fix"
     ],
-    "web/app/themes/**/*.{md}": [
+    "web/app/themes/**/*.md": [
         "lando prettier --write"
     ],
-    "web/app/themes/**/*.{php}": [
+    "web/app/themes/**/*.php": [
         "lando phplint --no-ansi",
         "lando phpcbf --no-colors",
         "lando phpcs --no-colors"

@@ -16,9 +16,8 @@ use Roots\WPConfig\Config;
 
 Config::define('WP_DEBUG', false);
 Config::define('DISALLOW_FILE_MODS', true);
-
 Config::define('DISALLOW_INDEXING', true);
-
 Config::define('ENABLED_HTTP_LOGIN', true);
+
 //Config::define('HTTP_USER', "example"); // default : adeliom
 //Config::define('HTTP_PASSWD', password_hash("example", PASSWORD_DEFAULT));  // default : @deliom[YEAR]! -> ex: @deliom2022!
