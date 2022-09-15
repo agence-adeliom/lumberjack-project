@@ -1,1 +1,1 @@
-import "../../tailwind/index";
+import "@tailwind";

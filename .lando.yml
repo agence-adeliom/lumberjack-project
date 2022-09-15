@@ -1,7 +1,7 @@
-name: lubmerjack
+name: lumberjack
 recipe: lamp
 config:
-  php: '8.0'
+  php: '8.1'
   composer_version: '2'
   database: mariadb
   webroot: web
@@ -12,11 +12,11 @@ keys:
 services:
   appserver:
     build_as_root:
-      - curl -sL https://deb.nodesource.com/setup_16.x | bash -
+      - curl -sL https://deb.nodesource.com/setup_18.x | bash -
       - apt-get install -y nodejs
     overrides:
       volumes:
-        - ~/.composer/auth.json:/var/www/.composer/auth.json
+        - ~/.composer/auth.json:/var/www/.composer/auth.json:ro
 
   mailhog:
     type: mailhog
@@ -46,7 +46,7 @@ tooling:
     cmd: npx prettier
   stylelint:
     service: appserver
-    cmd: npx stylelint web/app/themes/adeliom/assets/**/*.{scss,pcss,css}
+    cmd: npx stylelint web/app/themes/adeliom/assets/**/*.{pcss,css}
   eslint:
     service: appserver
     cmd: npx eslint --ext .jsx,.js,.tsx,.ts web/app/themes/adeliom/assets/

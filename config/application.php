@@ -129,6 +129,7 @@ Config::define('WP_DEBUG_DISPLAY', env('WP_DEBUG_DISPLAY') ?? false);
 Config::define('WP_DEBUG_LOG', Config::get('WP_DEBUG') ? "debug.log" : false);
 Config::define('SCRIPT_DEBUG', false);
 
+error_reporting(E_ALL & ~E_WARNING & ~E_DEPRECATED & ~E_USER_DEPRECATED & ~E_NOTICE);
 @ini_set('display_errors', '0');
 
 /**
