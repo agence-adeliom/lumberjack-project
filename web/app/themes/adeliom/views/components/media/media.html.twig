@@ -1,0 +1,48 @@
+{% set media = media ?? fields.media %}
+
+{% set class = {
+    base: "",
+    default: {}
+}|mergeClass({}, className) %}
+
+{% embed "components/media/partials/wrapper-media.html.twig" with {wrapper} %}
+
+    {% block content %}
+
+        {% if media.type != "video" %}
+
+            {% if media.image %}
+
+                {% set optionsMedia = {
+                    className: class,
+                    media: media.image,
+                }|merge(optionsMedia ?? {}) %}
+
+                {% include "components/media/image.html.twig" with optionsMedia only %}
+
+            {% endif %}
+
+        {% else %}
+
+            {% set optionsMedia = {
+                className: class,
+                media: media.video.thumbnail
+            }|merge(optionsMedia ?? {}) %}
+
+            {% include "components/media/image.html.twig" with optionsMedia only %}
+
+            {% include "components/buttons/btn-play.html.twig" %}
+
+            {% embed "components/overlay/modal.html.twig" %}
+                {% block content %}
+                    {% include "components/media/video.html.twig" with {
+                        video: media.video
+                    } only %}
+                {% endblock %}
+            {% endembed %}
+
+        {% endif %}
+
+    {% endblock %}
+
+{% endembed %}

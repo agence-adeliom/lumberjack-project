@@ -1,0 +1,46 @@
+{% set class = {
+    base: "",
+    default: {
+        "background": "white"
+    },
+    background: {
+        "none": "",
+        "white": "bg-white",
+        "black": "bg-black"
+    }
+}|mergeClass({
+    background: fields.dark_mode ? "black" : background
+},
+    className,
+    fields.dark_mode ? "dark",
+    fields.margin.top_remove ? "pt-0 lg:pt-0",
+    fields.margin.bottom_remove ? "pb-0 lg:pb-0"
+)%}
+
+{% set background = "" %}
+
+{% set containerClass = {
+    base: "",
+    default: {
+        "containerType": "normal"
+    },
+    containerType: {
+        "normal": "container",
+        "fluid": "max-w-[1400px] m-auto px-20"
+    }
+}|mergeClass({containerType}) %}
+
+<section class="{{ class }}" {% if fields.anchor %}id="{{ fields.anchor }}"{% endif %}>
+    <div class="{{ containerClass }}">
+
+        {% block intro %}{% endblock %}
+
+        {% block content %}{% endblock %}
+
+        {% block cta %}{% endblock %}
+
+    </div>
+</section>
+
+
+

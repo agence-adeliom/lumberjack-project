@@ -1,0 +1,12 @@
+{% set wrapperClass = {
+    base: "",
+    default: {}
+}|mergeClass({}, wrapper.wrapperClassName) %}
+
+{% if media.type != "video" %}
+<div class="{{ wrapperClass }}">
+{% else %}
+<div class="relative {{ wrapperClass }}" x-data="{ showModal: false}">
+    {% endif %}
+    {% block content %}{% endblock %}
+</div>

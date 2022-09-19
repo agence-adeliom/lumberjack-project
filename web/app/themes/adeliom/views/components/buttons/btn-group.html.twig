@@ -1,0 +1,29 @@
+{% set class = {
+    base: "",
+    default: {}
+}|mergeClass({}, className) %}
+
+{% set content = fields.btns ?? content %}
+
+{% if content %}
+
+    <div class="{{ class }}">
+
+        {% for btn in content %}
+
+            {% set classes = '' %}
+
+            {% if loop.index > 1 %}
+                {% set classes = classes ~ 'mt-4 lg:ml-4' %}
+            {% endif %}
+
+            {% include 'components/buttons/btn.html.twig' with {
+                className: classes
+            } %}
+
+        {% endfor %}
+
+    </div>
+
+{% endif %}
+

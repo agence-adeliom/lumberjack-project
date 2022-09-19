@@ -1,0 +1,67 @@
+{% set content = fields.content ?? null %}
+
+{% set class = {
+    base: "wysiwyg",
+    default: {},
+    marginBottom: {
+        "none": "",
+        "small": "mb-4",
+        "normal": "mb-6",
+        "medium": "mb-8",
+        "large": "mb-10"
+    },
+    marginTop: {
+        "small": "mt-4",
+        "normal": "mt-6",
+        "medium": "mt-8",
+        "large": "mt-10"
+    }
+}|mergeClass({
+    marginTop,
+    marginBottom
+}, className) %}
+
+{% if content or (headline or title or wysiwyg or button)%}
+    <div class="wysiwyg {{ class }}">
+
+        {% set headline = {
+            title: content.up_title,
+            size: "headline",
+            className: "mb-2"
+        }|merge(headline ?? {}) %}
+
+        {% include "components/typography/heading.html.twig" with headline %}
+
+        {% set title = {
+            title: content.title,
+        }|merge(title ?? {}) %}
+
+        {% include "components/typography/heading.html.twig" with title %}
+
+        {# Marge selon le level du titre #}
+        {% set paragraphMargin = {
+            1: "mt-10",
+            2: "mt-10",
+            3: "mt-10",
+            4: "mt-5",
+            5: "mt-4",
+        } %}
+
+        {% set wysiwyg = {
+            content: content.wysiwyg,
+            wysiwyg: true,
+            size: "base",
+            className: paragraphMargin[title.size]
+        }|merge(wysiwyg ?? {}) %}
+
+        {% include "components/typography/text.html.twig" with wysiwyg %}
+
+        {% set button = {
+            btn: content.btn,
+            className: "mt-6"
+        }|merge(button ?? {}) %}
+
+        {% include "components/buttons/btn.html.twig" with button %}
+
+    </div>
+{% endif %}

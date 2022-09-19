@@ -1,0 +1,32 @@
+{% set class = {
+    base: "",
+    default: {
+        size: "1",
+        color: "black"
+    },
+    size: {
+        1 : "",
+        2 : "",
+        3 : "",
+        4 : "",
+        5 : "",
+        6 : "",
+        headline: "",
+    },
+    color: {
+        current: "text-current",
+        white: "text-white",
+        black: "text-black"
+    }
+}|mergeClass({color,size}, className) %}
+
+{% set title = title ?? fields.title %}
+
+{% set tag = title.tag ? title.tag : "div" %}
+{% set content = title.content ?? title %}
+
+{% if content %}
+    <{{ tag }} class="{{ class }}">
+        {{ content }}
+    </{{ tag }}>
+{% endif %}

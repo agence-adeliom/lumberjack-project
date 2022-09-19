@@ -1,0 +1,39 @@
+{% set class = {
+    base: 'btn',
+    default: {
+        type: "primary",
+        size: "medium"
+    },
+    type: {
+        primary: "btn--primary",
+        secondary: "btn--secondary"
+    },
+    size: {
+        small: "",
+        medium: "",
+        large: "",
+    }
+}|mergeClass({
+    "type": type ?? btn.type,
+    size
+}, className) %}
+
+{% set btn = btn.content ?? btn %}
+
+{% set content = btn.title ?? "" %}
+{% set url = btn.url ?? "" %}
+{% set target = btn.target ?? "" %}
+{% set id = btn.id ?? "" %}
+{% set tag = btn.tag ?? "div" %}
+
+{% if url %}
+    {% set tag = 'a' %}
+{% endif %}
+
+{% set attributes = attributes ?? "" %}
+
+{% if content %}
+    <{{ tag }} id="{{ id }}" class="{{ class }}" {{ attributes }} {% if url %}href="{{ url }}"{% endif %} {% if target %}target="{{ target }}"{% endif %}>
+        {{ content }}
+    </{{ tag }}>
+{% endif %}

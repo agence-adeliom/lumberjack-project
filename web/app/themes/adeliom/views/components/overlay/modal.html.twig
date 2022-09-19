@@ -1,0 +1,15 @@
+<div x-on:click="showModal = true; document.querySelector('body').classList.add('overflow-hidden'); for (var p = 0 , m; m = document.querySelectorAll('.popup-media')[p]; p++) { m.classList.add('z-[10000000]') }"
+     class="absolute z-20 top-0 w-full h-full left-0">
+</div>
+
+<div x-cloak x-show="showModal" x-transition.opacity
+     class="fixed w-screen h-screen modal-open left-0 top-0 bg-black/[0.6]">
+    <div class="absolute h-12 w-12 top-10 right-10 bg-brand-02 border border-white z-10 rounded-xs flex-center">
+        {# icone #}
+    </div>
+    <div class="w-full h-full relative flex-center">
+        <div class="bg-white" x-show="showModal" @click.outside="showModal = false; for (var i = 0 , f; f = document.querySelectorAll('.frame')[i]; i++) { f.src = f.src }; document.querySelector('body').classList.remove('overflow-hidden'); for (var p = 0 , m; m = document.querySelectorAll('.popup-media')[p]; p++) { m.classList.remove('z-[10000000]') }">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</div>

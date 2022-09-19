@@ -1,0 +1,44 @@
+{% set class = {
+    default: {
+        padding: "medium"
+    },
+    padding: {
+        "none": "",
+        "xs": "p-3",
+        "small": "p-6",
+        "normal": "p-8",
+        "medium": "p-8 xl:p-10",
+        "large": "p-8 xl:p-14",
+        "xl": "p-6 lg:p-12"
+    },
+    background: {
+        "none": "",
+        "white": "bg-white",
+        "black": "bg-black"
+    },
+    rounded: {
+        "none": "",
+        "xs": "rounded",
+        "small": "rounded-sm",
+        "normal": "rounded-md",
+        "lg": "rounded-lg",
+        "medium": "rounded-xl",
+        "large": "rounded-2xl",
+    },
+    shadow: {
+        "none": "",
+        "sm": "shadow-sm",
+        "md": "shadow-md",
+        "lg": "shadow-lg",
+        "xl": "shadow-xl",
+    }
+}|mergeClass({
+    padding,
+    background,
+    rounded,
+    shadow
+}, className) %}
+
+<div class="{{ class }}">
+    {% block content %}{% endblock %}
+</div>

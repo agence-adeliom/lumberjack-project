@@ -1,15 +1,5 @@
-<header id="header" class="w-full border-b border-gray-400">
-    {% if top_menu %}
-        <div class="border-b border-gray-400">
-            <div class="container mx-auto py-2">
-                {% include "navigations/menu.html.twig" with {'menu': top_menu.get_items} %}
-            </div>
-        </div>
-    {% endif %}
+<div>
+    {% include "components/navigations/menu.html.twig" with {'menu': top_menu.get_items} %}
+</div>
 
-    <div class="container mx-auto py-4">
-        <div class="w-full">
-            {% include "navigations/menu.html.twig" with {'menu': menu.get_items, 'class': 'list-reset flex justify-end flex-1 items-center'} %}
-        </div>
-    </div>
-</header>
+{% include "components/navigations/menu.html.twig" with {'menu': menu.get_items} %}

@@ -1,5 +1,5 @@
 {% if menu %}
-    <ul class="{{ class|default('') }}">
+    <ul>
         {% for item in menu %}
             <li class="{{ isChildren ? item.classes | join(' ') : ' ' ~ item.classes | join(' ') }}">
                 {% if 'menu-item-has-children' in item.classes %}
@@ -8,7 +8,7 @@
                     {% set icon = '' %}
                 {% endif %}
                 <a target="{{ item.target }}" href="{{ item.link }}">{{ item.title }}{{ icon }}</a>
-                {% include "navigations/menu.html.twig" with {'menu': item.get_children, 'isChildren': true} %}
+                {% include "components/navigations/menu.html.twig" with {'menu': item.get_children, 'isChildren': true} %}
             </li>
         {% endfor %}
     </ul>
