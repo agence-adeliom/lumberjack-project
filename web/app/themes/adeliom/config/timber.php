@@ -8,6 +8,7 @@ return [
      */
     'paths' => [
         'views/components',
+        'views/blocks',
         'views/templates',
         'views',
     ],

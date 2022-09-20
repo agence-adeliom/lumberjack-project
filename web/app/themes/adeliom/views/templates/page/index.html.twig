@@ -4,9 +4,9 @@
     <div class="container mx-auto">
         {% block content_title %}{% endblock %}
         {% for post in posts %}
-            {% include ['tease/tease-'~post.post_type~'.html.twig', 'tease/tease.html.twig'] %}
+            {% include ['components/tease/tease-'~post.post_type~'.html.twig', 'components/tease/tease.html.twig'] %}
         {% endfor %}
 
-        {% include 'navigations/pagination.html.twig' %}
+        {% include 'components/navigations/pagination.html.twig' %}
     </div>
 {% endblock %}

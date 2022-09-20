@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Blocks;
+namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
@@ -15,21 +15,20 @@ use Traversable;
  */
 class QuoteBlock extends AbstractBlock
 {
+    public const NAME = "quote";
+    public const TITLE = "Citation";
+    public const DESCRIPTION = "Bloc permettant la mise en avant d’un témoignage ou d’une citation";
+
     public function __construct()
     {
         parent::__construct([
-            'title' => __('Citation'),
-            'description' => __('Bloc permettant la mise en avant d’un témoignage ou d’une citation'),
-            'category' => GutBlockName::CONTENT,
             'mode' => 'edit',
+            'category' => GutBlockName::CONTENT,
             'dir' => BlocksTwigPath::CONTENT
         ]);
     }
 
-    /**
-     * @return Traversable
-     */
-    protected function registerFields(): \Traversable
+    public static function getFields(): ?\Traversable
     {
         yield HeadingField::make();
     }

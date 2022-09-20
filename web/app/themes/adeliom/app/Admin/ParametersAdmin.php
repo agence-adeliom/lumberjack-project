@@ -21,20 +21,9 @@ use Traversable;
  */
 class ParametersAdmin extends AbstractAdmin
 {
+    public const TITLE = 'Paramètres';
+    public const IS_OPTION_PAGE = true;
     public const CONFIG_KEY = 'config';
-
-    public static function getTitle(): string
-    {
-        return 'Paramètres';
-    }
-
-    /**
-     * Register has option page
-     */
-    public static function hasOptionPage(): bool
-    {
-        return true;
-    }
 
     public static function getStyle(): string
     {

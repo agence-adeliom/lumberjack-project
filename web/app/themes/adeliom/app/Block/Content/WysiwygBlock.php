@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Blocks;
+namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
-use App\Admin\Fields\Tabs\ContentTab;
-use App\Admin\Fields\Tabs\LayoutTab;
-use App\Admin\Fields\Typography\WysiwygField;
+use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 
@@ -18,18 +18,25 @@ use App\Enum\GutBlockName;
  */
 class WysiwygBlock extends AbstractBlock
 {
+    public const NAME = "wysiwyg";
+    public const TITLE = "Texte";
+    public const DESCRIPTION = "Bloc de texte";
+
     public function __construct()
     {
         parent::__construct([
-            'title' => __('Texte centré'),
-            'description' => __('Bloc de texte centré'),
-            'category' => GutBlockName::CONTENT,
             'mode' => 'edit',
-            'dir' => BlocksTwigPath::CONTENT
+            'category' => GutBlockName::CONTENT,
+            'dir' => BlocksTwigPath::CONTENT,
+            'supports' => [
+                "align" => ['left', 'right', 'center'],
+                "anchor" => true
+            ],
+            'align' => 'center'
         ]);
     }
 
-    protected function registerFields(): \Traversable
+    public static function getFields(): ?\Traversable
     {
         yield from ContentTab::make();
         yield HeadingField::group();
@@ -37,10 +44,6 @@ class WysiwygBlock extends AbstractBlock
 
         yield from LayoutTab::make([
             LayoutTab::DARK_MODE
-        ]);
-
-        yield from SettingsTab::make([
-            SettingsTab::ANCHOR
         ]);
     }
 }

@@ -1,8 +1,6 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
-
         {% include "components/typography/heading.html.twig" %}
-        {% include "components/typography/text.html.twig" %}
-
+        {% include "components/typography/text.html.twig" with {content: fields.wysiwyg}%}
     {% endblock %}
 {% endembed %}

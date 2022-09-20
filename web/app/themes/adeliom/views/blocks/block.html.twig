@@ -30,7 +30,9 @@
     }
 }|mergeClass({containerType}) %}
 
-<section class="{{ class }}" {% if fields.anchor %}id="{{ fields.anchor }}"{% endif %}>
+{% set anchor = block.anchor|default(fields.anchor)|default(null) %}
+
+<section class="{{ class }}" {% if anchor %}id="{{ anchor }}"{% endif %}>
     <div class="{{ containerClass }}">
 
         {% block intro %}{% endblock %}
