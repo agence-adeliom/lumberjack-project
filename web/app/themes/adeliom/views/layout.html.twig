@@ -29,7 +29,7 @@
 
     {% block header %}
         {% if hide_header is not defined %}
-            {% include 'navigations/header.html.twig' %}
+            {% include 'components/navigations/header.html.twig' %}
         {% endif %}
     {% endblock %}
 
@@ -43,7 +43,7 @@
 
     {% block footer %}
         {% if hide_footer is not defined %}
-            {% include 'navigations/footer.html.twig' %}
+            {% include 'components/navigations/footer.html.twig' %}
         {% endif %}
     {% endblock %}
     {{ function('wp_footer') }}

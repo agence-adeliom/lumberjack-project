@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Blocks;
+namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
@@ -8,6 +8,7 @@ use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
+use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 
@@ -18,18 +19,23 @@ use App\Enum\GutBlockName;
  */
 class TextImageBlock extends AbstractBlock
 {
+    public const NAME = "text-image";
+    public const TITLE = "Texte + média";
+    public const DESCRIPTION = "Bloc de texte accolé d'une image";
+
     public function __construct()
     {
         parent::__construct([
-            'title' => __('Texte + média'),
-            'description' => __('Description : Bloc avec texte accolé à une image'),
-            'category' => GutBlockName::CONTENT,
             'mode' => 'edit',
-            'dir' => BlocksTwigPath::CONTENT
+            'category' => GutBlockName::CONTENT,
+            'dir' => BlocksTwigPath::CONTENT,
+            'supports' => [
+                "anchor" => true
+            ]
         ]);
     }
 
-    protected function getFields(): \Traversable
+    public static function getFields(): ?\Traversable
     {
 
         yield from ContentTab::make();
@@ -41,10 +47,6 @@ class TextImageBlock extends AbstractBlock
         yield from LayoutTab::make([
             LayoutTab::MEDIA_POSITION,
             LayoutTab::DARK_MODE
-        ]);
-
-        yield from SettingsTab::make([
-           SettingsTab::ANCHOR
         ]);
     }
 }

@@ -135,6 +135,9 @@
         "setup": [
             "Adeliom\\Installer\\Install::buildEnv"
         ],
+        "post-update-cmd": [
+            "@setup"
+        ],
         "post-install-cmd": [
             "@setup"
         ],
