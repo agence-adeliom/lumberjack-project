@@ -29,7 +29,7 @@ class QuoteBlock extends AbstractBlock
     /**
      * @return Traversable
      */
-    protected function registerFields(): \Traversable
+    protected function getFields(): \Traversable
     {
         yield HeadingField::make();
     }
