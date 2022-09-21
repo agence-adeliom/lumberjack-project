@@ -4,7 +4,6 @@ namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
-use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 

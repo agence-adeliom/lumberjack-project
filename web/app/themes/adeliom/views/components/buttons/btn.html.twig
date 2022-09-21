@@ -18,7 +18,7 @@
     size
 }, className) %}
 
-{% set btn = btn.content ?? btn %}
+{% set btn = btn.content ?? btn ?? fields.button %}
 
 {% set content = btn.title ?? "" %}
 {% set url = btn.url ?? "" %}
