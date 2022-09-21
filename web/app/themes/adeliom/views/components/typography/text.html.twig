@@ -26,7 +26,12 @@
     color
 }, className) %}
 
-{% set content = content ?? fields.wysiwyg ?? fields.text %}
+{% set content = content ? content : fields.wysiwyg %}
+
+{% if not content and fields.text %}
+    {% set content = fields.text %}
+{% endif %}
+
 {% if content %}
     {% if wysiwyg %}
         <div class="{{ class }}">
