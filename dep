@@ -6,4 +6,4 @@ fi
 if [ -f "/user/.ssh/id_rsa" ]; then
   ssh-add /user/.ssh/id_rsa
 fi
-php vendor/bin/deployer.phar $@
+php vendor/bin/dep $@
