@@ -1,5 +1,5 @@
 {% set class = {
-    base: "",
+    base: block.className|default(""),
     default: {
         "background": "white"
     },
@@ -34,13 +34,9 @@
 
 <section class="{{ class }}" {% if anchor %}id="{{ anchor }}"{% endif %}>
     <div class="{{ containerClass }}">
-
         {% block intro %}{% endblock %}
-
         {% block content %}{% endblock %}
-
         {% block cta %}{% endblock %}
-
     </div>
 </section>
 
