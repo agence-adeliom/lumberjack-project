@@ -1,23 +1,27 @@
 name: lumberjack
-recipe: lamp
+recipe: adeliom
 config:
   php: '8.1'
-  composer_version: '2'
+  node: '18'
   database: mariadb
   webroot: web
+  forward_composer_auth: true
 
 keys:
   - id_rsa
+  - id_ed25519
+
+excludes:
+  - vendor
+  - node_modules
+  - web/wp
+  - web/app/languages
+  - web/app/mu-plugins
+  - web/app/plugins
+  - web/app/sessions
+  - web/app/themes/node_modules
 
 services:
-  appserver:
-    build_as_root:
-      - curl -sL https://deb.nodesource.com/setup_18.x | bash -
-      - apt-get install -y nodejs
-    overrides:
-      volumes:
-        - ~/.composer/auth.json:/var/www/.composer/auth.json:ro
-
   mailhog:
     type: mailhog
     hogfrom:
@@ -25,12 +29,6 @@ services:
 
 tooling:
   git:
-    service: appserver
-  npm:
-    service: appserver
-  node:
-    service: appserver
-  npx:
     service: appserver
 
   phplint:
@@ -56,7 +54,7 @@ tooling:
     cmd: vendor/bin/wp
   deployer:
     service: appserver
-    cmd: ./dep
+    cmd: ./bin/dep
 
   theme:npm:
     service: appserver

@@ -22,3 +22,5 @@ wp-cli.local.yml
 .php-cs-fixer.cache
 .phplint.cache
 .phplint-cache
+
+*.mutagen.yml.*
