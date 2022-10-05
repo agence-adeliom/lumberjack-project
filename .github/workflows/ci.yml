@@ -25,7 +25,7 @@ jobs:
       GRAVITYFORMS_KEY: ${{ secrets.GRAVITYFORMS_KEY }}
       ACF_PRO_KEY: ${{ secrets.ACF_PRO_KEY }}
 
-  symfony-plugins-update:
+  wordpress-plugins-update:
     needs: [build]
     uses: agence-adeliom/github-actions/.github/workflows/callable-wordpress-dependabot-update.yml@main
     with:
