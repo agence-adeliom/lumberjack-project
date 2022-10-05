@@ -39,7 +39,8 @@
         "wpackagist-plugin/disable-comments": "*",
         "wpackagist-plugin/seo-by-rank-math": "*",
         "wpackagist-plugin/wordfence": "*",
-        "wpackagist-plugin/worker": "*"
+        "wpackagist-plugin/worker": "*",
+        "wpackagist-plugin/w3-total-cache": "*"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
