@@ -73,5 +73,4 @@ events:
   post-start:
     - npm install
     - composer install
-    - cd /app/web/app/themes/adeliom && npm install
-    - cd /app/web/app/themes/adeliom && npm run build:development --if-present
+    - cd /app/web/app/themes/adeliom && npm install && npm run build:development --if-present

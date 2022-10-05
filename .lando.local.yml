@@ -1,0 +1,9 @@
+services:
+  #database:
+  #    portforward: 62128
+  pma:
+    type: phpmyadmin
+  mailhog:
+    type: mailhog
+    hogfrom:
+      - appserver

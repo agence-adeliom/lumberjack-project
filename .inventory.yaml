@@ -3,7 +3,7 @@
   hostname: example.com
   remote_user: example
   http_user: example
-  identity_file: /user/.ssh/id_rsa
+  identity_file: /user/.ssh/id_ed25519
   forward_agent: true
   ssh_arguments:
     - '-o AddKeysToAgent=yes'
