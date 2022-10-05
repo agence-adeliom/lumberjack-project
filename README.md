@@ -15,16 +15,19 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ## ⚠️ Avant de commencer :
 
 - [**Docker Desktop pour Mac**](https://docs.docker.com/desktop/install/mac-install/)
-- Téléchargez et installer [**Lando**](https://github.com/lando/lando/releases)  **_⚠️ Ne pas utilisé la version de Docker Desktop intégrée_**
+- Téléchargez et installer [**Lando**](https://github.com/lando/lando/releases)  ℹ️ **_Ne pas utilisé la version de Docker Desktop intégrée_**
 - Le plugin [**lando-adeliom**](https://github.com/agence-adeliom/lando-adeliom)
 - Lisez la documentation de [**Lando**](https://docs.lando.dev/)
 
-Si ce n'est pas deja fait ajoutez l'authentification pour Gravity Forms et ACF :
+🚨 **_Si ce n'est pas deja fait ajoutez l'authentification pour Gravity Forms et ACF_**
+<details>
 
 * Gravity Forms [(doc)](https://github.com/arnaud-ritti/gravityforms-composer-bridge/blob/main/dependabot_usage.md) : `composer config --global http-basic.gf-composer-proxy.arnaud-ritti.workers.dev licensekey [YOUR_GRAVITYFORMS_KEY]`
 * ACF Pro [(doc)](https://github.com/pivvenit/acf-pro-installer/issues/222#issuecomment-890359373) : `composer config --global http-basic.auth-acf-composer-proxy.pivvenit.net licensekey [YOUR_ACFPRO_KEY]`
 
 _Vou pouvez trouver les clés sur le [codex](https://codex.adeliom.com/books/wordpress/page/plugins-achetés)._
+
+</details>
 
 ## 💡Technos utilisées :
 
@@ -120,7 +123,11 @@ Production (branche main)
 lando deployer deploy producation
 ```
 
+
+
 ## 🎩 Bonus
+
+<details>
 
 ### Comment faire ?
 
@@ -162,3 +169,6 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 ```shell
 echo 'export PATH="/usr/local/bin:$PATH"' > ~/.huskyrc
 ```
+
+</details>
+
