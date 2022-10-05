@@ -54,7 +54,7 @@ tooling:
     cmd: vendor/bin/wp
   deployer:
     service: appserver
-    cmd: ./bin/dep
+    cmd: bin/dep
 
   theme:npm:
     service: appserver
@@ -74,3 +74,6 @@ events:
     - npm install
     - composer install
     - cd /app/web/app/themes/adeliom && npm install && npm run build:development --if-present
+
+
+

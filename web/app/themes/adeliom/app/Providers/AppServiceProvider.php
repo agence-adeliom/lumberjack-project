@@ -27,7 +27,8 @@ class AppServiceProvider extends ServiceProvider
             return array_merge($mime_types, $mimesTypes);
         });
 
-        if (defined('WP_DEBUG') && WP_DEBUG && function_exists('add_filter')) {
+        // @phpstan-ignore-next-line
+        if ((defined('WP_DEBUG') && WP_DEBUG) && function_exists('add_filter')) {
             add_filter('timber/loader/twig', function ($twig) {
                 $twig->addExtension(new CommentedIncludeExtension());
                 $twig->addExtension(new DumpExtension());
