@@ -28,4 +28,4 @@ jobs:
     secrets:
       GRAVITYFORMS_KEY: ${{ secrets.GRAVITYFORMS_KEY }}
       ACF_PRO_KEY: ${{ secrets.ACF_PRO_KEY }}
-      WEBHOOK_KEY: ${{ secrets.NEWRELIC_API_KEY }}
+      NEW_RELIC_API_KEY: ${{ secrets.NEWRELIC_API_KEY }}
