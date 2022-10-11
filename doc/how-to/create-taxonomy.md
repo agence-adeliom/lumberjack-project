@@ -1,14 +1,14 @@
 # Créer une taxonomy
 
-Dans le dossier `web/app/themes/adeliom/app/Taxonomy` créer un fichier pour votre post type. ex: `Example.php`
+Dans le dossier `web/app/themes/adeliom/app/Taxonomies` créer un fichier pour votre post type. ex: `Example.php`
 
 ```php
 <?php
-// web/app/themes/adeliom/app/Taxonomy/Example.php
+// web/app/themes/adeliom/app/Taxonomies/Example.php
 
 declare(strict_types=1);
 
-namespace App\Taxonomy;
+namespace App\Taxonomies;
 
 use Adeliom\Lumberjack\Taxonomy\Term as BaseTerm;
 
@@ -81,7 +81,7 @@ return [
      */
     'register' => [
         ...
-        \App\Taxonomy\Example::class
+        \App\Taxonomies\Example::class
     ],
 ];
 ```
