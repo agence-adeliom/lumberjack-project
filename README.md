@@ -1,7 +1,7 @@
 # Projet example
 
 ## 🧐 À propos
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+ECRIRE QUELQUES LIGNES A PROPOS DU PROJET
 
 **Date de création** : dd/mm/yyyy
 
@@ -60,11 +60,12 @@ git clone git@github.com:agence-adeliom/example.git
 
 **2.** **Démarrer le projet** **:**
 
+Dans le fichier .lando.yml, renommez le nom du projet "lumberjack" par le nom de votre projet. C'est ce qui génèrera l'URL de votre projet.
+
 `lando start`
 
 ⚠️ Si vous faites des changement dans le `.lando.yml` ou dans `.lando.local.yml` faite un `lando rebuild -y`
 
-🍩 **Faites une pause café car ça va être long... très long...**
 
 Lando s'occupe de tout :
 - création des différents conteneurs docker : appserver, phpmyadmin, node, mailhog
@@ -74,10 +75,6 @@ Lando s'occupe de tout :
 Une fois les containers créés, un message apparaît et vous donne toutes les infos nécessaires :
 
 ```console
-BOOMSHAKALAKA!!!
-
-Your app has started up correctly.
-
 Here are some vitals:
 
  NAME             example                                       
@@ -90,17 +87,6 @@ Here are some vitals:
  PHPMYADMIN URLS  http://localhost:51137                         
  MAILHOG URLS     http://localhost:51116                         
 ```
-
-**4.** **Récupérer la base de données** **:**
-
-La base de donnée peut directement être récupérer de la production. Pour cela il suffit de ce rendre sur :
-
-* [le dashboard du projet sur Infomaniak](https://manager.infomaniak.com/), puis dans l'onglet Bases de données. Même pas besoin de se connecter à PhpMyAdmin, il est possible d'effectuer un export en cliquant sur les 3 petits points à droite de la BDD sur IK.
-
-`lando db-import nom_bdd.sql`
-
-ℹ️ Ne vous embêtez pas à renommer les URLs en base de données. La valeur du projet dans le .env suffit (le .env reprend les données de `/config/local.php`)
-
 **Compilation des assets et autres** **:**
 ```console
 cd web/app/themes/adeliom

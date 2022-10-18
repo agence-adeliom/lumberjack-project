@@ -1,5 +1,4 @@
 name: CI
-
 on:
   pull_request:
   pull_request_target:
@@ -9,18 +8,13 @@ on:
     branches:
       - main
 
-env:
-  THEME: "adeliom"
-  PHP_VERSION: "8.1"
-  NODE_VERSION: "18"
-
 jobs:
   build:
     uses: agence-adeliom/github-actions/.github/workflows/callable-lumberjack-install.yml@main
     with:
-      theme: ${{ env.THEME }}
-      php: ${{ env.PHP_VERSION }}
-      node: ${{ env.NODE_VERSION }}
+      theme: "adeliom"
+      php: "8.1"
+      node: "18"
     secrets:
       GRAVITYFORMS_KEY: ${{ secrets.GRAVITYFORMS_KEY }}
       ACF_PRO_KEY: ${{ secrets.ACF_PRO_KEY }}
@@ -29,9 +23,9 @@ jobs:
     needs: [build]
     uses: agence-adeliom/github-actions/.github/workflows/callable-lumberjack-dependabot-update.yml@main
     with:
-      php: ${{ env.PHP_VERSION }}
-      node: ${{ env.NODE_VERSION }}
+      php: "8.1"
+      node: "18"
     secrets:
       GRAVITYFORMS_KEY: ${{ secrets.GRAVITYFORMS_KEY }}
       ACF_PRO_KEY: ${{ secrets.ACF_PRO_KEY }}
-      WEBHOOK_KEY: ${{ secrets.NEWRELIC_API_KEY }}
+      NEW_RELIC_API_KEY: ${{ secrets.NEWRELIC_API_KEY }}
