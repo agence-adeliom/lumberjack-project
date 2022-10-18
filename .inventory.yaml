@@ -5,6 +5,7 @@
   http_user: example
   identity_file: /user/.ssh/id_ed25519
   forward_agent: true
+  git_ssh_command: 'ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
   ssh_arguments:
     - '-o AddKeysToAgent=yes'
     - '-o UserKnownHostsFile=/dev/null'

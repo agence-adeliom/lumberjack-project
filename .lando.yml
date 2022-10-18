@@ -14,12 +14,7 @@ keys:
 excludes:
   - vendor
   - node_modules
-  - web/wp
-  - web/app/languages
-  - web/app/mu-plugins
-  - web/app/plugins
-  - web/app/sessions
-  - web/app/themes/node_modules
+  - web/app/themes/adeliom/node_modules
 
 tooling:
   git:

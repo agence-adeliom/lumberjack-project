@@ -86,30 +86,6 @@ Encore
     .configureWatchOptions(watchOptions => {
         watchOptions.poll = 250;
     })
-
-    .configureTerserPlugin((options) => {
-        options.cache = true;
-        options.minify = TerserPlugin.esbuildMinify;
-        options.terserOptions = {
-            compress: true,
-            output: {
-                comments: false
-            }
-        }
-    })
-
-    .configureCssMinimizerPlugin((options) => {
-        options.cache = true;
-        options.minify = CssMinimizerPlugin.esbuildMinify;
-        options.minimizerOptions = {
-            preset: [
-                "default",
-                {
-                    discardComments: { removeAll: true },
-                },
-            ]
-        }
-    })
 ;
 
 const config = Encore.getWebpackConfig();
