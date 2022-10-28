@@ -42,6 +42,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\QueryBuilderProvider::class,
         App\Providers\HttpLoginServiceProvider::class,
+        App\Providers\TwigExtensionsServiceProvider::class,
     ],
 
     'aliases' => [
