@@ -17,8 +17,6 @@ return [
      * List of providers to initialise during app boot
      */
     'providers' => [
-        // Http Login Provider
-        App\Providers\HttpLoginServiceProvider::class,
         // Lumberjack Providers
         Rareloop\Lumberjack\Providers\RouterServiceProvider::class,
         Rareloop\Lumberjack\Providers\WordPressControllersServiceProvider::class,
