@@ -1,3 +1,5 @@
+{% set btn = btn ?? fields.button %}
+
 {% set class = {
     base: 'btn',
     default: {
@@ -18,11 +20,10 @@
     size
 }, className) %}
 
-{% set btn = btn.content ?? btn ?? fields.button %}
 
-{% set content = btn.title ?? "" %}
-{% set url = btn.url ?? "" %}
-{% set target = btn.target ?? "" %}
+{% set content = btn.title ?? btn.link.title ?? "" %}
+{% set url = btn.url ?? btn.link.url ?? "" %}
+{% set target = btn.target ??  btn.link.target ?? "" %}
 {% set id = btn.id ?? "" %}
 {% set tag = btn.tag ?? "div" %}
 
