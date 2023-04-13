@@ -7,6 +7,7 @@ namespace App\Hooks\Admin;
 use Adeliom\Lumberjack\Assets\Assets;
 use Adeliom\Lumberjack\Hooks\Models\Action;
 use Adeliom\Lumberjack\Hooks\Models\Filter;
+use Adeliom\Lumberjack\Assets\Assets;
 
 /**
  * Class ThemeHooks
@@ -27,6 +28,16 @@ class ThemeHooks
         $context['config'] = isset($options['config']) ?: null;
 
         return $context;
+    }
+    /**
+     * Ajout des scripts de base
+     *
+     * @Action("wp_enqueue_scripts")
+     */
+    #[Action("wp_enqueue_scripts")]
+    public static function enqueueScripts(): void
+    {
+        Assets::enqueue('components/global', 'components/global', []);
     }
 
     /**

@@ -26,6 +26,9 @@ updates:
       prefix: "fix"
       prefix-development: "build"
       include: "scope"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
     registries:
       - acf
       - gravityforms
@@ -44,6 +47,9 @@ updates:
       prefix: "fix"
       prefix-development: "build"
       include: "scope"
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "npm"
     directory: "/"

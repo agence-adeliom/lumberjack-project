@@ -15,7 +15,6 @@
 
     {{function('wp_head')}}
     {% block stylesheet %}
-        {{ entry_link_tags("components/global") }}
     {% endblock %}
 
     {# <script>
@@ -48,7 +47,6 @@
     {{ function('wp_footer') }}
 
     {% block javascript %}
-        {{ entry_script_tags("components/global") }}
     {% endblock %}
 </body>
 </html>

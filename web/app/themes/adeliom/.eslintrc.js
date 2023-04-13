@@ -17,7 +17,7 @@ module.exports = {
         "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
-        "no-console": 2,
+        "no-console": 1,
         "no-unused-vars": 0
     }
 }
