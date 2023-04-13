@@ -3,10 +3,13 @@
 namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
+use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
+use Adeliom\Lumberjack\Admin\Fields\Typography\TextField;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
-use Traversable;
 
 /**
  * Class QuoteBlock
@@ -30,6 +33,13 @@ class QuoteBlock extends AbstractBlock
 
     public static function getFields(): ?\Traversable
     {
-        yield HeadingField::make();
+        yield from ContentTab::make()->fields([
+            HeadingField::make()->tag(),
+            TextField::make("Citation")
+        ]);
+
+        yield from LayoutTab::make()->fields([
+            LayoutField::margin()
+        ]);
     }
 }

@@ -3,6 +3,9 @@
 namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
+use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
+use Adeliom\Lumberjack\Admin\Fields\Medias\MediaField;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
@@ -27,6 +30,12 @@ class ImageFullBlock extends AbstractBlock
 
     public static function getFields(): ?\Traversable
     {
-        yield from MediaTab::make();
+        yield from MediaTab::make()->fields([
+            MediaField::image()
+        ]);
+
+        yield from LayoutTab::make()->fields([
+            LayoutField::margin()
+        ]);
     }
 }

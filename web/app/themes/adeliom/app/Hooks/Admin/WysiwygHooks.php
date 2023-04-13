@@ -16,6 +16,8 @@ class WysiwygHooks
     public const TOOLBAR_DEFAULT = 'default';
     public const TOOLBAR_SIMPLE = 'simple';
 
+    /* TODO : Créer nouveau wysiwyg */
+
     /**
      * Change title page into custom placeholder
      *

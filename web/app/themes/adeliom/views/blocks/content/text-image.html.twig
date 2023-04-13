@@ -1,12 +1,75 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
 
-        <div>
-            {% include "components/typography/heading.html.twig" %}
-            {% include "components/typography/text.html.twig" %}
+        {% if fields.ratio == "auto" or not fields.ratio %}
+            {% set orientation = "paysage" %}
+
+            {% set image = fields.media.type == "video" ? fields.media.video.thumbnail : fields.media.image %}
+
+            {% if image.height > image.width %}
+                {% set orientation = "portrait" %}
+            {% endif %}
+        {% else %}
+            {% set orientation = fields.ratio %}
+        {% endif %}
+
+        {% set positions = {
+            portrait: {
+                right: {
+                    text: "lg:row-start-1 lg:col-span-6",
+                    media: "lg:col-start-8 lg:col-end-13"
+                },
+                left: {
+                    media: "lg:col-span-4",
+                    text: "lg:col-start-7 lg:col-end-13"
+                }
+            },
+            paysage: {
+                right: {
+                    text: "lg:row-start-1 lg:col-span-5",
+                    media: "lg:col-start-7 lg:col-end-13"
+                },
+                left: {
+                    media: "lg:col-span-6",
+                    text: "lg:col-start-8 lg:col-end-13"
+                }
+            }
+        } %}
+
+        {% set ratio = "" %}
+
+        {% if fields.has_ratio %}
+
+            {% set ratioFormat = {
+                paysage: "aspect-[4/3]",
+                portrait: "aspect-square"
+            } %}
+
+            {% set ratio = "w-full object-cover " ~ ratioFormat[orientation] %}
+
+        {% endif %}
+
+        <div class="grid items-center grid-cols-1 lg:grid-cols-12">
+
+            {% include "components/content/media/media.html.twig" with {
+                wrapper: {
+                    className: concat("col-span-full", positions[orientation][fields.media_position].media)
+                },
+                className: ratio
+            } %}
+
+            <div class="mt-6 lg:mt-0 {{ concat("col-span-full", positions[orientation][fields.media_position].text) }}">
+
+                {% include "components/typography/text-group.html.twig" with {
+                    title: {
+                        size: 3
+                    }
+                }%}
+
+            </div>
+
         </div>
 
-        {% include "components/media/media.html.twig" %}
 
     {% endblock %}
 {% endembed %}

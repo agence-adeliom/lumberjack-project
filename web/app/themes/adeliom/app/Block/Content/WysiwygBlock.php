@@ -3,9 +3,10 @@
 namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
+use Adeliom\Lumberjack\Admin\Fields\Buttons\ButtonField;
+use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
-use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
 use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use App\Enum\BlocksTwigPath;
@@ -38,12 +39,15 @@ class WysiwygBlock extends AbstractBlock
 
     public static function getFields(): ?\Traversable
     {
-        yield from ContentTab::make();
-        yield HeadingField::group();
-        yield WysiwygField::default();
+        yield from ContentTab::make()->fields([
+            HeadingField::tag(),
+            WysiwygField::make()->default()->mediaUpload(true),
+            ButtonField::make()->types()
+        ]);
 
-        yield from LayoutTab::make([
-            LayoutTab::DARK_MODE
+        yield from LayoutTab::make()->fields([
+            LayoutField::darkMode(),
+            LayoutField::margin()
         ]);
     }
 }

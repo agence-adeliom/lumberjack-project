@@ -1,0 +1,17 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+
+        <div>
+            <div>
+                {% include "components/typography/heading.html.twig" %}
+
+                {% include "components/typography/text.html.twig" with {
+                    content : fields.content,
+                }%}
+            </div>
+
+            {% include "components/action/buttons/btn.html.twig" %}
+        </div>
+
+    {% endblock %}
+{% endembed %}

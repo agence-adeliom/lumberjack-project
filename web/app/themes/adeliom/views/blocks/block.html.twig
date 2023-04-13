@@ -7,9 +7,15 @@
         "none": "",
         "white": "bg-white",
         "black": "bg-black"
+    },
+    padding: {
+        "none": "",
+        "small": "py-10",
+        "large": "py-20"
     }
 }|mergeClass({
-    background: fields.dark_mode ? "black" : background
+    background: fields.dark_mode ? "black" : background,
+    padding: padding ?? fields.margin.sizes ?? "large"
 },
     className,
     fields.dark_mode ? "dark",
@@ -18,6 +24,7 @@
 )%}
 
 {% set background = "" %}
+{% set className = "" %}
 
 {% set containerClass = {
     base: "",

@@ -5,7 +5,7 @@
     default: {}
 }|mergeClass({}, className) %}
 
-{% embed "components/media/partials/wrapper-media.html.twig" with {wrapper} %}
+{% embed "components/content/media/partials/wrapper-media.html.twig" with {wrapper} %}
 
     {% block content %}
 
@@ -18,7 +18,7 @@
                     media: media.image,
                 }|merge(optionsMedia ?? {}) %}
 
-                {% include "components/media/image.html.twig" with optionsMedia only %}
+                {% include "components/content/media/image.html.twig" with optionsMedia only %}
 
             {% endif %}
 
@@ -29,13 +29,13 @@
                 media: media.video.thumbnail
             }|merge(optionsMedia ?? {}) %}
 
-            {% include "components/media/image.html.twig" with optionsMedia only %}
+            {% include "components/content/media/image.html.twig" with optionsMedia only %}
 
-            {% include "components/buttons/btn-play.html.twig" %}
+            {% include "components/action/buttons/btn-play.html.twig" %}
 
             {% embed "components/overlay/modal.html.twig" %}
                 {% block content %}
-                    {% include "components/media/video.html.twig" with {
+                    {% include "components/content/media/video.html.twig" with {
                         video: media.video
                     } only %}
                 {% endblock %}

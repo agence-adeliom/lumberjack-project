@@ -1,7 +1,7 @@
 {% set class = "aspect-video h-[50vh]" %}
 
-{% if video.is_url %}
-    <iframe src="https://www.youtube.com/embed/{{  video.url }}"  allowfullscreen class="{{ class }} frame"></iframe>
+{% if video.is_youtube %}
+    <iframe src="https://www.youtube.com/embed/{{  video.id }}"  allowfullscreen class="{{ class }} frame"></iframe>
 {% else %}
     <video controls class="{{ class }}">
         <source src="{{ video.video }}" type="video/mp4">

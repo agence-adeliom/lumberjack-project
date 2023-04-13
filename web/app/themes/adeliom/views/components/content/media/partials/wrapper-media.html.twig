@@ -1,7 +1,7 @@
 {% set wrapperClass = {
     base: "",
     default: {}
-}|mergeClass({}, wrapper.wrapperClassName) %}
+}|mergeClass({}, wrapper.className) %}
 
 {% if media.type != "video" %}
 <div class="{{ wrapperClass }}">
