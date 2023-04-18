@@ -7,7 +7,6 @@ namespace App\Hooks\Admin;
 use Adeliom\Lumberjack\Assets\Assets;
 use Adeliom\Lumberjack\Hooks\Models\Action;
 use Adeliom\Lumberjack\Hooks\Models\Filter;
-use Adeliom\Lumberjack\Assets\Assets;
 
 /**
  * Class ThemeHooks

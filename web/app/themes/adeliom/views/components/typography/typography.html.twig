@@ -1,0 +1,188 @@
+{#
+#############################
+#############################
+    Heading
+#############################
+#############################
+#}
+{% macro heading(obj) %}
+
+    {% set class = {
+        base: "",
+        default: {
+            size: "1",
+            color: "black"
+        },
+        size: {
+            1 : "",
+            2 : "",
+            3 : "",
+            4 : "",
+            5 : "",
+            6 : "",
+            headline: "",
+        },
+        color: {
+            current: "text-current",
+            white: "text-white",
+            black: "text-black"
+        }
+    }|mergeClass({color: obj.color, size: obj.size}, obj.className) %}
+
+    {% set title = obj.content ?? obj.fields.title %}
+
+    {% set tag = obj.tag ?? title.tag ?? "div" %}
+    {% set content = title.content ?? title %}
+
+    {% if content %}
+        <{{ tag }} class="{{ class }}">
+        {{ content }}
+        </{{ tag }}>
+    {% endif %}
+
+{% endmacro %}
+
+
+{#
+#############################
+#############################
+    Text
+#############################
+#############################
+#}
+{% macro text(obj) %}
+
+    {% set class = {
+        base: '',
+        default: {
+            size: "base",
+            color: "black"
+        },
+        size: {
+            xs : "text-xs",
+            sm : "text-sm",
+            base : "text-base",
+            lg : "text-lg",
+            xl : "text-xl"
+        },
+        weight: {
+            bold: "font-bold",
+            medium: "font-medium",
+            normal: "font-normal"
+        },
+        color: {
+            white: "text-white",
+            black: "text-black dark:text-white"
+        }
+    }|mergeClass({
+        size: obj.size,
+        weight: obj.weight,
+        color: obj.color
+    }, className) %}
+
+    {% set content = obj.content ?? obj.fields.wysiwyg %}
+
+    {% if not content and obj.fields.text %}
+        {% set content = obj.fields.text %}
+    {% endif %}
+
+    {% if content %}
+        {% if obj.wysiwyg or (content matches '/<\s*[a-z][^>]*>/i') %}
+            <div class="{{ class }}">
+                {{ content|raw }}
+            </div>
+        {% else %}
+            <p class="{{ class }}">
+                {{ content }}
+            </p>
+        {% endif %}
+    {% endif %}
+
+{% endmacro %}
+
+
+{#
+#############################
+#############################
+    Icon
+#############################
+#############################
+#}
+{% macro icon(obj) %}
+
+    {% set class = {
+        base: "fa-fw",
+        default: {
+            variant: "regular"
+        },
+        variant: {
+            solid: "fas",
+            regular: "far",
+            light: "fal",
+            duotone: "fad",
+            brand: "fab",
+            kit: "fak"
+        },
+        size: {
+            xs: 'text-xs',
+            sm: 'text-sm',
+            lg: 'text-lg',
+            xl: 'text-xl',
+        }
+    }|mergeClass({size: obj.size}, obj.className) %}
+
+    <i class="{{ class }} fa-{{ obj.icon }}"></i>
+
+{% endmacro %}
+
+
+{#
+#############################
+#############################
+    Text group
+#############################
+#############################
+#}
+{% macro textGroup(obj) %}
+
+    {% set class = {
+        base: "wysiwyg",
+        default: {},
+    }|mergeClass({}, className) %}
+
+    <div class="{{ class }}">
+
+        {% set headline = {
+            content: obj.fields.headline,
+            size: "headline",
+            className: "mb-2"
+        }|merge(obj.headline ?? {}) %}
+
+        {{ _self.heading(headline) }}
+
+        {% set title = {
+            content: obj.fields.title,
+        }|merge(obj.title ?? {}) %}
+
+        {{ _self.heading(title) }}
+
+        {# Marge selon le level du titre #}
+        {% set paragraphMargin = {
+            1: "mt-10",
+            2: "mt-10",
+            3: "mt-10",
+            4: "mt-5",
+            5: "mt-4",
+        } %}
+
+        {% set wysiwyg = {
+            content: obj.fields.wysiwyg,
+            size: "base",
+            className: paragraphMargin[title.size]
+        }|merge(obj.wysiwyg ?? {}) %}
+
+        {{ _self.heading(wysiwyg) }}
+
+    </div>
+
+{% endmacro %}

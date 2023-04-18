@@ -60,11 +60,13 @@
 
             <div class="mt-6 lg:mt-0 {{ concat("col-span-full", positions[orientation][fields.media_position].text) }}">
 
-                {% include "components/typography/text-group.html.twig" with {
+                {% import "components/typography/typography.html.twig" as typography %}
+                {{ typography.textGroup({
+                    fields,
                     title: {
-                        size: 3
-                    }
-                }%}
+                        size: 2,
+                    },
+                }) }}
 
             </div>
 
