@@ -46,7 +46,7 @@ class TextImageBlock extends AbstractBlock
         yield from ContentTab::make()->fields([
             HeadingField::make()->tag(),
             WysiwygField::make()->default(),
-            ButtonField::make()->types()
+            ButtonField::make()->group(true)
         ]);
 
         yield from MediaTab::make()->fields([

@@ -1,16 +1,18 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
 
-        <div>
-            <div>
-                {% include "components/typography/heading.html.twig" %}
+        {% import "components/typography/typography.html.twig" as typography %}
+        {% import "components/action/buttons/btn.html.twig" as button %}
 
-                {% include "components/typography/text.html.twig" with {
-                    content : fields.content,
-                }%}
+        <div>
+
+            <div>
+                {{ typography.heading(fields) }}
+                {{ typography.text(fields) }}
             </div>
 
-            {% include "components/action/buttons/btn.html.twig" %}
+            {{ button.single(fields) }}
+
         </div>
 
     {% endblock %}

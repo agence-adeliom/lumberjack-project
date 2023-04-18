@@ -1,40 +1,64 @@
-{% set btn = btn ?? fields.button %}
+{% macro single(obj) %}
 
-{% set class = {
-    base: 'btn',
-    default: {
-        type: "primary",
-        size: "medium"
-    },
-    type: {
-        primary: "btn--primary",
-        secondary: "btn--secondary"
-    },
-    size: {
-        small: "",
-        medium: "",
-        large: "",
-    }
-}|mergeClass({
-    "type": type ?? btn.type,
-    size
-}, className) %}
+    {% set btn = obj.content ?? obj.fields.button ?? obj %}
 
+    {% set class = {
+        base: 'btn',
+        default: {
+            type: "primary",
+            size: "medium"
+        },
+        type: {
+            primary: "btn--primary",
+            secondary: "btn--secondary",
+            outline: "btn--outline"
+        },
+        size: {
+            small: "",
+            medium: "",
+            large: "",
+        }
+    }|mergeClass({
+        "type": obj.type ?? btn.type,
+        size: obj.size
+    }, obj.className) %}
 
-{% set content = btn.title ?? btn.link.title ?? "" %}
-{% set url = btn.url ?? btn.link.url ?? "" %}
-{% set target = btn.target ??  btn.link.target ?? "" %}
-{% set id = btn.id ?? "" %}
-{% set tag = btn.tag ?? "div" %}
+    {% set content = btn.title ?? btn.link.title ?? "" %}
+    {% set url = btn.url ?? btn.link.url ?? "" %}
+    {% set target = btn.target ??  btn.link.target ?? "" %}
+    {% set id = btn.id ?? "" %}
+    {% set tag = btn.tag ?? "div" %}
 
-{% if url %}
-    {% set tag = 'a' %}
-{% endif %}
+    {% if url %}
+        {% set tag = 'a' %}
+    {% endif %}
 
-{% set attributes = attributes ?? "" %}
+    {% set attributes = obj.attributes ?? "" %}
 
-{% if content %}
-    <{{ tag }} id="{{ id }}" class="{{ class }}" {{ attributes }} {% if url %}href="{{ url }}"{% endif %} {% if target %}target="{{ target }}"{% endif %}>
+    {% if content %}
+        <{{ tag }} id="{{ id }}" class="{{ class }}" {{ attributes }} {% if url %}href="{{ url }}"{% endif %} {% if target %}target="{{ target }}"{% endif %}>
         {{ content }}
-    </{{ tag }}>
-{% endif %}
+        </{{ tag }}>
+    {% endif %}
+
+{% endmacro %}
+
+
+{% macro group(obj) %}
+
+    {% set class = {
+        base: "",
+        default: {}
+    }|mergeClass({}, obj.className) %}
+
+    {% set content = obj.content ?? obj.fields.buttons ?? obj %}
+
+    {% if content %}
+        <div class="flex flex-col md:flex-row gap-4 {{ class }}">
+            {% for button in content %}
+                {{ _self.single(button) }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+{% endmacro %}

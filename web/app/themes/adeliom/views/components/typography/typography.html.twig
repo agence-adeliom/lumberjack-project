@@ -152,19 +152,31 @@
 
     <div class="{{ class }}">
 
-        {% set headline = {
-            content: obj.fields.headline,
-            size: "headline",
-            className: "mb-2"
-        }|merge(obj.headline ?? {}) %}
+        {# Headline #}
+        {% if obj.fields.headline or obj.headline %}
 
-        {{ _self.heading(headline) }}
+            {% set headline = {
+                content: obj.fields.headline,
+                size: "headline",
+                className: "mb-2"
+            }|merge(obj.headline ?? {}) %}
 
-        {% set title = {
-            content: obj.fields.title,
-        }|merge(obj.title ?? {}) %}
+            {{ _self.heading(headline) }}
 
-        {{ _self.heading(title) }}
+        {% endif %}
+
+
+        {# Title #}
+        {% if obj.fields.title or obj.title %}
+
+            {% set title = {
+                content: obj.fields.title,
+            }|merge(obj.title ?? {}) %}
+
+            {{ _self.heading(title) }}
+
+        {% endif %}
+
 
         {# Marge selon le level du titre #}
         {% set paragraphMargin = {
@@ -175,13 +187,52 @@
             5: "mt-4",
         } %}
 
-        {% set wysiwyg = {
-            content: obj.fields.wysiwyg,
-            size: "base",
-            className: paragraphMargin[title.size]
-        }|merge(obj.wysiwyg ?? {}) %}
 
-        {{ _self.heading(wysiwyg) }}
+        {# Wysiwyg #}
+        {% if obj.fields.wysiwyg or obj.wysiwyg %}
+
+            {% set wysiwyg = {
+                content: obj.fields.wysiwyg,
+                size: "base",
+                className: paragraphMargin[title.size]
+            }|merge(obj.wysiwyg ?? {}) %}
+
+            {{ _self.text(wysiwyg) }}
+
+        {% endif %}
+
+
+        {% if obj.fields.button or obj.button or obj.fields.buttons or obj.buttons %}
+
+            {% import "components/action/buttons/btn.html.twig" as btn %}
+
+            {% set className = "mt-6" %}
+
+            {# Button #}
+            {% if obj.fields.button or obj.button %}
+
+                {% set button = {
+                    content: obj.fields.button,
+                    className
+                }|merge(obj.button ?? {}) %}
+
+                {{ btn.single(button) }}
+
+            {% endif %}
+
+            {# Buttons Group #}
+            {% if obj.fields.buttons or obj.buttons %}
+
+                {% set buttons = {
+                    content: obj.fields.buttons,
+                    className
+                }|merge(obj.buttons ?? {}) %}
+
+                {{ btn.group(buttons) }}
+
+            {% endif %}
+
+        {% endif %}
 
     </div>
 

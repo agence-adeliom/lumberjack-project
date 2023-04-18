@@ -42,7 +42,7 @@ class WysiwygBlock extends AbstractBlock
         yield from ContentTab::make()->fields([
             HeadingField::tag(),
             WysiwygField::make()->default()->mediaUpload(true),
-            ButtonField::make()->types()
+            ButtonField::make()->group(true)
         ]);
 
         yield from LayoutTab::make()->fields([
