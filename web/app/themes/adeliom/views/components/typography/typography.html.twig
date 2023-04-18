@@ -78,7 +78,7 @@
         size: obj.size,
         weight: obj.weight,
         color: obj.color
-    }, className) %}
+    }, obj.className) %}
 
     {% set content = obj.content ?? obj.fields.wysiwyg %}
 
@@ -148,7 +148,7 @@
     {% set class = {
         base: "wysiwyg",
         default: {},
-    }|mergeClass({}, className) %}
+    }|mergeClass({}, obj.className) %}
 
     <div class="{{ class }}">
 
