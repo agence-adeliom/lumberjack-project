@@ -51,7 +51,7 @@
         default: {}
     }|mergeClass({}, obj.className) %}
 
-    {% set content = obj.content ?? obj.fields.buttons ?? obj %}
+    {% set content = obj.buttons ?? obj.fields.buttons ?? obj %}
 
     {% if content %}
         <div class="flex flex-col md:flex-row gap-4 {{ class }}">

@@ -1,0 +1,32 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+        {% import "components/action/buttons/btn.html.twig" as button %}
+
+        <div class="grid gap-6 lg:grid-cols-12">
+            <div class="lg:col-span-5">
+
+                {{ typography.heading({
+                    fields,
+                    title: {
+                        size: 2,
+                    },
+                }) }}
+
+            </div>
+
+            <div class="lg:col-span-7">
+
+                {{ typography.text({
+                    fields,
+                }) }}
+                {{ button.group({
+                    fields,
+                    className: 'mt-6'
+                }) }}
+
+            </div>
+
+        </div>
+    {% endblock %}
+{% endembed %}
