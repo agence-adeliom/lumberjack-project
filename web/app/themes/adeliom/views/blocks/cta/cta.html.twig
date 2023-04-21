@@ -4,14 +4,29 @@
         {% import "components/typography/typography.html.twig" as typography %}
         {% import "components/action/buttons/btn.html.twig" as button %}
 
-        <div>
+        <div class="grid items-center gap-10 lg:gap-6 lg:grid-cols-12">
 
-            <div>
-                {{ typography.heading(fields) }}
-                {{ typography.text(fields) }}
+            <div class="lg:col-span-7">
+
+                {{ typography.heading({
+                    fields,
+                    title: {
+                        size: 2,
+                    }
+                }) }}
+
+                {{ typography.text({
+                    content: fields.description,
+                    className: 'mt-4'
+                }) }}
+
             </div>
 
-            {{ button.single(fields) }}
+            <div class="lg:justify-self-end lg:align-self-center lg:col-span-5">
+
+                {{ button.single({fields}) }}
+
+            </div>
 
         </div>
 
