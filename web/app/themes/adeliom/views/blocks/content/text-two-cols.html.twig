@@ -1,0 +1,25 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+        {% if fields.title is defined and fields.title %}
+            {{ typography.heading({
+                content: fields.title,
+                className: 'mb-6 lg:mb-10',
+            }) }}
+        {% endif %}
+        <div class="grid grid-cols-12 gap-6">
+            {% if fields.col_left is defined and fields.col_left %}
+                {{ typography.text({
+                    content: fields.col_left,
+                    className: 'col-span-12 lg:col-span-6',
+                }) }}
+            {% endif %}
+            {% if fields.col_right is defined and fields.col_right %}
+                {{ typography.text({
+                    content: fields.col_right,
+                    className: 'col-span-12 lg:col-span-6'
+                }) }}
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endembed %}
