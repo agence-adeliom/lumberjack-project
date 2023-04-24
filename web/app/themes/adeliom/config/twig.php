@@ -7,5 +7,7 @@ declare(strict_types=1);
  */
 return [
     'allowed_functions' => [],
-    'extensions' => [],
+    'extensions' => [
+        \App\TwigExtensions\NewsExtension::class,
+    ],
 ];

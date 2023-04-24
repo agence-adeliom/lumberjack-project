@@ -1,0 +1,45 @@
+{% set news = {} %}
+
+{% set isDefaultNews = fields.type == 'default' %}
+{% set isCustomNews = fields.type == 'custom_last_news' %}
+{% set isSpecificCategory = fields.type == 'specific_category' %}
+{% set specificCategory = null %}
+
+{% if isSpecificCategory %}
+    {% set specificCategory = fields.specific_category %}
+{% endif %}
+
+{% if isCustomNews %}
+    {% set news = getLastNews(fields.custom_last_news) %}
+{% else %}
+    {% set news = getLastNews(null, 3, [specificCategory.slug]) %}
+{% endif %}
+
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+
+        {{ typography.heading({
+            fields,
+            title: {
+                size: 2,
+            }
+        }) }}
+
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+
+            {% from "components/content/cards/news/index.html.twig" import newsCard %}
+
+            {% for card in news %}
+
+                {{ newsCard({
+                    card: card,
+                    category: specificCategory,
+                }) }}
+
+            {% endfor %}
+
+        </div>
+
+    {% endblock %}
+{% endembed %}
