@@ -14,6 +14,7 @@ use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 use App\PostTypes\Post;
 use Extended\ACF\ConditionalLogic;
+use Timber\Timber;
 
 /**
  * Class LastNewsBlock
@@ -25,7 +26,6 @@ class LastNewsBlock extends AbstractBlock
     public const NAME = "last-news";
     public const TITLE = "Remontée actualités";
     public const DESCRIPTION = "Bloc permettant d'afficher vos dernières actualités publiées";
-
     private const TYPE = 'type';
     private const DEFAULT_TYPE = 'default';
     private const CUSTOM_LAST_NEWS = 'custom_last_news';
@@ -50,11 +50,11 @@ class LastNewsBlock extends AbstractBlock
             HeadingField::tag(),
 
             RadioField::make("Je souhaite :", 'type')
-            ->choices([
-                self::DEFAULT_TYPE => "Remonter automatiquement les dernières actualités publiées sur le site",
-                self::CUSTOM_LAST_NEWS => "Sélectionner manuellement les actualités à remonter",
-                self::SPECIFIC_CATEGORY => "Remonter les actualités d’une catégorie spécifique"
-            ]),
+                ->choices([
+                    self::DEFAULT_TYPE => "Remonter automatiquement les dernières actualités publiées sur le site",
+                    self::CUSTOM_LAST_NEWS => "Sélectionner manuellement les actualités à remonter",
+                    self::SPECIFIC_CATEGORY => "Remonter les actualités d’une catégorie spécifique"
+                ]),
 
             RelationField::make(__('Sélectionnez les actualités à afficher'), self::CUSTOM_LAST_NEWS)
                 ->instructions(__('Renseignez au moins une actualité.'))
@@ -68,6 +68,7 @@ class LastNewsBlock extends AbstractBlock
 
             TaxonomyField::make('Sélectionnez la catégorie des articles à afficher', self::SPECIFIC_CATEGORY)
                 ->taxonomy(self::CATEGORY_NAME)
+                ->required()
                 ->conditionalLogic([
                     ConditionalLogic::where(self::TYPE, "==", self::SPECIFIC_CATEGORY),
                 ])
@@ -77,5 +78,45 @@ class LastNewsBlock extends AbstractBlock
         yield from LayoutTab::make()->fields([
             LayoutField::margin()
         ]);
+    }
+
+    public function addToContext(): array
+    {
+        $fields = get_fields();
+        $perPage = 3;
+        $isCustomNews = $fields['type'] == self::CUSTOM_LAST_NEWS;
+        $isSpecificCategory = $fields['type'] == self::SPECIFIC_CATEGORY;
+
+        $specificCategory = $isSpecificCategory ? $fields['specific_category'] : null;
+
+        if ($isCustomNews) {
+            $lastNews = Timber::get_posts($fields['custom_last_news']);
+        } else {
+            $taxonomies = [];
+            if ($specificCategory) {
+                $taxonomies = array_map(function ($slug) {
+                    if ($slug) {
+                        return [
+                            'taxonomy' => self::CATEGORY_NAME,
+                            'field' => 'slug',
+                            'terms' => $slug,
+                            'include_children' => true,
+                            'operator' => 'IN',
+                        ];
+                    }
+                }, [$specificCategory->slug]);
+            }
+
+
+            $query = \Rareloop\Lumberjack\Post::builder()
+                ->orderBy('date', 'DESC')
+                ->limit($perPage)
+                ->whereTaxonomies($taxonomies);
+
+            $lastNews = $query->get();
+        }
+        return [
+            "lastNews" => $lastNews,
+        ];
     }
 }
