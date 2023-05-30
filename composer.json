@@ -19,7 +19,7 @@
         "doctrine/annotations": "^1.6",
         "koodimonni-language/fr_fr": "*",
         "oscarotero/env": "^2.1",
-        "rareloop/lumberjack-core": "^5.0",
+        "rareloop/lumberjack-core": "^6.0",
         "rareloop/lumberjack-email": "^1.4",
         "rareloop/lumberjack-validation": "^1.1",
         "rbdwllr/wordpress-salts-generator": "^0.2.0",

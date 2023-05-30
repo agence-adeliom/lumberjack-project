@@ -24,3 +24,4 @@ wp-cli.local.yml
 .phplint-cache
 
 *.mutagen.yml.*
+codealike.json
