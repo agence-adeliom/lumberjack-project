@@ -2,24 +2,14 @@
     {% block content %}
         {% import "components/typography/typography.html.twig" as typography %}
         <div class="relative w-fit flex relative mx-auto">
-            <div class="z-1 absolute -top-[60%] md:-top-[80%] lg:-top-[100%] left-0">
-                <svg width="128" height="109" viewBox="0 0 128 109" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M29.767 109C20.0558 109 12.6668 105.314 7.60007 97.942C2.53336 90.57 0 80.4599 0 67.6116C0 52.657 3.69448 39.4928 11.0834 28.1188C18.4724 16.7449 29.767 7.37199 44.9671 0L55.1005 20.2203C45.6004 24.8541 38.4226 30.4357 33.567 36.9652C28.9225 43.2841 26.6003 51.0773 26.6003 60.3449C27.0225 60.1343 27.5503 60.029 28.1836 60.029C28.8169 60.029 29.3447 60.029 29.767 60.029C36.5226 60.029 42.2226 62.1353 46.8671 66.3478C51.7227 70.3498 54.1505 75.9314 54.1505 83.0928C54.1505 90.886 51.8283 97.2048 47.1838 102.049C42.5393 106.683 36.7337 109 29.767 109ZM102.666 109C92.9552 109 85.5663 105.314 80.4995 97.942C75.4328 90.57 72.8995 80.4599 72.8995 67.6116C72.8995 52.657 76.594 39.4928 83.9829 28.1188C91.3719 16.7449 102.666 7.37199 117.867 0L128 20.2203C118.5 24.8541 111.322 30.4357 106.466 36.9652C101.822 43.2841 99.4997 51.0773 99.4997 60.3449C99.922 60.1343 100.45 60.029 101.083 60.029C101.716 60.029 102.244 60.029 102.666 60.029C109.422 60.029 115.122 62.1353 119.767 66.3478C124.622 70.3498 127.05 75.9314 127.05 83.0928C127.05 90.886 124.728 97.2048 120.083 102.049C115.439 106.683 109.633 109 102.666 109Z" fill="#E7E8E9"/>
-                </svg>
-            </div>
-
+            <i class="text-[#E7E8E9] fa-solid fa-quote-left z-1 absolute -top-[60%] md:-top-[80%] lg:-top-[100%] left-0 text-[120px]"></i>
             <div class="w-fit flex flex-col gap-6 ml-10 relative z-10">
-                {% if fields.title is defined and fields.title %}
-                    {{ typography.heading({
-                        content: fields.title,
-                    }) }}
-                {% endif %}
-
-                {% if fields.content is defined and fields.content %}
-                    {{ typography.text({
-                        content: fields.content,
-                    }) }}
-                {% endif %}
+                {{ typography.heading({
+                    content: fields.title,
+                }) }}
+                {{ typography.text({
+                    content: fields.content,
+                }) }}
             </div>
         </div>
     {% endblock %}

@@ -66,6 +66,10 @@ Dans le fichier .lando.yml, renommez le nom du projet "lumberjack" par le nom de
 
 ⚠️ Si vous faites des changement dans le `.lando.yml` ou dans `.lando.local.yml` faite un `lando rebuild -y`
 
+***Installation de FontAwesome*** ***:***
+
+⚠️ Sur ce projet, nous utilisons FontAwesome pour la gestion des icônes.
+Pour pouvoir installer le package, remplacer dans le fichier '.npmrc' à la racine du thème 'VOTRE_CLE' par le Package Manager Token à cette url : https://fontawesome.com/account (compte Adeliom dans Bitwarden).
 
 Lando s'occupe de tout :
 - création des différents conteneurs docker : appserver, phpmyadmin, node, mailhog
