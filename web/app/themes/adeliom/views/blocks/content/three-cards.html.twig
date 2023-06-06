@@ -1,0 +1,24 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/action/buttons/btn.html.twig" as button %}
+        {% import "components/typography/typography.html.twig" as typography %}
+        {{ typography.heading({
+            fields,
+            className: 'mb-6 lg:mb-10'
+        }) }}
+        <div class="grid grid-cols-12 gap-6 mb-6 lg:mb-10">
+            {% for item in fields.cards %}
+                <div class="col-span-4">
+                    <div class="">
+{#                        {% include "components/content/media/media.html.twig" with {} %}#}
+                    </div>
+                    {{ dump(item) }}
+                </div>
+            {% endfor %}
+        </div>
+        {{ button.single({
+            fields,
+            className: 'mx-auto'
+        }) }}
+    {% endblock %}
+{% endembed %}
