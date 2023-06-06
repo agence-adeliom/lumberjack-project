@@ -14,6 +14,7 @@ use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 use Extended\ACF\Fields\Repeater;
+use Extended\ACF\Fields\TrueFalse;
 
 /**
  * Class ThreCardsBlock
@@ -39,9 +40,10 @@ class ThreCardsBlock extends AbstractBlock
     {
         yield from ContentTab::make()->fields([
             HeadingField::make()->tag(),
+            TrueFalse::make("Mode image")->stylisedUi(),
             Repeater::make("Cards", 'cards')
                 ->fields([
-                    ImageField::make(),
+                    ImageField::make()->Instructions('Icon : png ou svg 256x256 <br/> Image : format portrait'),
                     HeadingField::make()->tag(),
                     WysiwygField::make()->default()
                 ])

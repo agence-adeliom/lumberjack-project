@@ -7,18 +7,42 @@
             className: 'mb-6 lg:mb-10'
         }) }}
         <div class="grid grid-cols-12 gap-6 mb-6 lg:mb-10">
+            {% if fields.mode_image == 'true' %}
+                {% set imageStyle = 'object-cover w-full h-full' %}
+                {% set wrapperStyle = '' %}
+            {% else %}
+                {% set imageStyle = 'object-contain w-32 h-32' %}
+                {% set wrapperStyle = 'flex items-center justify-center' %}
+            {% endif %}
+
             {% for item in fields.cards %}
-                <div class="col-span-4">
-                    <div class="">
-{#                        {% include "components/content/media/media.html.twig" with {} %}#}
+                <div class="col-span-full lg:col-span-4 rounded overflow-hidden">
+                    <div class="h-[245px] overflow-hidden {{ wrapperStyle }}">
+                        {% include "components/content/media/image.html.twig" with {
+                            media: item.image,
+                            className: imageStyle
+                        }%}
                     </div>
-                    {{ dump(item) }}
+                    <div class="flex flex-col p-4">
+                        {{ typography.heading({
+                            fields,
+                            className: 'mb-6 lg:mb-10'
+                        }) }}
+                        {{ typography.text({
+                            content: item.wysiwyg,
+                            size: 'base',
+                            color: 'black',
+                            className: 'mt-3',
+                        }) }}
+                    </div>
                 </div>
             {% endfor %}
         </div>
-        {{ button.single({
-            fields,
-            className: 'mx-auto'
-        }) }}
+        <div class="w-full flex items-center justify-center">
+            {{ button.single({
+                fields,
+                className: 'mx-auto'
+            }) }}
+        </div>
     {% endblock %}
 {% endembed %}
