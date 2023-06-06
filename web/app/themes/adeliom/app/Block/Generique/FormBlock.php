@@ -8,6 +8,7 @@ use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
+use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 
@@ -35,6 +36,7 @@ class FormBlock extends AbstractBlock
     {
         yield from ContentTab::make()->fields([
             HeadingField::make()->tag(),
+            WysiwygField::make()->default()->mediaUpload(true),
             FormFields::select(),
         ]);
 
