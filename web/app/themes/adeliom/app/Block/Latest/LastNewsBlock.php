@@ -13,6 +13,7 @@ use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 use App\PostTypes\Post;
+use App\Repositories\PostRepository;
 use Extended\ACF\ConditionalLogic;
 use Timber\Timber;
 
@@ -107,13 +108,7 @@ class LastNewsBlock extends AbstractBlock
                 }, [$specificCategory->slug]);
             }
 
-
-            $query = \Rareloop\Lumberjack\Post::builder()
-                ->orderBy('date', 'DESC')
-                ->limit($perPage)
-                ->whereTaxonomies($taxonomies);
-
-            $lastNews = $query->get();
+            $lastNews = PostRepository::getAll(3, $taxonomies);
         }
         return [
             "lastNews" => $lastNews,

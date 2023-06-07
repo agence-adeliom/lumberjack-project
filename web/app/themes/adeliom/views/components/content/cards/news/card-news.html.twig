@@ -5,7 +5,7 @@
 {% set className = obj.className is defined ? obj.className : defaultClassName %}
 
 {% embed "components/content/cards/card.html.twig" with {
-    classNames: classNames,
+    className: className,
     padding: 'none',
     rounded: 'normal',
     background: 'white',
