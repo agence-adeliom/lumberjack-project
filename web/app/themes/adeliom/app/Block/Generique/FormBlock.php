@@ -3,7 +3,7 @@
 namespace App\Block\Content;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
-use Adeliom\Lumberjack\Admin\Fields\Choices\FormFields;
+use Adeliom\Lumberjack\Admin\Fields\FormFields;
 use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
@@ -37,7 +37,7 @@ class FormBlock extends AbstractBlock
         yield from ContentTab::make()->fields([
             HeadingField::make()->tag(),
             WysiwygField::make()->default()->mediaUpload(true),
-            FormFields::select(),
+            FormFields::selectGF(),
         ]);
 
         yield from LayoutTab::make()->fields([
