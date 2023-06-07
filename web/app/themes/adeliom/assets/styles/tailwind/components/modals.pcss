@@ -1,0 +1,118 @@
+@layer components {
+    .micromodal-slide {
+        display: none !important;
+    }
+
+    .micromodal-slide.is-open {
+        display: grid !important;
+    }
+
+    .micromodal-slide .modal-container,
+    .micromodal-slide .modal-overlay {
+        will-change: transform;
+    }
+
+    @keyframes fade-in {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes fade-out {
+        from {
+            opacity: 1;
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    @keyframes top-slide-in {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes top-slide-out {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+    }
+
+    @keyframes bottom-slide-in {
+        from {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes bottom-slide-out {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+    }
+
+    /* Animation FadeIn -> FadeOut Overlay */
+    .micromodal-slide[aria-hidden="false"] .modal-overlay {
+        animation: fade-in 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .micromodal-slide[aria-hidden="true"] .modal-overlay {
+        animation: fade-out 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    /* Animation ToTopSlideIn -> ToTopSlideOut Modal */
+    .slide-top[aria-hidden="false"] .modal-container {
+        animation: top-slide-in 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .slide-top[aria-hidden="true"] .modal-container {
+        animation: top-slide-out 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    /* Animation ToBottomSlideIn -> ToBottomSlideOut Modal */
+    .slide-bottom[aria-hidden="false"] .modal-container {
+        animation: bottom-slide-in 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .slide-bottom[aria-hidden="true"] .modal-container {
+        animation: bottom-slide-out 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    /* Animation FadeIn -> FadeOut Modal */
+    .slide-fade[aria-hidden="false"] .modal-container {
+        animation: fade-in 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+
+    .slide-fade[aria-hidden="true"] .modal-container {
+        animation: fade-out 0.35s cubic-bezier(0, 0, 0.2, 1);
+    }
+}
