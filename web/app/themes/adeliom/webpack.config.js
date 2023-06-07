@@ -4,7 +4,7 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const glob = require("glob");
 const path = require("path");
 const theme = path.basename(__dirname);
-console.log(theme, __dirname);
+
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
 if (!Encore.isRuntimeEnvironmentConfigured()) {
@@ -12,14 +12,15 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 }
 
 Encore.addAliases({
-    "@tailwind": path.resolve(__dirname, "assets/tailwind"),
-    "@components": path.resolve(__dirname, "assets/components/"),
+    "@tailwind": path.resolve(__dirname, "assets/styles/tailwind"),
+    "@styles": path.resolve(__dirname, "assets/styles"),
+    "@scripts": path.resolve(__dirname, "assets/scripts"),
 });
 
 const globToEntry = (base, pattern) => {
     return glob.sync(path.join(base, pattern)).reduce((entry, file) => {
         const parsedPath = path.parse(path.relative(base, file));
-        entry[parsedPath.dir] = path.resolve(file);
+        entry[path.join(parsedPath.dir, parsedPath.name)] = path.resolve(file);
         return entry;
     }, {});
 };
@@ -44,7 +45,11 @@ Encore
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
     .enableSingleRuntimeChunk()
-    .addEntries(globToEntry("assets", "components/**/index.ts"))
+    .addEntries(globToEntry("assets", "scripts/[^types]**/[^_]*.ts"))
+    .addEntries(globToEntry("assets", "scripts/[^_]*.ts"))
+    .addStyleEntry("styles/global", "./assets/styles/global.pcss")
+    .addStyleEntry("styles/editor", "./assets/styles/editor.pcss")
+    .addStyleEntry("styles/admin", "./assets/styles/admin.pcss")
 
     /*
      * FEATURE CONFIG

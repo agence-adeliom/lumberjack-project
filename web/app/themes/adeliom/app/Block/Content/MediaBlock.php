@@ -39,7 +39,7 @@ class MediaBlock extends AbstractBlock
                 "anchor" => true
             ],
             'enqueue_assets' => function () {
-                Assets::enqueue('components/blocks/media', 'components/blocks/media', []);
+                Assets::enqueue('scripts/blocks/media', 'scripts/blocks/media', []);
             },
         ]);
     }

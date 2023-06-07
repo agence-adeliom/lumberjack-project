@@ -1,6 +1,6 @@
 import "glightbox/dist/css/glightbox.css";
 import GLightbox from "glightbox";
-import { setBackFocus } from "@components/utils/lightbox";
+import { setBackFocus } from "@scripts/components/lightbox";
 
 /*----------------------
 ----------------------

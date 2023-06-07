@@ -1,4 +1,3 @@
-import "./index.pcss";
 import MicroModal from "micromodal";
 
 MicroModal.init({

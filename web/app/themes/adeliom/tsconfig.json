@@ -20,12 +20,12 @@
         "jsx": "preserve",
         "incremental": true,
         "typeRoots" : ["node_modules/@types",
-            "./assets/typings"
+            "./assets/scripts/types"
         ],
         "paths": {
-            "@components/*": ["./assets/components/*"],
+            "@scripts/*": ["./assets/scripts/*"],
         }
     },
-    "include": ["./assets/components/**/*.ts", "./assets/typings/**/*.ts"],
+    "include": ["./assets/scripts/**/*.ts", "./assets/scripts/types/**/*.ts"],
     "exclude": ["node_modules"]
 }
