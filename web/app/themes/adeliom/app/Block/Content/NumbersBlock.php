@@ -20,7 +20,6 @@ use Extended\ACF\Fields\Number;
  */
 class NumbersBlock extends AbstractBlock
 {
-
     public const NAME = 'numbers-block';
     public const TITLE = 'Chiffres clés';
     public const DESCRIPTION = 'Bloc permettant la mise en avant de chiffres clés.';
