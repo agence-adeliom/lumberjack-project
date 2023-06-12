@@ -27,8 +27,8 @@ class FormBlock extends AbstractBlock
     {
         parent::__construct([
             'mode' => 'edit',
-            'category' => GutBlockName::GENERIQUE,
-            'dir' => BlocksTwigPath::GENERIQUE
+            'category' => GutBlockName::RELATION,
+            'dir' => BlocksTwigPath::RELATION
         ]);
     }
 
