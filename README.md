@@ -70,6 +70,7 @@ Dans le fichier .lando.yml, renommez le nom du projet "lumberjack" par le nom de
 
 ⚠️ Sur ce projet, nous utilisons FontAwesome pour la gestion des icônes.
 Pour pouvoir installer le package, remplacer dans le fichier '.npmrc' à la racine du thème 'VOTRE_CLE' par le Package Manager Token à cette url : https://fontawesome.com/account (compte Adeliom dans Bitwarden).
+Une fois l'installation passée, merci de retirer la clé du fichier '.npmrc' et de la stocker dans le fichier '.env' de manière à ce qu'elle ne soit pas commit.
 
 Lando s'occupe de tout :
 - création des différents conteneurs docker : appserver, phpmyadmin, node, mailhog
