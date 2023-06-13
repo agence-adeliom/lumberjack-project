@@ -41,7 +41,8 @@
         "wpackagist-plugin/seo-by-rank-math": "*",
         "wpackagist-plugin/w3-total-cache": "*",
         "wpackagist-plugin/wordfence": "*",
-        "wpackagist-plugin/worker": "*"
+        "wpackagist-plugin/worker": "*",
+        "gravityforms/gravityforms": "*"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
@@ -70,8 +71,19 @@
             "url": "https://auth-acf-composer-proxy.pivvenit.net/wordpress-muplugin/"
         },
         {
-            "type": "composer",
-            "url": "https://gf-composer-proxy.arnaud-ritti.workers.dev/wordpress-muplugin/"
+            "type": "package",
+            "package": {
+                "name": "gravityforms/gravityforms",
+                "version": "2.7.7",
+                "type": "wordpress-plugin",
+                "dist": {
+                    "type": "zip",
+                    "url": ".plugins/gravityforms.zip"
+                },
+                "require": {
+                    "composer/installers": "^1.0 || ^2.0"
+                }
+            }
         },
         {
             "type": "composer",
