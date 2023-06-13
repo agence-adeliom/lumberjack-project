@@ -1,4 +1,5 @@
 import Alpine from "alpinejs";
+
 document.addEventListener("alpine:init", () => {
     Alpine.data("initAccordion", () => {
         const activeClass = "is-active";
@@ -15,7 +16,6 @@ document.addEventListener("alpine:init", () => {
             closeEl(item: HTMLElement) {
                 const index = item.dataset.index;
                 item.classList.remove(activeClass);
-                this.active = false;
                 const content = this.getContent(index);
 
                 this.setMaxHeight(content);
@@ -24,7 +24,6 @@ document.addEventListener("alpine:init", () => {
             openEl(item: HTMLElement) {
                 const index = item.dataset.index;
                 const content = this.getContent(index);
-                this.active = !this.active;
                 if (item.className.includes(activeClass)) {
                     item.classList.remove(activeClass);
                     this.setMaxHeight(content);
