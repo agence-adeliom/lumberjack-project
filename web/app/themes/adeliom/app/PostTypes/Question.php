@@ -23,7 +23,7 @@ class Question extends BasePost
      */
     public static function getPostType(): string
     {
-        return 'questions';
+        return 'question';
     }
 
     /**
@@ -37,7 +37,7 @@ class Question extends BasePost
     {
         return [
             'labels' => [
-                'name' => __('Questions'),
+                'name' => __('Question'),
                 'singular_name' => __('Question'),
                 'add_new_item' => __('Ajouter une nouvelle question'),
             ],
