@@ -1,6 +1,6 @@
 # Overlay
 
-Les composents de type Overlays sont utilisés pour mettre l'accent sur un element en particulier ou une action de l'utilisateur.
+Les composants de type Overlays sont utilisés pour mettre l'accent sur un element en particulier ou une action de l'utilisateur.
 
 Dans ce dossier on va retrouver :
 

@@ -1,6 +1,6 @@
 # Navigation
 
-Les composents de type Navigation sont utilisés pour naviguer entre les pages ou les items.
+Les composants de type Navigation sont utilisés pour naviguer entre les pages ou les items.
 
 Dans ce dossier on va retrouver :
 
