@@ -1,8 +1,8 @@
 # Navigation
 
-Navigation components are used to navigate seamlessly between pages or items.
+Les composents de type Navigation sont utilisés pour naviguer entre les pages ou les items.
 
-In this folder you can have :
+Dans ce dossier on va retrouver :
 
 -   Breadcrumb
 -   Footer
