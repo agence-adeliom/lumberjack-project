@@ -3,6 +3,7 @@
 {% set description = description %}
 {% set index = index %}
 
+{# Pour maintenir l'accordéon ouvert lorsque que l'utilisateur clique sur un autre accordéon, il suffit de retirer l'attribut "@click.outside="closeEl($el);".#}
 <div class="cursor-pointer" @click.outside="closeEl($el);" @click="openEl($el)" data-index="{{ index }}">
     <div class="flex items-center justify-between gap-4 bg-gray-200 is-active:bg-gray-400 p-6 rounded transition-all select-none">
         {{ typography.heading({
