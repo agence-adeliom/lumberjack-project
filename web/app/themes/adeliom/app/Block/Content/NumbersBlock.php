@@ -6,6 +6,7 @@ use Adeliom\Lumberjack\Admin\AbstractBlock;
 use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
 use Adeliom\Lumberjack\Admin\Fields\Typography\TextField;
 use App\Enum\BlocksTwigPath;
@@ -20,7 +21,6 @@ use Extended\ACF\Fields\Number;
  */
 class NumbersBlock extends AbstractBlock
 {
-
     public const NAME = 'numbers-block';
     public const TITLE = 'Chiffres clés';
     public const DESCRIPTION = 'Bloc permettant la mise en avant de chiffres clés.';
@@ -49,6 +49,9 @@ class NumbersBlock extends AbstractBlock
 
         yield from LayoutTab::make()->fields([
             LayoutField::margin()
+        ]);
+        yield from SettingsTab::make()->fields([
+            SettingsTab::anchor()
         ]);
     }
 }

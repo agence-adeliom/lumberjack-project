@@ -10,6 +10,7 @@ use Adeliom\Lumberjack\Admin\Fields\Medias\MediaField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
 use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use App\Enum\BlocksTwigPath;
@@ -64,6 +65,9 @@ class TextImageBlock extends AbstractBlock
                 ConditionalLogic::where("has_ratio", "==", 1)
             ]),
             LayoutField::margin()
+        ]);
+        yield from SettingsTab::make()->fields([
+            SettingsTab::anchor()
         ]);
     }
 }
