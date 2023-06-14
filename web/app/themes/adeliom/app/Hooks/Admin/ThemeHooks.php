@@ -36,7 +36,8 @@ class ThemeHooks
     #[Action("wp_enqueue_scripts")]
     public static function enqueueScripts(): void
     {
-        Assets::enqueue('components/global', 'components/global', []);
+        Assets::enqueue('scripts/global', 'scripts/global', []);
+        Assets::enqueue('styles/global', 'styles/global', []);
     }
 
     /**

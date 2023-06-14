@@ -1,0 +1,58 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+
+        {% if fields.ratio == "auto" or not fields.ratio %}
+            {% set orientation = "paysage" %}
+
+            {% set image = fields.media.type == "video" ? fields.media.video.thumbnail : fields.media.image %}
+
+            {% if image.height > image.width %}
+                {% set orientation = "portrait" %}
+            {% endif %}
+        {% else %}
+            {% set orientation = fields.ratio %}
+        {% endif %}
+
+        {% set positions = {
+            portrait: "lg:col-start-4 lg:col-end-10 xlg:col-start-5 xlg:col-end-9",
+            paysage: "lg:col-start-3 lg:col-end-11 xlg:col-start-4 xlg:col-end-10"
+        } %}
+
+        {% set ratio = "" %}
+
+        {% if fields.has_ratio %}
+
+            {% set ratioFormat = {
+                paysage: "aspect-[4/3]",
+                portrait: "aspect-square"
+            } %}
+
+            {% set ratio = "w-full object-cover " ~ ratioFormat[orientation] %}
+
+        {% endif %}
+
+        <div class="grid items-center grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-y-10">
+
+            <div class="text-center lg:col-start-3 lg:col-end-11 xlg:col-start-4 xlg:col-end-10">
+
+                {% import "components/typography/typography.html.twig" as typography %}
+                {{ typography.textGroup({
+                    fields,
+                    title: {
+                        size: 2,
+                    },
+                }) }}
+
+            </div>
+
+            {% include "components/content/media/media.html.twig" with {
+                wrapper: {
+                    className: concat("col-span-full", positions[orientation])
+                },
+                className: ratio
+            } %}
+
+        </div>
+
+    {% endblock %}
+{% endembed %}

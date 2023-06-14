@@ -4,21 +4,14 @@ namespace App\Block\Cta;
 
 use Adeliom\Lumberjack\Admin\AbstractBlock;
 use Adeliom\Lumberjack\Admin\Fields\Buttons\ButtonField;
-use Adeliom\Lumberjack\Admin\Fields\Choices\TrueFalseField;
 use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
-use Adeliom\Lumberjack\Admin\Fields\Medias\MediaField;
-use Adeliom\Lumberjack\Admin\Fields\Settings\SettingsField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
-use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
-use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
+use Adeliom\Lumberjack\Admin\Fields\Typography\TextareaField;
 use Adeliom\Lumberjack\Admin\Fields\Typography\TextField;
-use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
-use Extended\ACF\ConditionalLogic;
-use Extended\ACF\Fields\RadioButton;
 
 /**
  * Class CtaBlock
@@ -48,7 +41,7 @@ class CtaBlock extends AbstractBlock
 
         yield from ContentTab::make()->fields([
             HeadingField::make()->tag(),
-            TextField::make(),
+            TextareaField::make(),
             ButtonField::make()
         ]);
 
