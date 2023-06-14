@@ -122,6 +122,7 @@ Pour :
 * Modifier les colonnes d'un PostType ([doc/how-to/edit-posttype-columns.md](./doc/how-to/edit-posttype-columns.md))
 * Créer une Taxonomy ([doc/how-to/create-taxonomy.md](./doc/how-to/create-taxonomy.md))
 * Créer une Extension Twig ([doc/how-to/create-twig_extensions.md](./doc/how-to/create-twig_extensions.md))
+* Créer des champs ACF ([vendor/agence-adeliom/lumberjack-admin/src/Fields/README.md](./vendor/agence-adeliom/lumberjack-admin/src/Fields/README.md))
 
 ### Forward le port de la base de donnée pour une utilisation locale _(TablePlus, SequelPro, MySQL Workbenchh ou PHPStorm)_
 
