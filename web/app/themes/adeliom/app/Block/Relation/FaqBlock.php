@@ -28,7 +28,7 @@ class FaqBlock extends AbstractBlock
     public const NAME = "faq";
     public const TITLE = "Remontée de FAQ";
     public const DESCRIPTION = "Bloc remontant les dernières FAQ.";
-    public const QUESTION = "question";
+    public const QUESTIONS = "questions";
     public function __construct()
     {
         parent::__construct([
@@ -46,7 +46,7 @@ class FaqBlock extends AbstractBlock
         yield from ContentTab::make()->fields([
             HeadingField::make()->tag(),
             WysiwygField::make()->default(),
-            RelationField::make(__('Questions à remonter'), self::QUESTION)
+            RelationField::make(__('Questions à remonter'), self::QUESTIONS)
                 ->postTypes([Question::getPostType()])
                 ->min(1)
         ]);

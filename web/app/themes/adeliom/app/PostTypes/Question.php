@@ -37,7 +37,7 @@ class Question extends BasePost
     {
         return [
             'labels' => [
-                'name' => __('Question'),
+                'name' => __('Questions'),
                 'singular_name' => __('Question'),
                 'add_new_item' => __('Ajouter une nouvelle question'),
             ],
