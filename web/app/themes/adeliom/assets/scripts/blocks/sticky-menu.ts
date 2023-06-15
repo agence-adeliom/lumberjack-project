@@ -9,10 +9,7 @@ const swiper = new Swiper(".swiper", {
     slidesPerView: "auto",
     spaceBetween: "24",
     loop: false,
-    freeMode: {
-        enabled: true,
-        sticky: false,
-    },
+    mousewheel: true,
     navigation: {
         nextEl: ".js-swiper-next",
         prevEl: ".js-swiper-prev",
@@ -73,7 +70,7 @@ addEventListener("scroll", () => {
 
             const sliderIndex: any = el.dataset.sliderIndex!;
 
-            swiper.slideTo(sliderIndex, 0);
+            swiper.slideTo(sliderIndex, 300);
         }
     });
 });
