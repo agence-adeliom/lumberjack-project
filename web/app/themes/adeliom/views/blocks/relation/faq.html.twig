@@ -1,0 +1,32 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="col-span-full lg:col-span-6">
+                {{ typography.heading({
+                    content: fields.title,
+                    className: '',
+                }) }}
+                {{ typography.text({
+                    content: fields.wysiwyg,
+                    className: 'mt-6 lg:mt-10',
+                }) }}
+            </div>
+
+            <div class="col-span-full lg:col-span-6 flex flex-col gap-4" x-data="initAccordion">
+                {% for question in fields.questions %}
+
+                    {% include 'components/structure/accordion/faq.html.twig' with {
+                        title: question.post_title,
+                        description: question.post_content,
+                        index: loop.index
+                    } only %}
+
+                {% endfor %}
+
+        </div>
+    {% endblock %}
+{% endembed %}
+
+

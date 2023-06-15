@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin');
 module.exports = {
+    darkMode: 'class',
     content: ["./views/**/*.html.twig", "./assets/**/*.{js,ts,jsx,tsx}"],
     theme: {
         container: {
@@ -26,6 +28,10 @@ module.exports = {
             base: ["assets/tailwind/base/**/*.{css,pcss}"], // Glob paths to your bases
             utilities: ["assets/tailwind/utilities/**/*.{css,pcss}"], // Glob paths to your utilities
             components: ["assets/tailwind/components/**/*.{css,pcss}"], // Glob paths to your components
+        }),
+        // Ajout de variants custom
+        plugin(function ({ addVariant }) {
+            addVariant('is-active', ['&.is-active', '.is-active &']);
         }),
     ],
 };

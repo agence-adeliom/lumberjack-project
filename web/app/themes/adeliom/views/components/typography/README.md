@@ -1,8 +1,8 @@
 # Typography
 
-Typography components are used to display text throughout the website.
+Les composants de type Typography sont utilisés pour afficher le texte sur the site.
 
-In this folder you can have :
+Dans ce dossier on va retrouver :
 
 -   Heading
 -   Icon

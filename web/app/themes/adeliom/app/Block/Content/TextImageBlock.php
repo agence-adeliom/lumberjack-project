@@ -13,6 +13,7 @@ use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
 use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
+use Adeliom\Lumberjack\Assets\Assets;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 use Extended\ACF\ConditionalLogic;
@@ -37,7 +38,10 @@ class TextImageBlock extends AbstractBlock
             'dir' => BlocksTwigPath::CONTENT,
             'supports' => [
                 "anchor" => true
-            ]
+            ],
+            'enqueue_assets' => function () {
+                Assets::enqueue('scripts/blocks/media', 'scripts/blocks/media', []);
+            },
         ]);
     }
 

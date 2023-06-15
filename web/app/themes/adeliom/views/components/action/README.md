@@ -1,8 +1,8 @@
 # Action
 
-Actions allow users to perform certain operations and make the interfaces interactive.
+Les composants de type Action permettent aux utilisateurs d'effectuer certaines opérations et rendent les interfaces interactives.
 
-For example in this folder you can have :
+Dans ce dossier on va retrouver :
 
 -   Button
 -   Link

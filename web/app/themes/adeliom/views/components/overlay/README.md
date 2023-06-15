@@ -1,8 +1,8 @@
 # Overlay
 
-Overlay components are used to provide emphasis on a particular element or an action of the user.
+Les composants de type Overlays sont utilisés pour mettre l'accent sur un element en particulier ou une action de l'utilisateur.
 
-In this folder you can have :
+Dans ce dossier on va retrouver :
 
 -   Backdrop
 -   Dialog

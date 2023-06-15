@@ -1,0 +1,25 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+
+        {% import "components/typography/typography.html.twig" as typography %}
+
+        {{ typography.heading({
+            fields,
+            title: {
+                size: 2,
+            }
+        }) }}
+
+        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+
+            {% for card in context_block['lastNews'] %}
+                {% include "components/content/cards/news/card-news.html.twig" with { obj:{
+                    card: card,
+                    category: specificCategory,
+                }} %}
+            {% endfor %}
+
+        </div>
+
+    {% endblock %}
+{% endembed %}

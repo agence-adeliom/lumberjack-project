@@ -10,4 +10,5 @@ final class GutBlockName
     public const CTA = 'cta';
 
     public const NAVIGATION = 'navigation';
+    public const RELATION = 'relation';
 }
