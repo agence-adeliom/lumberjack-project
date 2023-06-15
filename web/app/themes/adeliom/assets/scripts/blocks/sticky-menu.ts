@@ -1,3 +1,24 @@
+import Swiper, { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+const swiper = new Swiper(".swiper", {
+    // configure Swiper to use modules
+    modules: [Navigation],
+    slidesPerView: "auto",
+    spaceBetween: "24",
+    loop: false,
+    freeMode: {
+        enabled: true,
+        sticky: false,
+    },
+    navigation: {
+        nextEl: ".js-swiper-next",
+        prevEl: ".js-swiper-prev",
+    },
+});
+
 const stickyMenu: HTMLElement = document.querySelector(".js-sticky-menu")!;
 const links: NodeListOf<HTMLElement> = stickyMenu?.querySelectorAll(
     ".js-sticky-menu-item "
@@ -49,6 +70,10 @@ addEventListener("scroll", () => {
             if (!el.classList.contains(activeClass)) {
                 el.classList.add(activeClass);
             }
+
+            const sliderIndex: any = el.dataset.sliderIndex!;
+
+            swiper.slideTo(sliderIndex, 0);
         }
     });
 });

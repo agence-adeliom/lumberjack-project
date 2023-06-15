@@ -52,8 +52,7 @@ class StickyMenuBlock extends AbstractBlock
                     TextField::make('ID de l’Ancre', 'anchor')
                 ])
                 ->instructions('Pour des raisons d’affichage, ce menu ne peut contenir que 5 éléments. Veuillez tout de même prêter attention à la longueur des noms des liens.')
-                ->min(3)
-                ->max(5),
+                ->min(2),
             ButtonField::make()->types()
         ]);
 
