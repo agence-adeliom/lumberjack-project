@@ -8,4 +8,5 @@ class BlocksTwigPath
     public const HERO = 'hero';
     public const LISTING = 'listing';
     public const CTA = 'cta';
+    public const RELATION = 'relation';
 }

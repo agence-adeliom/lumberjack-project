@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "ESNext",
+        "noImplicitAny": false,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
         "useDefineForClassFields": true,
         "module": "ESNext",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],

@@ -155,6 +155,10 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 ```shell
 echo 'export PATH="/usr/local/bin:$PATH"' > ~/.huskyrc
 ```
+### Verifier pourquoi son commit ne passe pas
+```shell
+lando phpcs
+```
 
 </details>
 
