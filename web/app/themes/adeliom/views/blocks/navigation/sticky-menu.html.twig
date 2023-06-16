@@ -6,16 +6,14 @@
     {% block content %}
     {% import "components/action/buttons/btn.html.twig" as button %}
     {% import "components/typography/typography.html.twig" as typography %}
-        <div class="flex gap-6 items-center justify-between js-sticky-menu relative ">
+        <div class="flex gap-6 items-center justify-between js-sticky-menu relative" x-data="initStickyMenu()">
             <div class="py-4 lg:py-10 w-full lg:max-w-[80%] relative">
-                {# Effet de voile dégradé #}
-                <div class="bg-gradient-to-r pointer-events-none from-transparent to-red-200 w-14 z-10 h-full absolute top-0 right-0"></div>
                 {# Slider d'item #}
-                <div class="swiper !h-fit !static">
+                <div class="swiper !h-fit !static" x-ref="swiperContainer">
                     <div class="swiper-wrapper">
                         {% for item in fields.sticky_menu %}
-                            <div class="!w-fit !h-fit flex swiper-slide gap-6 items-center rounded js-sticky-menu-item {{ loop.last and loop.index > 5 ? 'mr-10' }}"  data-slider-index="{{ loop.index0 }}">
-                                <a href="#{{ item.anchor }}" class="whitespace-nowrap transition-all bg-red-300 is-active:bg-red-500">
+                            <div class="!w-fit !h-fit will-change-transform swiper-slide gap-6 items-center rounded js-sticky-menu-item {{ loop.last and loop.index > 5 ? 'mr-10' }}"  data-slider-index="{{ loop.index0 }}">
+                                <a href="#{{ item.anchor }}" class="whitespace-nowrap transition-all block is-active:bg-red-300">
                                     {{ typography.text({
                                         content: item.title,
                                         className: '',
@@ -26,9 +24,9 @@
                     </div>
 
                     {# Chevron slider #}
-                    {% set sliderBtnCLass = " -translate-y-1/2 z-10 text-white absolute top-1/2 bg-gradient-to-r cursor-pointer" %}
-                    <div class="js-swiper-prev left-0 from-red-200 to-transparent {{ sliderBtnCLass }}"><-</div>
-                    <div class="js-swiper-next right-0 from-transparent to-red-200 {{ sliderBtnCLass }}">-></div>
+                    {% set sliderBtnCLass = " trnasition-all -translate-y-1/2 z-10 text-white absolute top-1/2 bg-gradient-to-r cursor-pointer" %}
+                    <div class="left-0 from-red-200 to-transparent {{ sliderBtnCLass }}" x-ref="buttonPrev">👈</div>
+                    <div class="right-0 from-transparent to-red-200 {{ sliderBtnCLass }}" x-ref="buttonNext" >👉</div>
                 </div>
             </div>
             <div class="w-full left-0 lg:w-fit flex-shrink-0 bg-red-300 fixed bottom-0 lg:static lg:bg-none">
@@ -41,8 +39,3 @@
     {% endblock %}
 {% endembed %}
 
-<style>
-    .swiper-button-disabled {
-        display: none;
-    }
-</style>
