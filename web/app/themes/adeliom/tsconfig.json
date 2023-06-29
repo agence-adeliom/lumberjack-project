@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "target": "ESNext",
+        "noImplicitAny": false,                            /* Enable error reporting for expressions and declarations with an implied 'any' type. */
         "useDefineForClassFields": true,
         "module": "ESNext",
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
@@ -8,7 +9,7 @@
         "strict": true,
         "sourceMap": true,
         "resolveJsonModule": true,
-        "isolatedModules": true,
+        "isolatedModules": false,
         "esModuleInterop": true,
         "noEmit": true,
         "noUnusedLocals": true,
@@ -19,8 +20,13 @@
         "forceConsistentCasingInFileNames": true,
         "jsx": "preserve",
         "incremental": true,
-        "typeRoots" : ["node_modules/@types"]
+        "typeRoots" : ["node_modules/@types",
+            "./assets/scripts/types"
+        ],
+        "paths": {
+            "@scripts/*": ["./assets/scripts/*"],
+        }
     },
-    "include": ["assets/components/**/*.ts"],
+    "include": ["./assets/scripts/**/*.ts", "./assets/scripts/types/**/*.ts"],
     "exclude": ["node_modules"]
 }

@@ -15,7 +15,7 @@
         "lando phpcbf --no-colors",
         "lando phpcs --no-colors"
     ],
-    "packages/**/*.{php}": [
+    "packages/**/*.php": [
         "lando phplint --no-ansi",
         "lando phpcbf --no-colors",
         "lando phpcs --no-colors"
