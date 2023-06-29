@@ -21,7 +21,7 @@ use Extended\ACF\Fields\TrueFalse;
  * @see https://github.com/wordplate/extended-acf#fields
  * @package App\FlexibleLayout
  */
-class ThreCardsBlock extends AbstractBlock
+class ThreeCardsBlock extends AbstractBlock
 {
     public const NAME = "three-cards";
     public const TITLE = "Blocs 3 cartes";
