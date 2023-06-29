@@ -1,8 +1,8 @@
 # Content
 
-Content components are used to define architecture of your interface and ensure consistency between pages.
+Les composants de type Content sont utilisés pour définir l'architecture de l'interface et assurent la cohérence entre les pages .
 
-In this folder you can have :
+Dans ce dossier on va retrouver :
 
 -   Card
 -   Badge

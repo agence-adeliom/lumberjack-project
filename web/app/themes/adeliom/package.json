@@ -17,6 +17,8 @@
         "@babel/core": "^7.19.1",
         "@babel/preset-env": "^7.19.1",
         "@symfony/webpack-encore": "^4.0.0",
+        "@types/alpinejs": "^3.7.1",
+        "@types/micromodal": "^0.3.3",
         "@typescript-eslint/eslint-plugin": "^5.36.2",
         "@typescript-eslint/parser": "^5.36.2",
         "autoprefixer": "^10.4.11",
@@ -40,6 +42,9 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-pro": "^6.4.0"
+        "@fortawesome/fontawesome-pro": "^6.4.0",
+        "alpinejs": "^3.12.2",
+        "glightbox": "^3.2.0",
+        "micromodal": "^0.4.10"
     }
 }

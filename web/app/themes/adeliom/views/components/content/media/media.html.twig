@@ -5,44 +5,43 @@
     default: {}
 }|mergeClass({}, className) %}
 
-{% embed "components/content/media/partials/wrapper-media.html.twig" with {wrapper} %}
 
-    {% block content %}
+<div class="{{ wrapper.className }}">
 
-        {% if media.type != "video" %}
+    {% if media.type != "video" %}
 
-            {% if media.image %}
-
-                {% set optionsMedia = {
-                    className: class,
-                    media: media.image,
-                }|merge(optionsMedia ?? {}) %}
-
-                {% include "components/content/media/image.html.twig" with optionsMedia only %}
-
-            {% endif %}
-
-        {% else %}
+        {% if media.image %}
 
             {% set optionsMedia = {
                 className: class,
-                media: media.video.thumbnail
+                media: media.image,
             }|merge(optionsMedia ?? {}) %}
 
             {% include "components/content/media/image.html.twig" with optionsMedia only %}
 
-            {% include "components/action/buttons/btn-play.html.twig" %}
-
-            {% embed "components/overlay/modal.html.twig" %}
-                {% block content %}
-                    {% include "components/content/media/video.html.twig" with {
-                        video: media.video
-                    } only %}
-                {% endblock %}
-            {% endembed %}
-
         {% endif %}
 
-    {% endblock %}
+    {% else %}
 
-{% endembed %}
+        {% set optionsMedia = {
+            className: class,
+            media: media.video.thumbnail
+        }|merge(optionsMedia ?? {}) %}
+
+        {% set videoURL = "" %}
+
+        {% if media.video.is_youtube %}
+            {% set videoURL = "https://www.youtube.com/embed/" ~ media.video.id %}
+        {% else %}
+            {% set videoURL = video.video %}
+        {% endif %}
+
+        <a class="js-glightbox-video-single relative" href="{{ videoURL }}">
+            {% include "components/content/media/image.html.twig" with optionsMedia only %}
+            {% include "components/action/buttons/btn-play.html.twig" %}
+        </a>
+
+    {% endif %}
+
+</div>
+

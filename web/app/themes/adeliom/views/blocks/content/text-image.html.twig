@@ -17,10 +17,10 @@
             portrait: {
                 right: {
                     text: "lg:row-start-1 lg:col-span-6",
-                    media: "lg:col-start-8 lg:col-end-13"
+                    media: "max-lg:order-1 lg:col-start-8 lg:col-end-13"
                 },
                 left: {
-                    media: "lg:col-span-4",
+                    media: "lg:col-start-1 lg:col-end-6",
                     text: "lg:col-start-7 lg:col-end-13"
                 }
             },
@@ -49,7 +49,7 @@
 
         {% endif %}
 
-        <div class="grid items-center grid-cols-1 lg:grid-cols-12">
+        <div class="grid items-center gap-10 lg:gap-6 lg:grid-cols-12">
 
             {% include "components/content/media/media.html.twig" with {
                 wrapper: {
@@ -58,7 +58,7 @@
                 className: ratio
             } %}
 
-            <div class="mt-6 lg:mt-0 {{ concat("col-span-full", positions[orientation][fields.media_position].text) }}">
+            <div class="{{ concat("col-span-full", positions[orientation][fields.media_position].text) }}">
 
                 {% import "components/typography/typography.html.twig" as typography %}
                 {{ typography.textGroup({

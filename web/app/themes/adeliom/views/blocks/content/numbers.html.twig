@@ -1,0 +1,28 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+        {{ typography.heading({
+            content: fields.title,
+            className: 'mb-6 lg:mb-10',
+        }) }}
+        <div class="grid grid-cols-12 gap-6">
+            {% for item in fields.key_numbers %}
+                <div class="col-span-full md:col-span-6 lg:col-span-3">
+                    {{ typography.text({
+                        content: item.number,
+                        size: 'xl',
+                        weight: 'medium',
+                        color: 'black',
+                        className: 'text-left'
+                    }) }}
+                    {{ typography.text({
+                        content: item.content,
+                        size: 'base',
+                        color: 'black',
+                        className: 'mt-3',
+                    }) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
+{% endembed %}

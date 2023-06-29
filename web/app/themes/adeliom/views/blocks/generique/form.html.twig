@@ -1,0 +1,14 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+        {{ typography.heading({
+            content: fields.title,
+            className: 'mb-6 lg:mb-10',
+        }) }}
+        {{ typography.text({
+            content: fields.wysiwyg,
+            className: 'mb-6 lg:mb-10',
+        }) }}
+        {{ fn('do_shortcode', '[gravityform id="' ~ fields.form_id ~ '" title="false" description="false" ajax="true" tabindex="49"]') }}
+    {% endblock %}
+{% endembed %}
