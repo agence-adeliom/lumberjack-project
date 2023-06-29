@@ -1,39 +1,44 @@
 import Alpine from "alpinejs";
-
+const isMultiple = false;
 document.addEventListener("alpine:init", () => {
-    Alpine.data("initAccordion", () => {
-        const activeClass = "is-active";
-        return {
-            setMaxHeight(content: HTMLElement, height = 0) {
-                content.style.maxHeight = `${height}px`;
-            },
+    Alpine.data("initAccordions", () => ({
+        active: [],
+        setMaxHeight(content, height = 0) {
+            content.style.maxHeight = height + "px";
+        },
 
-            getContent(index: number) {
-                const container = `container${index}`;
-                return this.$refs[container];
-            },
+        getContent(id) {
+            return this.$refs["container-" + id];
+        },
 
-            closeEl(item: HTMLElement) {
-                const index = item.dataset.index;
-                item.classList.remove(activeClass);
-                const content = this.getContent(index);
+        isOpen(id) {
+            return this.active.indexOf(id) !== -1;
+        },
 
-                this.setMaxHeight(content);
-            },
+        close(id) {
+            this.active = this.active.filter((accordion) => accordion !== id);
+            const content = this.getContent(id);
+            this.setMaxHeight(content);
+        },
 
-            openEl(item: HTMLElement) {
-                const index = item.dataset.index;
-                const content = this.getContent(index);
-                if (item.className.includes(activeClass)) {
-                    item.classList.remove(activeClass);
-                    this.setMaxHeight(content);
-                } else {
-                    const contentHeight = content.scrollHeight;
-                    item.classList.add(activeClass);
+        closeAll() {
+            this.active.forEach((el) => {
+                this.close(el);
+            });
+        },
 
-                    this.setMaxHeight(content, contentHeight);
+        open(id) {
+            const content = this.getContent(id);
+            if (this.isOpen(id)) {
+                this.close(id);
+            } else {
+                if (!isMultiple) {
+                    this.closeAll();
                 }
-            },
-        };
-    });
+                this.active.push(id);
+                const contentHeight = content.scrollHeight;
+                this.setMaxHeight(content, contentHeight);
+            }
+        },
+    }));
 });

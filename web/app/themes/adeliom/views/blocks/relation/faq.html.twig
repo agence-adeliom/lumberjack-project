@@ -14,7 +14,7 @@
                 }) }}
             </div>
 
-            <div class="col-span-full lg:col-span-6 flex flex-col gap-4" x-data="initAccordion">
+            <div class="col-span-full lg:col-span-6 flex flex-col gap-4" x-data="initAccordions" x-init="open(1)">
                 {% for question in fields.questions %}
 
                     {% include 'components/structure/accordion/faq.html.twig' with {
