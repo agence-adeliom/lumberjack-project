@@ -1,10 +1,17 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
-
-        {% include "components/typography/heading.html.twig" %}
-        {% include "components/typography/text.html.twig" with {
-            content: fields.content
-        } %}
-
+        {% import "components/typography/typography.html.twig" as typography %}
+        <div class="relative w-fit flex relative mx-auto">
+            <i class="text-[#E7E8E9] fa-solid fa-quote-left z-1 absolute -top-[60%] md:-top-[80%] lg:-top-[100%] left-0 text-[120px]"></i>
+            <div class="w-fit flex flex-col gap-6 ml-10 relative z-10">
+                {{ typography.heading({
+                    content: fields.title,
+                }) }}
+                {{ typography.text({
+                    content: fields.content,
+                }) }}
+            </div>
+        </div>
     {% endblock %}
 {% endembed %}
+

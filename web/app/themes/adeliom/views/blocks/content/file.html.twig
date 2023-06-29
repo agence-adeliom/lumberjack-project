@@ -1,0 +1,25 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            {{ typography.heading({
+                content: fields.title,
+                className: 'mb-6 lg:mb-10 col-span-full lg:col-start-3 lg:col-end-11',
+            }) }}
+            {% for item in fields.files %}
+                <div class="col-span-full lg:col-start-3 lg:col-end-11 grid grid-cols-4 gap-6 relative p-6 lg:px-6 lg:py-8 shadow-lg rounded">
+                    <a href="{{ item.file }}" target="_blank" class="absolute top-0 left-0 right-0 bottom-0"></a>
+                    <div class="col-span-3 flex gap-8">
+                        <span>icon</span>
+                        {{ typography.text({
+                            content: item.title,
+                            className: '',
+                        }) }}
+                    </div>
+                    <span class="col-span-1 flex justify-end">icon</span>
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
+{% endembed %}
