@@ -18,7 +18,7 @@ class Install
             $projectENV = file_get_contents(dirname(__DIR__) . "/.env");
         }
 
-        if(!is_file(dirname(__DIR__) . "/install.lock")){
+        if(!is_file(dirname(__DIR__) . "/.installer/install.lock")){
             $salts = self::generateSalts();
             $appKey = self::generateAppKey();
             $projectVars = [
@@ -27,7 +27,7 @@ class Install
 
             $projectVars = array_merge($projectVars, $salts);
         }else{
-            $projectVars = json_decode(file_get_contents(dirname(__DIR__) . "/.installer/install.lock"));
+            $projectVars = json_decode(file_get_contents(dirname(__DIR__) . "/.installer/install.lock"), true);
         }
 
         foreach ($projectVars as $k => $v){
