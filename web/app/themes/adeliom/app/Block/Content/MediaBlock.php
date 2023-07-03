@@ -56,14 +56,7 @@ class MediaBlock extends AbstractBlock
         ]);
 
         yield from LayoutTab::make()->fields([
-            TrueFalseField::make("Contraindre le ratio du média", "has_ratio"),
-            RadioButton::make("Ratio", "ratio")->choices([
-                "auto" => "Automatique",
-                "paysage" => "Paysage",
-                "portrait" => "Portrait"
-            ])->conditionalLogic([
-                ConditionalLogic::where("has_ratio", "==", 1)
-            ]),
+            LayoutField::mediaRatio(),
             LayoutField::margin()
         ]);
     }
