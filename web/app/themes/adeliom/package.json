@@ -42,8 +42,6 @@
         "webpack-cli": "^4.10.0"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-pro": "^6.4.0",
-        "alpinejs": "^3.12.2",
         "glightbox": "^3.2.0",
         "micromodal": "^0.4.10"
     }

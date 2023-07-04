@@ -1,0 +1,25 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/action/buttons/btn.html.twig" as button %}
+        {% import "components/typography/typography.html.twig" as typography %}
+        {{ typography.heading({
+            fields,
+            className: 'mb-6 lg:mb-10'
+        }) }}
+        <div class="grid grid-cols-12 gap-6 mb-6 lg:mb-10">
+            {% for card in fields.cards %}
+                {% include 'components/content/cards/basic/card-basic.html.twig' with {
+                    obj: {
+                        card: card,
+                    }
+                }%}
+            {% endfor %}
+        </div>
+        <div class="w-full flex items-center justify-center">
+            {{ button.single({
+                fields,
+                className: 'mx-auto'
+            }) }}
+        </div>
+    {% endblock %}
+{% endembed %}
