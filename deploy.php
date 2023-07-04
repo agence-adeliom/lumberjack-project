@@ -31,7 +31,7 @@ task('dotenv:set-env', static function (): void {
         run('rm {{release_or_current_path}}/.env.local');
     }
     run('touch {{release_or_current_path}}/.env.local');
-    run('echo "WP_ENV={{app_env}}" >> {{release_or_current_path}}/.env.local');
+    run('echo "APP_ENV={{app_env}}" >> {{release_or_current_path}}/.env.local');
 
     run(sprintf('cd {{release_or_current_path}} && {{bin/composer}} config http-basic.gf-composer-proxy.arnaud-ritti.workers.dev licensekey %s', base64_decode('MDYxNjhkYzA2YzQ1NWRjYWVkNmU0NzM2Y2EzNTBkMjg=')));
     run(sprintf('cd {{release_or_current_path}} && {{bin/composer}} config http-basic.auth-acf-composer-proxy.pivvenit.net licensekey %s', base64_decode('YjNKa1pYSmZhV1E5TkRBMk9UWjhkSGx3WlQxa1pYWmxiRzl3WlhKOFpHRjBaVDB5TURFMExUQTVMVEkySURFek9qVXpPakkx')));
