@@ -1,7 +1,7 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
 
-        {% if fields.ratio == "auto" or not fields.ratio %}
+        {% if fields.media_ratio.ratio == "auto" or not fields.media_ratio.ratio %}
             {% set orientation = "paysage" %}
 
             {% set image = fields.media.type == "video" ? fields.media.video.thumbnail : fields.media.image %}
@@ -10,7 +10,7 @@
                 {% set orientation = "portrait" %}
             {% endif %}
         {% else %}
-            {% set orientation = fields.ratio %}
+            {% set orientation = fields.media_ratio.ratio %}
         {% endif %}
 
         {% set positions = {
@@ -38,7 +38,7 @@
 
         {% set ratio = "" %}
 
-        {% if fields.has_ratio %}
+        {% if fields.media_ratio.has_ratio %}
 
             {% set ratioFormat = {
                 paysage: "aspect-[4/3]",

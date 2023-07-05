@@ -1,11 +1,10 @@
 {% import "components/typography/typography.html.twig" as typography %}
 {% set title = title %}
 {% set description = description %}
-{% set index = index %}
-
-{# Pour maintenir l'accordéon ouvert lorsque que l'utilisateur clique sur un autre accordéon, il suffit de retirer l'attribut "@click.outside="closeEl($el);".#}
-<div class="cursor-pointer" @click.outside="closeEl($el);" @click="openEl($el)" data-index="{{ index }}">
-    <div class="flex items-center justify-between gap-4 bg-gray-200 is-active:bg-gray-400 p-6 rounded transition-all select-none">
+{% set id = index %}
+<div :class="isOpen({{ id }}) ? 'is-active' : '' ">
+    <div class="flex cursor-pointer items-center justify-between gap-4 bg-gray-200 is-active:bg-gray-400 p-6 rounded transition-all select-none"
+         @click="open({{ id }})">
         {{ typography.heading({
             content: title,
             className: '',
@@ -17,11 +16,13 @@
 
     </div>
 
-    <div class="max-h-0 overflow-hidden transition-all" x-ref="container{{ index }}">
-        {{ typography.text({
-            content: description,
-            className: 'p-6',
-        }) }}
+    <div class="overflow-hidden bg-gray-100 transition-all max-h-0" x-ref="container-{{ id }}">
+        <div class="p-6">
+            {{ typography.text({
+                content: description,
+                className: '',
+            }) }}
+        </div>
     </div>
 
 </div>
