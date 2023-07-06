@@ -20,7 +20,7 @@ use Extended\ACF\Fields\Gallery;
 class ImageGalleryBlock extends AbstractBlock
 {
     public const NAME = "image-gallery";
-    public const TITLE = "Gallerie d'imgages";
+    public const TITLE = "Gallerie d'images";
     public const DESCRIPTION = "Bloc comprenant un ensemble d'images.";
 
     public function __construct()
