@@ -1,0 +1,22 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+
+        <div class="grid gap-10 lg:grid-cols-12">
+            {{ typography.heading({
+                content: fields.title,
+                className: 'text-center lg:col-start-3 lg:col-end-11 xlg:col-start-4 xlg:col-end-10',
+            }) }}
+
+            <div class="col-span-full grid grid-cols-12 gap-4">
+                {% for media in fields.images %}
+                    <a href="{{ media.url }}" class="rounded-lg block relative overflow-hidden aspect-square col-span-full md:col-span-6 lg:col-span-4 xlg:col-span-3 js-gallery" data-gallery="{{ block.id }}">
+                        {% include "components/content/media/image.html.twig" with {
+                            className: "cover-full",
+                        } %}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    {% endblock %}
+{% endembed %}
