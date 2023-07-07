@@ -1,0 +1,29 @@
+{% embed "blocks/block.html.twig" %}
+    {% block content %}
+
+        <div class="grid items-center gap-10 lg:gap-6 lg:grid-cols-12">
+
+            {% include "components/content/media/media.html.twig" with {
+                wrapper: {
+                    className: "col-span-full rounded-xl overflow-hidden max-lg:order-1 lg:col-start-8 lg:col-end-13"
+                },
+                className: "w-full object-cover aspect-square"
+            } %}
+
+            <div class="col-span-full lg:row-start-1 lg:col-span-6">
+
+                {% import "components/typography/typography.html.twig" as typography %}
+                {{ typography.textGroup({
+                    fields,
+                    title: {
+                        tag: "h1",
+                        size: 2,
+                    },
+                }) }}
+
+            </div>
+
+        </div>
+
+    {% endblock %}
+{% endembed %}
