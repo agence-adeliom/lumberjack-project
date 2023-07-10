@@ -24,14 +24,10 @@ module.exports = {
         clear: false,
     },
     plugins: [
-        require("tailwind-css-extensions")({
-            base: ["assets/styles/tailwind/base/**/*.{css,pcss}"], // Glob paths to your bases
-            utilities: ["assets/styles/tailwind/utilities/**/*.{css,pcss}"], // Glob paths to your utilities
-            components: ["assets/styles/tailwind/components/**/*.{css,pcss}"], // Glob paths to your components
-        }),
         // Ajout de variants custom
         plugin(function ({ addVariant }) {
             addVariant('is-active', ['&.is-active', '.is-active &']);
+            addVariant('keyboard', '.tab-active &');
         }),
     ],
 };

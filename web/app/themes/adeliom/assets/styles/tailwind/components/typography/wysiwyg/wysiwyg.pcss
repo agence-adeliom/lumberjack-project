@@ -1,0 +1,34 @@
+.wysiwyg {
+    .h2 {
+        @apply display display-2;
+    }
+
+    .h3 {
+        @apply display display-3;
+    }
+
+    .h4 {
+        @apply display display-4;
+    }
+
+    .h5 {
+        @apply display display-5;
+    }
+
+    a:not(.btn) {
+        @apply font-bold underline transition lg:hover:opacity-80;
+    }
+
+    ul,
+    ol {
+        @apply flex flex-col gap-2;
+    }
+
+    ul {
+        @apply list list--disc;
+    }
+
+    ol {
+        @apply list list--decimal;
+    }
+}

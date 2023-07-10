@@ -1,0 +1,21 @@
+@layer components {
+    .list {
+        @apply list-inside space-y-1;
+
+        &--none {
+            @apply list-none;
+        }
+
+        &--disc {
+            @apply list-disc;
+
+            li {
+                @apply marker:mr-2 marker:text-black;
+            }
+        }
+
+        &--decimal {
+            @apply list-decimal;
+        }
+    }
+}
