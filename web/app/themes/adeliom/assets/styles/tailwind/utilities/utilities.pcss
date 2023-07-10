@@ -29,4 +29,13 @@
     .contain-full {
         @apply absolute inset-0 h-full w-full object-contain;
     }
+
+    .disable-scrollbar {
+        &::-webkit-scrollbar {
+            @apply hidden;
+        }
+
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none;
+    }
 }

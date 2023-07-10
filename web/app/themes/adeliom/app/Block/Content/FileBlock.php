@@ -7,6 +7,7 @@ use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
 use Adeliom\Lumberjack\Admin\Fields\Medias\FileField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
 use Adeliom\Lumberjack\Admin\Fields\Typography\TextField;
 use App\Enum\BlocksTwigPath;
@@ -48,6 +49,10 @@ class FileBlock extends AbstractBlock
 
         yield from LayoutTab::make()->fields([
             LayoutField::margin()
+        ]);
+
+        yield from SettingsTab::make()->fields([
+            SettingsTab::anchor()
         ]);
     }
 }
