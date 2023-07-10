@@ -36,13 +36,13 @@ class HeroBasicBlock extends AbstractBlock
     {
 
         yield from ContentTab::make()->fields([
-            HeadingField::make(),
+            HeadingField::make()->tag(),
             WysiwygField::make()->default(),
             ButtonField::make()->group(true)
         ]);
 
         yield from MediaTab::make()->fields([
-            MediaField::make("Ratio recommandé : 1200 x 1200", [MediaField::HAS_IMAGE])
+            MediaField::make("Ratio recommandé : 1920 x 1080", [MediaField::HAS_IMAGE])
         ]);
     }
 }
