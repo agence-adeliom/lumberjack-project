@@ -39,7 +39,7 @@
                 className: 'mt-3',
             }) }}
         </div>
-        <a href="{{ fn('get_permalink', card) }}" class="absolute-full"></a>
+        <a href="{{ fn('get_permalink', card) }}" aria-label="{{ card.post_title }}" class="absolute-full"></a>
     {% endblock %}
 
 {% endembed %}
