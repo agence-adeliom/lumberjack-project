@@ -32,6 +32,6 @@ Côté template, il y a 2 étapes à suivre :
 endblock %} {% endembed %}
 ```
 
-3 effets d'apparition sont prédéfinis : `slide-fade`, `slide-top`, `slide-bottom`. (Ajustables dans le fichier `web/app/themes/adeliom/assets/components/utils/modals/index.pcss`)
+3 effets d'apparition sont prédéfinis : `slide-fade`, `slide-top`, `slide-bottom`. (Ajustables dans le fichier `web/app/themes/adeliom/assets/styles/tailwind/components/overlay/modals/modals.pcss`)
 
 Il est important que l'ID des modal soit unique sur la page.

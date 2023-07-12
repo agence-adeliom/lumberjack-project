@@ -22,7 +22,13 @@
     </script> #}
 </head>
 <body class="{{ body_class }} font-sans leading-normal tracking-normal">
-    <a class="skip-link screen-reader-text" href="#content">{{ _e( 'Skip to content') }}</a>
+    {% import "components/action/button/btn.html.twig" as button %}
+
+    {{ button.single({
+        title: "Accéder au contenu principal",
+        url: '#content',
+        className: 'skip-link'
+    }) }}
 
     {% block header %}
         {% if hide_header is not defined %}

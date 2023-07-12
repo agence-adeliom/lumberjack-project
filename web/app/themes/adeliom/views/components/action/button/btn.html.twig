@@ -28,15 +28,20 @@
     {% set target = btn.target ??  btn.link.target ?? "" %}
     {% set id = btn.id ?? "" %}
     {% set tag = btn.tag ?? "div" %}
+    {% set ariaLabel = btn.ariaLabel ?? content %}
 
     {% if url %}
         {% set tag = 'a' %}
     {% endif %}
 
+    {% if target == '_blank' %}
+        {% set ariaLabel = ariaLabel ~ ' - Ouvrir dans un nouvel onglet' %}
+    {% endif %}
+
     {% set attributes = obj.attributes ?? "" %}
 
     {% if content %}
-        <{{ tag }} id="{{ id }}" class="{{ class }}" {{ attributes }} {% if url %}href="{{ url }}"{% endif %} {% if target %}target="{{ target }}"{% endif %}>
+        <{{ tag }} id="{{ id }}" class="{{ class }}" {{ attributes }} {% if url %}href="{{ url }}"{% endif %} {% if target %}target="{{ target }}"{% endif %} aria-label="{{ ariaLabel }}">
         {{ content }}
         </{{ tag }}>
     {% endif %}

@@ -1,0 +1,15 @@
+@layer components {
+    .btn {
+        @apply relative flex items-center justify-center gap-2 transition-colors;
+
+        /* Primary button */
+        &--primary {
+            @apply text-red-600;
+        }
+    }
+
+    .skip-link {
+        @apply pointer-events-none absolute top-1 left-1 overflow-hidden opacity-0;
+        @apply keyboard:focus:pointer-events-auto keyboard:focus:opacity-100;
+    }
+}
