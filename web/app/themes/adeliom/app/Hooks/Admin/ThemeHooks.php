@@ -41,6 +41,16 @@ class ThemeHooks
     }
 
     /**
+     * Ajouter une feuille de style pour l’éditeur dans l’admin
+     * @Action(tag="enqueue_block_editor_assets")
+     */
+    #[Action("enqueue_block_editor_assets")]
+    public static function editorStyle(): void
+    {
+        Assets::enqueue('styles/editor', 'styles/editor', []);
+    }
+
+    /**
      * Remove comment from admin menu
      *
      * @Action("admin_menu", 15)

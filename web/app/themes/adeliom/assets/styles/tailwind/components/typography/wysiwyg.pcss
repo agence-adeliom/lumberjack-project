@@ -32,3 +32,22 @@
         @apply list list--decimal;
     }
 }
+
+#tinymce,
+.wysiwyg {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    p,
+    li {
+        & + ul,
+        & + li,
+        & + p {
+            @apply mt-4;
+        }
+    }
+}

@@ -39,9 +39,11 @@ class Question extends BasePost
             'labels' => [
                 'name' => __('Questions'),
                 'singular_name' => __('Question'),
-                'add_new_item' => __('Ajouter une nouvelle question'),
+                'add_new' => __('Ajouter une question'),
             ],
-            'public' => true,
+            'public' => false,
+            'show_ui' => true,
+            'show_in_menu' => true,
         ];
     }
 

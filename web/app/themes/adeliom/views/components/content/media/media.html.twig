@@ -33,10 +33,11 @@
         {% if media.video.is_youtube %}
             {% set videoURL = "https://www.youtube.com/embed/" ~ media.video.id %}
         {% else %}
-            {% set videoURL = video.video %}
+            {% set videoURL = media.video.file %}
         {% endif %}
 
         <a class="js-glightbox-video-single relative" href="{{ videoURL }}">
+            <div class="absolute w-full h-full top-0 left-0 bg-black/40"></div>
             {% include "components/content/media/image.html.twig" with optionsMedia only %}
             {% include "components/action/button/btn-play.html.twig" %}
         </a>
