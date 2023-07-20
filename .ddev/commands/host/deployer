@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd $DDEV_APPROOT
+ddev auth ssh
+
+ddev php vendor/bin/dep $*
