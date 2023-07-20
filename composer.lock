@@ -4,41 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "aefa7397533aa40662423ddbac3c32de",
+    "content-hash": "bec8fe8e627a7b7cf324c31a60d253e6",
     "packages": [
-        {
-            "name": "advanced-custom-fields/advanced-custom-fields-pro",
-            "version": "5.12.6",
-            "dist": {
-                "type": "zip",
-                "url": "https://auth-acf-composer-proxy.pivvenit.net/download?t=5.12.6"
-            },
-            "require": {
-                "composer/installers": "~1.0"
-            },
-            "type": "wordpress-muplugin",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Elliot Condon",
-                    "homepage": "http://www.elliotcondon.com",
-                    "role": "Maintainer"
-                },
-                {
-                    "name": "PivvenIT",
-                    "homepage": "https://pivvenit.nl",
-                    "role": "Composer Repository maintainer"
-                }
-            ],
-            "description": "Advanced Custom Fields PRO",
-            "homepage": "https://www.advancedcustomfields.com/",
-            "support": {
-                "docs": "https://www.advancedcustomfields.com/resources/",
-                "forum": "https://support.advancedcustomfields.com/topics/"
-            }
-        },
         {
             "name": "agence-adeliom/lumberjack-admin",
             "version": "1.0.53",
@@ -718,39 +685,37 @@
         },
         {
             "name": "composer/installers",
-            "version": "v1.12.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/installers.git",
-                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
+                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
-                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
+                "url": "https://api.github.com/repos/composer/installers/zipball/c29dc4b93137acb82734f672c37e029dfbd95b35",
+                "reference": "c29dc4b93137acb82734f672c37e029dfbd95b35",
                 "shasum": ""
             },
             "require": {
-                "composer-plugin-api": "^1.0 || ^2.0"
-            },
-            "replace": {
-                "roundcube/plugin-installer": "*",
-                "shama/baton": "*"
+                "composer-plugin-api": "^1.0 || ^2.0",
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "composer/composer": "1.6.* || ^2.0",
                 "composer/semver": "^1 || ^3",
                 "phpstan/phpstan": "^0.12.55",
                 "phpstan/phpstan-phpunit": "^0.12.16",
-                "symfony/phpunit-bridge": "^4.2 || ^5",
-                "symfony/process": "^2.3"
+                "symfony/phpunit-bridge": "^5.3",
+                "symfony/process": "^5"
             },
             "type": "composer-plugin",
             "extra": {
                 "class": "Composer\\Installers\\Plugin",
                 "branch-alias": {
-                    "dev-main": "1.x-dev"
-                }
+                    "dev-main": "2.x-dev"
+                },
+                "plugin-modifies-install-path": true
             },
             "autoload": {
                 "psr-4": {
@@ -771,7 +736,6 @@
             "description": "A multi-framework Composer library installer",
             "homepage": "https://composer.github.io/installers/",
             "keywords": [
-                "Craft",
                 "Dolibarr",
                 "Eliasis",
                 "Hurad",
@@ -792,7 +756,6 @@
                 "Whmcs",
                 "WolfCMS",
                 "agl",
-                "aimeos",
                 "annotatecms",
                 "attogram",
                 "bitrix",
@@ -811,7 +774,6 @@
                 "grav",
                 "installer",
                 "itop",
-                "joomla",
                 "known",
                 "kohana",
                 "laravel",
@@ -820,6 +782,7 @@
                 "magento",
                 "majima",
                 "mako",
+                "matomo",
                 "mediawiki",
                 "miaoxing",
                 "modulework",
@@ -839,9 +802,7 @@
                 "silverstripe",
                 "sydes",
                 "sylius",
-                "symfony",
                 "tastyigniter",
-                "typo3",
                 "wordpress",
                 "yawik",
                 "zend",
@@ -849,7 +810,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v1.12.0"
+                "source": "https://github.com/composer/installers/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -865,7 +826,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-09-13T08:19:44+00:00"
+            "time": "2022-08-20T06:45:11+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -11482,6 +11443,21 @@
             },
             "type": "wordpress-plugin",
             "homepage": "https://wordpress.org/plugins/worker/"
+        },
+        {
+            "name": "wpengine/advanced-custom-fields-pro",
+            "version": "6.1.7",
+            "dist": {
+                "type": "zip",
+                "url": "https://connect.advancedcustomfields.com/v2/plugins/composer_download?p=pro&t=6.1.7"
+            },
+            "require": {
+                "composer/installers": "~1.0 || ~2.0"
+            },
+            "replace": {
+                "wpackagist-plugin/advanced-custom-fields": "self.version"
+            },
+            "type": "wordpress-plugin"
         }
     ],
     "packages-dev": [
@@ -12534,12 +12510,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "6488b89b30eb204b9f78b3db4c2916914afa7445"
+                "reference": "82042e706a709bda7cc860273cb68987c347a6b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/6488b89b30eb204b9f78b3db4c2916914afa7445",
-                "reference": "6488b89b30eb204b9f78b3db4c2916914afa7445",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/82042e706a709bda7cc860273cb68987c347a6b8",
+                "reference": "82042e706a709bda7cc860273cb68987c347a6b8",
                 "shasum": ""
             },
             "conflict": {
@@ -12947,6 +12923,7 @@
                 "silverstripe/framework": "<4.12.5",
                 "silverstripe/graphql": "<3.5.2|>=4-alpha.1,<4-alpha.2|>=4.1.1,<4.1.2|>=4.2.2,<4.2.3|= 4.0.0-alpha1",
                 "silverstripe/hybridsessions": ">=1,<2.4.1|>=2.5,<2.5.1",
+                "silverstripe/recipe-cms": ">=4.5,<4.5.3",
                 "silverstripe/registry": ">=2.1,<2.1.2|>=2.2,<2.2.1",
                 "silverstripe/restfulserver": ">=1,<1.0.9|>=2,<2.0.4",
                 "silverstripe/silverstripe-omnipay": "<2.5.2|>=3,<3.0.2|>=3.1,<3.1.4|>=3.2,<3.2.1",
@@ -13168,7 +13145,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-19T22:04:22+00:00"
+            "time": "2023-07-20T12:05:30+00:00"
         },
         {
             "name": "sebastian/cli-parser",

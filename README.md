@@ -23,7 +23,7 @@
 <details>
 
 * Gravity Forms [(doc)](https://github.com/arnaud-ritti/gravityforms-composer-bridge/blob/main/dependabot_usage.md) : `composer config --global http-basic.gf-composer-proxy.arnaud-ritti.workers.dev licensekey [YOUR_GRAVITYFORMS_KEY]`
-* ACF Pro [(doc)](https://github.com/pivvenit/acf-pro-installer/issues/222#issuecomment-890359373) : `composer config --global http-basic.auth-acf-composer-proxy.pivvenit.net licensekey [YOUR_ACFPRO_KEY]`
+* ACF Pro [(doc)](https://www.advancedcustomfields.com/resources/installing-acf-pro-with-composer/) : `composer config --global http-basic.connect.advancedcustomfields.com [YOUR_ACFPRO_KEY] [PRODUCTION_URL]`
 
 _Vou pouvez trouver les clés sur le [codex](https://codex.adeliom.com/books/wordpress/page/plugins-achetés)._
 
@@ -65,6 +65,16 @@ Dans le fichier .ddev/config.yaml, renommez le nom du projet "lumberjack" par le
 `ddev start`
 
 ⚠️ Si vous faites des changements dans le `.ddev/config.yaml`, faites un `ddev restart`
+
+***Installation d'ACF Pro *** ***:***
+
+Lors du composer install vous devrez renseigner les identifiants d'ACF Pro (clé disponible sur Bitwarden) :
+    
+```shell
+Authentication required (connect.advancedcustomfields.com):
+Username: [YOUR_ACFPRO_KEY]
+Password: [PRODUCTION_URL]
+```
 
 ***Installation de FontAwesome*** ***:***
 
