@@ -7,7 +7,7 @@
         "php": ">=8.0.2",
         "ext-dom": "*",
         "ext-json": "*",
-        "advanced-custom-fields/advanced-custom-fields-pro": "^5.10",
+        "wpengine/advanced-custom-fields-pro": "^6.0",
         "agence-adeliom/lumberjack-admin": "^1.0",
         "agence-adeliom/lumberjack-assets": "^1.0",
         "agence-adeliom/lumberjack-cron": "^1.0",
@@ -67,8 +67,8 @@
     },
     "repositories": [
         {
-            "type": "composer",
-            "url": "https://auth-acf-composer-proxy.pivvenit.net/wordpress-muplugin/"
+            "type":"composer",
+            "url":"https://connect.advancedcustomfields.com"
         },
         {
             "type": "package",
@@ -113,7 +113,6 @@
             "composer/installers": true,
             "koodimonni/composer-dropin-installer": true,
             "roots/wordpress-core-installer": true,
-            "pivvenit/acf-pro-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
             "arnaud-ritti/gravityforms-installer": true,
             "php-http/discovery": true
@@ -136,7 +135,8 @@
                 "type:wordpress-muplugin",
                 "roots/wp-stage-switcher",
                 "soberwp/intervention",
-                "agence-adeliom/acf-icon-picker"
+                "agence-adeliom/acf-icon-picker",
+                "wpengine/advanced-custom-fields-pro"
             ],
             "web/app/plugins/{$name}/": [
                 "type:wordpress-plugin"
