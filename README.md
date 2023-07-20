@@ -66,7 +66,7 @@ Dans le fichier .ddev/config.yaml, renommez le nom du projet "lumberjack" par le
 
 ⚠️ Si vous faites des changements dans le `.ddev/config.yaml`, faites un `ddev restart`
 
-***Installation d'ACF Pro *** ***:***
+***Installation d'ACF Pro*** ***:***
 
 Lors du composer install vous devrez renseigner les identifiants d'ACF Pro (clé disponible sur Bitwarden) :
     
