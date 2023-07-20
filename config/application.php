@@ -38,9 +38,12 @@ $dotenv
 
 $isDdevProject = isset($_ENV['IS_DDEV_PROJECT'])&& $_ENV['IS_DDEV_PROJECT'];
 
-if (empty(env('WP_HOME'))) {
-    throw new \ErrorException("WP_HOME var is missing");
+if (!$isDdevProject) {
+    if (empty(env('WP_HOME'))) {
+        throw new \ErrorException("WP_HOME var is missing");
+    }
 }
+
 if (!$isDdevProject && !env('DATABASE_URL')) {
     if (empty(env('DB_NAME'))) {
         throw new \ErrorException("DB_NAME var is missing");
