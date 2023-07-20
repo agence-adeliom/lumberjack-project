@@ -6,6 +6,7 @@
 use Roots\WPConfig\Config;
 
 Config::define('WP_DEBUG', true);
+Config::define('WP_DEBUG_DISPLAY', true);
 ini_set('display_errors', '1');
 
 // Enable plugin and theme updates and installation from the admin
