@@ -10,6 +10,7 @@ use Adeliom\Lumberjack\Admin\Fields\Medias\MediaField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\ContentTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use Adeliom\Lumberjack\Admin\Fields\Typography\HeadingField;
 use Adeliom\Lumberjack\Admin\Fields\Typography\WysiwygField;
 use Adeliom\Lumberjack\Assets\Assets;
@@ -56,15 +57,11 @@ class MediaBlock extends AbstractBlock
         ]);
 
         yield from LayoutTab::make()->fields([
-            TrueFalseField::make("Contraindre le ratio du média", "has_ratio"),
-            RadioButton::make("Ratio", "ratio")->choices([
-                "auto" => "Automatique",
-                "paysage" => "Paysage",
-                "portrait" => "Portrait"
-            ])->conditionalLogic([
-                ConditionalLogic::where("has_ratio", "==", 1)
-            ]),
+            LayoutField::mediaRatio(),
             LayoutField::margin()
+        ]);
+        yield from SettingsTab::make()->fields([
+            SettingsTab::anchor()
         ]);
     }
 }

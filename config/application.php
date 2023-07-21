@@ -9,8 +9,9 @@
  */
 
 use Roots\WPConfig\Config;
-use function Env\env;
 use Symfony\Component\Dotenv\Dotenv;
+
+use function Env\env;
 
 /**
  * Directory containing all of the site's files
@@ -35,11 +36,24 @@ $dotenv
     ->loadEnv($root_dir.'/.env')
 ;
 
-if(empty(env('WP_HOME'))){throw new \ErrorException("WP_HOME var is missing");}
-if (!env('DATABASE_URL')) {
-    if(empty(env('DB_NAME'))){throw new \ErrorException("DB_NAME var is missing");}
-    if(empty(env('DB_USER'))){throw new \ErrorException("DB_USER var is missing");}
-    if(empty(env('DB_PASSWORD'))){throw new \ErrorException("DB_PASSWORD var is missing");}
+$isDdevProject = isset($_ENV['IS_DDEV_PROJECT'])&& $_ENV['IS_DDEV_PROJECT'];
+
+if (!$isDdevProject) {
+    if (empty(env('WP_HOME'))) {
+        throw new \ErrorException("WP_HOME var is missing");
+    }
+}
+
+if (!$isDdevProject && !env('DATABASE_URL')) {
+    if (empty(env('DB_NAME'))) {
+        throw new \ErrorException("DB_NAME var is missing");
+    }
+    if (empty(env('DB_USER'))) {
+        throw new \ErrorException("DB_USER var is missing");
+    }
+    if (empty(env('DB_PASSWORD'))) {
+        throw new \ErrorException("DB_PASSWORD var is missing");
+    }
 }
 
 
@@ -53,19 +67,19 @@ define('WP_ENV', env('APP_ENV') ?: 'production');
  * Sentry
  */
 define('WP_ENVIRONMENT_TYPE', WP_ENV);
-if(env('WP_SENTRY_DSN') && in_array(WP_ENVIRONMENT_TYPE, ["staging", "production"])){
-    Config::define( 'WP_SENTRY_ENV', WP_ENV );
-    Config::define( 'WP_SENTRY_PHP_DSN', env('WP_SENTRY_DSN') );
-    Config::define( 'WP_SENTRY_BROWSER_DSN', env('WP_SENTRY_DSN') );
-    Config::define( 'WP_SENTRY_ERROR_TYPES', env('WP_SENTRY_ERROR_TYPES') ?? E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_USER_DEPRECATED );
-    Config::define( 'WP_SENTRY_SEND_DEFAULT_PII', true );
-    Config::define( 'WP_SENTRY_BROWSER_TRACES_SAMPLE_RATE', env('WP_SENTRY_BROWSER_TRACES_SAMPLE_RATE') ?? 0.3 );
+if (env('WP_SENTRY_DSN') && in_array(WP_ENVIRONMENT_TYPE, ["staging", "production"])) {
+    Config::define('WP_SENTRY_ENV', WP_ENV);
+    Config::define('WP_SENTRY_PHP_DSN', env('WP_SENTRY_DSN'));
+    Config::define('WP_SENTRY_BROWSER_DSN', env('WP_SENTRY_DSN'));
+    Config::define('WP_SENTRY_ERROR_TYPES', env('WP_SENTRY_ERROR_TYPES') ?? E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_USER_DEPRECATED);
+    Config::define('WP_SENTRY_SEND_DEFAULT_PII', true);
+    Config::define('WP_SENTRY_BROWSER_TRACES_SAMPLE_RATE', env('WP_SENTRY_BROWSER_TRACES_SAMPLE_RATE') ?? 0.3);
 }
 
 /**
  * URLs
  */
-Config::define('WP_HOME', env('WP_HOME'));
+Config::define('WP_HOME', $isDdevProject ? 'https://'.$_ENV['DDEV_HOSTNAME'] : env('WP_HOME'));
 Config::define('WP_SITEURL', Config::get('WP_HOME') . '/wp');
 
 /**
@@ -79,10 +93,10 @@ Config::define('WP_DEFAULT_THEME', env('WP_DEFAULT_THEME') ?? "adeliom");
 /**
  * DB settings
  */
-Config::define('DB_NAME', env('DB_NAME'));
-Config::define('DB_USER', env('DB_USER'));
-Config::define('DB_PASSWORD', env('DB_PASSWORD'));
-Config::define('DB_HOST', env('DB_HOST') ?: 'localhost');
+Config::define('DB_NAME', $isDdevProject ? $_ENV['PGDATABASE'] : env('DB_NAME'));
+Config::define('DB_USER', $isDdevProject ? $_ENV['PGUSER'] : env('DB_USER'));
+Config::define('DB_PASSWORD', $isDdevProject ? $_ENV['PGPASSWORD'] : env('DB_PASSWORD'));
+Config::define('DB_HOST', $isDdevProject ? $_ENV['PGHOST'] : (env('DB_HOST') ?: 'localhost'));
 Config::define('DB_CHARSET', 'utf8mb4');
 Config::define('DB_COLLATE', '');
 $table_prefix = env('DB_PREFIX') ?: 'wp_';

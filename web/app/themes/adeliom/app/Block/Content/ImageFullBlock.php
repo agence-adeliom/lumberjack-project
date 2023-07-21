@@ -7,6 +7,7 @@ use Adeliom\Lumberjack\Admin\Fields\Layout\LayoutField;
 use Adeliom\Lumberjack\Admin\Fields\Medias\MediaField;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\LayoutTab;
 use Adeliom\Lumberjack\Admin\Fields\Tabs\MediaTab;
+use Adeliom\Lumberjack\Admin\Fields\Tabs\SettingsTab;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 
@@ -36,6 +37,10 @@ class ImageFullBlock extends AbstractBlock
 
         yield from LayoutTab::make()->fields([
             LayoutField::margin()
+        ]);
+
+        yield from SettingsTab::make()->fields([
+            SettingsTab::anchor()
         ]);
     }
 }

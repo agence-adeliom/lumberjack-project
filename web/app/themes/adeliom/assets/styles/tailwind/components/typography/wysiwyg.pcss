@@ -1,0 +1,53 @@
+.wysiwyg {
+    .h2 {
+        @apply heading heading-2;
+    }
+
+    .h3 {
+        @apply heading heading-3;
+    }
+
+    .h4 {
+        @apply heading heading-4;
+    }
+
+    .h5 {
+        @apply heading heading-5;
+    }
+
+    a:not(.btn) {
+        @apply font-bold underline transition lg:hover:opacity-80;
+    }
+
+    ul,
+    ol {
+        @apply flex flex-col gap-2;
+    }
+
+    ul {
+        @apply list list--disc;
+    }
+
+    ol {
+        @apply list list--decimal;
+    }
+}
+
+#tinymce,
+.wysiwyg {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    p,
+    li {
+        & + ul,
+        & + li,
+        & + p {
+            @apply mt-4;
+        }
+    }
+}

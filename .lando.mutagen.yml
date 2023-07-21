@@ -1,8 +1,0 @@
-sync:
-  defaults:
-    flushOnCreate: true
-    ignore:
-      vcs: false
-    permissions:
-      defaultFileMode: 644
-      defaultDirectoryMode: 755

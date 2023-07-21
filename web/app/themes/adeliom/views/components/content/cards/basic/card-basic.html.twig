@@ -1,0 +1,45 @@
+{% set defaultClassName = 'h-full relative col-span-full lg:col-span-4 overflow-hidden' %}
+
+{% set card = obj.card %}
+{% set className = obj.className is defined ? obj.className : defaultClassName %}
+
+{% embed "components/content/cards/card.html.twig" with {
+    className: className,
+    padding: 'none',
+    rounded: 'normal',
+    background: 'white',
+} %}
+
+    {% block content %}
+        {% import "components/typography/typography.html.twig" as typography %}
+
+        {% if fields.mode_image == 'true' %}
+            {% set imageStyle = 'object-cover w-full h-full' %}
+            {% set wrapperStyle = '' %}
+        {% else %}
+            {% set imageStyle = 'object-contain w-32 h-32' %}
+            {% set wrapperStyle = 'flex items-center justify-center' %}
+        {% endif %}
+
+        <div class="h-[245px] overflow-hidden {{ wrapperStyle }}">
+            {% include "components/content/media/image.html.twig" with {
+                media: card.image,
+                className: imageStyle
+            }%}
+        </div>
+        <div class="flex flex-col p-4">
+            {{ typography.heading({
+                fields,
+                className: 'mb-6 lg:mb-10'
+            }) }}
+            {{ typography.text({
+                content: card.wysiwyg,
+                size: 'base',
+                color: 'black',
+                className: 'mt-3',
+            }) }}
+        </div>
+        <a href="{{ fn('get_permalink', card) }}" aria-label="{{ card.post_title }}" class="absolute-full"></a>
+    {% endblock %}
+
+{% endembed %}

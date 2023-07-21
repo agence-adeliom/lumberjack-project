@@ -1,0 +1,41 @@
+{% embed "blocks/block.html.twig" with {
+    background: 'none',
+    className: 'dark bg-red-200 sticky top-0 z-[100000]',
+    padding: 'none'
+}%}
+    {% block content %}
+    {% import "components/action/buttons/btn.html.twig" as button %}
+    {% import "components/typography/typography.html.twig" as typography %}
+        <div class="flex gap-6 items-center justify-between js-sticky-menu relative" x-data="initStickyMenu()">
+            <div class="py-4 lg:py-10 w-full lg:max-w-[80%] relative">
+                {# Slider d'item #}
+                <div class="swiper !h-fit !static" x-ref="swiperContainer">
+                    <div class="swiper-wrapper">
+                        {% for item in fields.sticky_menu %}
+                            <div class="!w-fit !h-fit will-change-transform swiper-slide gap-6 items-center rounded js-sticky-menu-item {{ loop.last and loop.index > 5 ? 'mr-10' }}"  data-slider-index="{{ loop.index0 }}">
+                                <a href="#{{ item.anchor }}" class="whitespace-nowrap transition-all block is-active:bg-red-300">
+                                    {{ typography.text({
+                                        content: item.title,
+                                        className: '',
+                                    }) }}
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                    {# Chevron slider #}
+                    {% set sliderBtnCLass = " trnasition-all -translate-y-1/2 z-10 text-white absolute top-1/2 bg-gradient-to-r cursor-pointer" %}
+                    <div class="left-0 from-red-200 to-transparent {{ sliderBtnCLass }}" x-ref="buttonPrev">👈</div>
+                    <div class="right-0 from-transparent to-red-200 {{ sliderBtnCLass }}" x-ref="buttonNext" >👉</div>
+                </div>
+            </div>
+            <div class="w-full left-0 lg:w-fit flex-shrink-0 bg-red-300 fixed bottom-0 lg:static lg:bg-none">
+                {{ button.single({
+                    fields,
+                    className: ''
+                }) }}
+            </div>
+    </div>
+    {% endblock %}
+{% endembed %}
+

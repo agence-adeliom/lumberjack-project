@@ -14,13 +14,13 @@
             color: "black"
         },
         size: {
-            1 : "",
-            2 : "",
-            3 : "",
-            4 : "",
-            5 : "",
-            6 : "",
-            headline: "",
+            1 : "heading heading-1",
+            2 : "heading heading-2",
+            3 : "heading heading-3",
+            4 : "heading heading-4",
+            5 : "heading heading-5",
+            6 : "heading heading-6",
+            headline: "headline",
         },
         color: {
             current: "text-current",
@@ -34,8 +34,10 @@
     {% set tag = obj.tag ?? title.tag ?? "div" %}
     {% set content = title.content ?? title %}
 
+    {% set ariaHeading = tag == "div" ? true : false %}
+
     {% if content %}
-        <{{ tag }} class="{{ class }}">
+        <{{ tag }} class="{{ class }}" {% if ariaHeading %}role="heading" aria-level="{{ obj.size }}"{% endif %}>
         {{ content }}
         </{{ tag }}>
     {% endif %}
@@ -139,6 +141,27 @@
 {#
 #############################
 #############################
+    SVG
+#############################
+#############################
+#}
+{% macro svg(obj) %}
+
+    {% set class = {
+        base: "",
+        default: {},
+    }|mergeClass({}, obj.className) %}
+
+    <div class="{{ class }}">
+        {{ icon(obj.content) }}
+    </div>
+
+{% endmacro %}
+
+
+{#
+#############################
+#############################
     Text group
 #############################
 #############################
@@ -204,7 +227,7 @@
 
         {% if obj.fields.button or obj.button or obj.fields.buttons or obj.buttons %}
 
-            {% import "components/action/buttons/btn.html.twig" as btn %}
+            {% import "components/action/button/btn.html.twig" as btn %}
 
             {% set className = "mt-6" %}
 
