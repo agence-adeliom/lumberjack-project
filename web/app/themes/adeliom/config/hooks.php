@@ -10,5 +10,6 @@ return [
         App\Hooks\Admin\ConfigHooks::class,
         App\Hooks\Admin\ThemeHooks::class,
         App\Hooks\Admin\WysiwygHooks::class,
+        App\Hooks\Admin\BlockHooks::class,
     ],
 ];

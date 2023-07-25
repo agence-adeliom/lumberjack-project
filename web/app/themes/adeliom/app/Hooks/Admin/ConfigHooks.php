@@ -15,9 +15,6 @@ use App\Admin\ParametersAdmin;
  */
 class ConfigHooks
 {
-    /**
-     * @Action("acf/init")
-     */
     #[Action("acf/init")]
     public static function googleApiKey(): void
     {
@@ -30,8 +27,6 @@ class ConfigHooks
 
     /**
      * Set pretty permalinks
-     *
-     * @Action("after_switch_theme")¨
      */
     #[Action("after_switch_theme")]
     public static function prettyPermalinks(): void
@@ -41,9 +36,6 @@ class ConfigHooks
         flush_rewrite_rules();
     }
 
-    /**
-     * @Action("map_meta_cap", 10, 4)
-     */
     #[Action("map_meta_cap", 10, 4)]
     public static function customManagePrivacyOptions($caps, $cap, $user_id, $args)
     {
@@ -55,19 +47,12 @@ class ConfigHooks
         return $caps;
     }
 
-    /**
-     * @Filter("redirection_role")
-     */
     #[Filter("redirection_role")]
     public static function accessRedirectionEditor(): string
     {
         return 'edit_pages';
     }
 
-    /**
-     * Ajout menu dans la sidebar pour les éditeurs
-     * @Action("admin_menu")
-     */
     #[Action("admin_menu")]
     public static function changeMenuPosition(): void
     {

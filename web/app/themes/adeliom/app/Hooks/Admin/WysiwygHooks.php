@@ -20,8 +20,6 @@ class WysiwygHooks
 
     /**
      * Change title page into custom placeholder
-     *
-     * @Filter("enter_title_here")
      */
     #[Filter("enter_title_here")]
     public static function customPlaceholder(string $title = ""): string
@@ -33,10 +31,6 @@ class WysiwygHooks
         return $title;
     }
 
-    /**
-     * @Filter(tag="mce_css")
-     * @return string
-     */
     #[Filter("mce_css")]
     public static function customCss($mce_css): string
     {
@@ -47,11 +41,6 @@ class WysiwygHooks
         return $mce_css;
     }
 
-    /**
-     * @Filter(tag="tiny_mce_before_init")
-     * @param $settings
-     * @return array
-     */
     #[Filter("tiny_mce_before_init")]
     public static function customStyleFormats($settings): array
     {
@@ -108,12 +97,6 @@ class WysiwygHooks
         return $settings;
     }
 
-    /**
-     * @Filter("acf/fields/wysiwyg/toolbars")
-     *
-     * @param array $toolbars
-     * @return array
-     */
     #[Filter("acf/fields/wysiwyg/toolbars")]
     public static function wysiwygToolbars(array $toolbars): array
     {
@@ -149,8 +132,6 @@ class WysiwygHooks
 
     /**
      * Clean tinyMCE
-     *
-     * @Filter("mce_buttons")
      */
     #[Filter("mce_buttons")]
     public static function removeButtons($buttons): array
@@ -182,8 +163,6 @@ class WysiwygHooks
 
     /**
      * Clean tinyMCE 2nd row
-     *
-     * @Filter("mce_buttons_2")
      */
     #[Filter("mce_buttons_2")]
     public static function removeButtonLine2($buttons): array
@@ -220,8 +199,6 @@ class WysiwygHooks
 
     /**
      * Remove heading useless
-     *
-     * @Filter("tiny_mce_before_init")
      */
     #[Filter("tiny_mce_before_init")]
     public static function removeHeadings($headings): array

@@ -11,4 +11,10 @@ final class GutBlockName
 
     public const NAVIGATION = 'navigation';
     public const RELATION = 'relation';
+    public const GENERIC = 'generic';
+    public const LATEST = 'latest';
+    public const OTHERS = 'others';
+    public const DOWNLOAD = 'download';
+    public const ACCORDIONS = 'accordions';
+    public const TESTIMONIALS = 'testimonials';
 }

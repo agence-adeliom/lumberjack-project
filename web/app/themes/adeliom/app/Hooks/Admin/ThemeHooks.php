@@ -15,9 +15,6 @@ use Adeliom\Lumberjack\Hooks\Models\Filter;
  */
 class ThemeHooks
 {
-    /**
-     * @Filter("timber_context")
-     */
     #[Filter("timber_context")]
     public static function globalContext($context)
     {
@@ -30,8 +27,6 @@ class ThemeHooks
     }
     /**
      * Ajout des scripts de base
-     *
-     * @Action("wp_enqueue_scripts")
      */
     #[Action("wp_enqueue_scripts")]
     public static function enqueueScripts(): void
@@ -42,7 +37,6 @@ class ThemeHooks
 
     /**
      * Ajouter une feuille de style pour l’éditeur dans l’admin
-     * @Action(tag="enqueue_block_editor_assets")
      */
     #[Action("enqueue_block_editor_assets")]
     public static function editorStyle(): void
@@ -52,8 +46,6 @@ class ThemeHooks
 
     /**
      * Remove comment from admin menu
-     *
-     * @Action("admin_menu", 15)
      */
     #[Action("admin_menu", 15)]
     public static function removeCommentFromMenu(): void
@@ -68,8 +60,6 @@ class ThemeHooks
 
     /**
      * Remove manage options from post (options in topbar)
-     *
-     * @Action("screen_options_show_screen")
      */
     #[Action("screen_options_show_screen")]
     public static function removeManageOptions(): bool
@@ -79,8 +69,6 @@ class ThemeHooks
 
     /**
      * Remove all notices
-     *
-     * @Action("init", 100)
      */
     #[Action("init", 100)]
     public static function removeAllNotices(): void
@@ -90,10 +78,6 @@ class ThemeHooks
         }
     }
 
-    /**
-     * @Action("admin_enqueue_scripts")
-     * @Action("login_enqueue_scripts")
-     */
     #[Action("login_enqueue_scripts")]
     #[Action("admin_enqueue_scripts")]
     public static function themeStyle(): void
@@ -110,8 +94,6 @@ class ThemeHooks
 
     /**
      * Supprimer l’entrée “Personnaliser” dans la top bar (FO)
-     *
-     * @Action("wp_before_admin_bar_render")
      */
     #[Action("wp_before_admin_bar_render")]
     public static function beforeAdminMenuRender(): void
@@ -124,8 +106,6 @@ class ThemeHooks
 
     /**
      * Supprimer les entrées pour créer un nouveau média ou un nouvel article (quand on les désactives) depuis la top bar (FO)
-     *
-     * @Action("admin_bar_menu", 999)
      */
     #[Action("admin_bar_menu", 999)]
     public static function removeEntriesFromAdminBar(): void
