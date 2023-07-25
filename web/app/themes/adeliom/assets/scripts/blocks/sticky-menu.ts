@@ -1,5 +1,8 @@
 import Alpine from "alpinejs";
-import Swiper, { Navigation, SwiperOptions } from "swiper";
+import Swiper from "swiper";
+import { Navigation } from "swiper/modules";
+// Uncomment when problem from Swiper lib fixed
+// import { SwiperOptions } from "swiper/types";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -13,7 +16,9 @@ document.addEventListener("alpine:init", () => {
                 this.swiper.slideTo(sliderIndex, 300);
             },
             init() {
-                const swiperParams: SwiperOptions = {
+                // Uncomment when problem from Swiper lib fixed
+                // const swiperParams: SwiperOptions = {
+                const swiperParams = {
                     // configure Swiper to use modules
                     modules: [Navigation],
                     slidesPerView: "auto",
