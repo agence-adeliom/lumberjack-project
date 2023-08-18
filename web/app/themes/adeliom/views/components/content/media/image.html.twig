@@ -1,1 +1,199 @@
 <img src="{{ media.sizes.large }}" class="{{ className }}">
+
+{% macro media( media ) %}
+    {% if media != '' %}
+        media="{{ media }}"
+    {% endif %}
+{% endmacro %}
+
+{% macro render_picture(image_src = null, obj = {}) %}
+    {% import _self as picture_helper %}
+
+    {# Default properties for the image #}
+    {% set default = {
+        'alt': '',
+        'width': null,
+        'height': null,
+        'class': '',
+        'webp': true,
+        'loading': 'lazy',
+        'sizes': '100vw',
+        'srcset': '',
+        'crossorigin': '',
+        'decoding': '',
+        'usemap': '',
+        'ismap': false,
+        'referrerpolicy': '',
+        'fetchpriority': '',
+    } %}
+
+    {# Merge the default properties with the user-defined properties #}
+    {% set obj = default | merge(obj) %}
+
+    {# Determine lazy loading settings #}
+    {% set use_lazysizes = obj.loading == 'lazy' and obj.use_lazysizes | default(false) %}
+    {% set loading_attr = (obj.loading == 'lazy' or obj.loading == 'eager') and not use_lazysizes ? obj.loading : null %}
+    {% set loading_effect = use_lazysizes and obj.loading_effect is defined and obj.loading_effect is not empty ? obj.loading_effect : null %}
+    {% set low_quality = use_lazysizes and loading_effect is defined and loading_effect == "blur" ? (obj.low_quality ?? image_src) : null %}
+    {% set lazysizes_classes = use_lazysizes ? ("lazyload " ~ (loading_effect and (loading_effect == "fade" or loading_effect == "zoom-in" or loading_effect == "zoom-out" or loading_effect == "grayscale" or loading_effect == "sepia" or loading_effect == "slide-up") ? loading_effect : "")) : "" %}
+
+    {# Set classes for the image #}
+    {% set class = {
+        base: "mediabox-img",
+        default: {},
+        "object-fit": {"contain" : "object-contain", "cover" : "object-cover", "fill" : "object-fill", "none" : "object-none", "scale-down" : "object-scale-down"},
+        "object-position": {"bottom": "object-bottom", "center": "object-center", "left": "object-left", "left-bottom": "object-left-bottom", "left-top": "object-left-top", "right": "object-right", "right-bottom": "object-right-bottom", "right-top": "object-right-top", "top": "object-top"}
+    } | mergeClass({"object-fit": obj["object-fit"], "object-position": obj["object-position"]}, obj.class, lazysizes_classes ) %}
+
+    {# Set classes for the wrapper #}
+    {% set wrapper_class = {base: "mediabox", default: {}} | mergeClass({}, obj.wrapper_class) %}
+
+    {# Set the image attributes #}
+    {% set image_attributes = {
+        'class': class,
+        'alt': obj.alt,
+        'width': obj.width,
+        'height': obj.height,
+        'crossorigin': obj.crossorigin,
+        'decoding': obj.decoding,
+        'usemap': obj.usemap,
+        'ismap': obj.ismap,
+        'referrerpolicy': obj.referrerpolicy,
+        'fetchpriority': obj.fetchpriority,
+        'loading': loading_attr,
+    } %}
+
+    {# Render the image if it's available #}
+    {% if image_src %}
+        <div class="{{ wrapper_class }}">
+            {% set image_type = image_src|split('.')|last %}
+            {% set use_webp = (image_type != 'webp') and obj.webp %}
+
+            <picture>
+                {{ picture_helper.render_sources(image_src, image_type, use_webp, obj.force_jpg, use_lazysizes, obj.widths, obj.aspect_ratio, obj.sizes) }}
+                {{ picture_helper.render_image_tag(image_src, image_type, obj.force_jpg, use_lazysizes, low_quality, obj.widths, obj.aspect_ratio, image_attributes) }}
+            </picture>
+        </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro render_sources(image_src, image_type, use_webp, force_jpg, use_lazysizes, available_widths, aspect_ratio, sizes) %}
+    {% import _self as picture_helper %}
+
+    {# Check if 'webp' format is being used, and generate a <source> tag with the 'webp' image source and attributes #}
+    {% if use_webp %}
+        <source type="image/webp" {{ picture_helper.render_src(image_src, use_lazysizes, null, true, 'srcset', false, available_widths, aspect_ratio) }} sizes="{{ sizes }}" />
+    {% endif %}
+
+    {# Initialize a list of source types with the primary image format specified #}
+    {% set source_types = ['image/' ~ image_type] %}
+
+    {# Add 'image/jpeg' as a source type if the requested image type is 'webp' and JPG conversion is forced #}
+    {% if image_type == 'webp' and force_jpg %}
+        {% set source_types = source_types|merge(['image/jpeg']) %}
+    {% endif %}
+
+    {# Generate <source> tags for each source type in the list #}
+    {% if use_webp or (available_widths and available_widths|length > 0) or (image_type == 'webp' and force_jpg) %}
+        {% for source_type in source_types %}
+            <source type="{{ source_type }}" {{ picture_helper.render_src(image_src, use_lazysizes, null, false, 'srcset', (image_type == 'webp' and source_type == 'image/jpeg' and force_jpg), available_widths, aspect_ratio) }} sizes="{{ sizes }}" />
+        {% endfor %}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_image_tag(image_src, image_format, force_jpg, lazy_loading, low_quality, available_widths, aspect_ratio, image_attributes) %}
+    {% import _self as picture_helper %}
+
+    {# Render the image source and attributes using the 'render_src' macro from 'picture_helper' #}
+    {% set img_src = picture_helper.render_src(image_src, lazy_loading, low_quality, false, 'src', (image_format == 'webp' and force_jpg), available_widths, aspect_ratio) %}
+
+    {# Calculate width and height attributes based on aspect ratio and the first width in the list of widths #}
+    {% if available_widths is defined and available_widths|length > 0 and aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0 %}
+        {% set base_width = available_widths|first %}
+        {% set calculated_height = ((base_width * aspect_ratio[1]) / aspect_ratio[0]) | round %}
+        {% set calculated_width = base_width %}
+
+        {# Merge calculated width and height attributes into the 'image_attributes' dictionary #}
+        {% set image_attributes = image_attributes | merge({ 'width': calculated_width, 'height': calculated_height }) %}
+    {% elseif aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0 %}
+        {% set image_attributes = image_attributes | merge({ 'width': aspect_ratio[0], 'height': aspect_ratio[1] }) %}
+    {% endif %}
+
+    {# Output the 'img' tag with the rendered image source and additional image attributes #}
+    <img {{ img_src }} {{ picture_helper.render_attributes(image_attributes) }} />
+{% endmacro %}
+
+
+{% macro render_src(src, lazy_load = false, low_quality = null, use_webp = false, src_type = 'src', force_jpg = false, widths = [], aspect_ratio = null) %}
+    {# Calculate the first width from the list of widths #}
+    {% set first_width = widths|length > 0 ? widths|first : null %}
+
+    {# Calculate the height based on the aspect ratio if provided #}
+    {% set height = first_width and aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0
+        ? ((first_width * aspect_ratio[1]) / aspect_ratio[0]) | round
+        : null %}
+
+    {# Calculate the lowsrc (fallback image source) based on lazy loading and encoding options #}
+    {% set lowsrc = low_quality is defined and low_quality is not null
+        ? (force_jpg
+        ? (first_width ? low_quality | resize(first_width, height) | tojpg : low_quality | tojpg)
+        : (first_width ? low_quality | resize(first_width, height) : low_quality))
+        : null %}
+
+    {# Calculate the main image source based on encoding options #}
+    {% set image_src = use_webp ? src | towebp : (force_jpg ? src | tojpg : src) %}
+
+    {# Calculate the default image source based on the first width and aspect ratio if no widths are specified #}
+    {% set default_img = first_width
+        ? image_src | resize(first_width, height)
+        : (aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0
+        ? image_src | resize(aspect_ratio[0], aspect_ratio[1])
+        : image_src) %}
+
+    {# Check if the source is provided #}
+    {% if src != '' %}
+
+        {# Generate srcset attributes based on different widths if src_type is 'srcset' #}
+        {% if widths|length > 0 and src_type == 'srcset' %}
+            {% set srcset = [] %}
+
+            {% for width in widths %}
+                {% set height = (aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0)
+                    ? ((width * aspect_ratio[1]) / aspect_ratio[0]) | round
+                    : null %}
+                {% set srcset_item = image_src | resize(width, height) ~ ' ' ~ width ~ 'w' %}
+                {% set srcset = srcset | merge([srcset_item]) %}
+            {% endfor %}
+        {% endif %}
+
+        {# Handle lazy loading and data attributes #}
+        {% if lazy_load %}
+            {% if lowsrc is not null and src_type == 'src' %}
+                data-lowsrc="{{ lowsrc }}"
+            {% endif %}
+
+            {# Generate data attributes for lazy loading based on srcset or default image #}
+            {% set data_attr = srcset is not empty
+                ? 'data-' ~ src_type ~ '="' ~ srcset | join(', ') ~ '"'
+                : 'data-' ~ src_type ~ '="' ~ default_img ~ '"' %}
+            {{ data_attr }}
+        {% else %}
+            {# Output srcset attribute if available, otherwise default image #}
+            {{ src_type }}="{{ srcset is not empty ? srcset | join(', ') : default_img }}"
+        {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro render_attributes(arr) %}
+    {% for key, value in arr %}
+        {% if value is not same as(false) and value is not same as(null) %}
+            {% set attribute = '' %}
+            {% if key == "alt" %}
+                {% set attribute = key ~ '="' ~ value ~ '"' %}
+            {% elseif value is not empty %}
+                {% set attribute = key ~ '="' ~ (value is same as(true) ? '' : value) ~ '"' %}
+            {% endif %}
+            {{- ' ' ~ attribute -}}
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
