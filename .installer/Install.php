@@ -40,20 +40,13 @@ class Install
             file_put_contents(dirname(__DIR__) . "/.installer/install.lock", json_encode($projectVars, JSON_PRETTY_PRINT));
         }
 
-        if(getenv('LANDO_INFO')){
-            $lando = json_decode(getenv('LANDO_INFO'), TRUE);
-            $siteURL = sprintf('%s.%s', getenv('LANDO_APP_NAME'), getenv('LANDO_DOMAIN'));
-            $dbHost = $lando["database"]["internal_connection"]["host"];
-            $dbName = $lando["database"]["creds"]["database"];
-            $dbUser = $lando["database"]["creds"]["password"];
-            $dbPassword = $lando["database"]["creds"]["user"];
-
+       if(getenv('IS_DDEV_PROJECT')){
             $localVars = [
-                "DB_HOST" => $dbHost,
-                "DB_NAME" => $dbName,
-                "DB_USER" => $dbUser,
-                "DB_PASSWORD" => $dbPassword,
-                "WP_HOME" => "https://" . $siteURL,
+                "DB_HOST" => getenv("PGHOST"),
+                "DB_NAME" => getenv("PGDATABASE"),
+                "DB_USER" => getenv("PGUSER"),
+                "DB_PASSWORD" => getenv("PGPASSWORD"),
+                "WP_HOME" => 'https://'.getenv('DDEV_HOSTNAME')
             ];
 
             if(!is_file(dirname(__DIR__) . "/.env.local")) {
