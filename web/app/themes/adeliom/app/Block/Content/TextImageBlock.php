@@ -17,7 +17,9 @@ use Adeliom\Lumberjack\Assets\Assets;
 use App\Enum\BlocksTwigPath;
 use App\Enum\GutBlockName;
 use Extended\ACF\ConditionalLogic;
+use Extended\ACF\Fields\Group;
 use Extended\ACF\Fields\RadioButton;
+use Extended\ACF\Fields\TrueFalse;
 
 /**
  * Class TextImageBlock
@@ -60,7 +62,30 @@ class TextImageBlock extends AbstractBlock
 
         yield from LayoutTab::make()->fields([
             LayoutField::mediaPosition(),
-            LayoutField::mediaRatio(),
+            Group::make("Ratio du média", "media_ratio")->fields([
+                TrueFalse::make("Choisir le ratio du média", "has_ratio")
+                    ->stylisedUi(),
+                RadioButton::make("Format d'image", "ratio")
+                    ->choices([
+                        "auto" => "Automatique",
+                        "paysage" => "Paysage",
+                        "portrait" => "Portrait",
+                        "square" => "Carré"
+                    ])
+                    ->conditionalLogic([
+                        ConditionalLogic::where("has_ratio", "==", 1)
+                    ]),
+                RadioButton::make("Ratio d'aspect", "aspect_ratio")
+                    ->choices([
+                        "aspect-4/3" => "4/3",
+                        "aspect-3/2" => "3/2",
+                        "aspect-16/9" => "16/9"
+                    ])
+                    ->conditionalLogic([
+                        ConditionalLogic::where("has_ratio", "==", 1)->and("ratio", "==", 'paysage'),
+                        ConditionalLogic::where("has_ratio", "==", 1)->and("ratio", "==", 'portrait'),
+                    ]),
+            ]),
             LayoutField::margin()
         ]);
         yield from SettingsTab::make()->fields([

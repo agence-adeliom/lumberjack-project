@@ -26,8 +26,8 @@ La macro `render_picture` génère une balise `<picture>` avec des balises `<sou
     'use_lazysizes': true,
     'loading_effect': 'blur',
     'low_quality': '/chemin/vers/low_quality_image.jpg'
-    'sizes': '100vw',
-    'widths': [360, 768, 1024, 1440, 1920],
+    'responsive_sizes': '100vw',
+    'image_widths': [360, 768, 1024, 1440, 1920],
     'class': 'w-full',
     'wrapper_class': 'w-full',
     'object-fit': 'cover',
@@ -58,8 +58,8 @@ La macro `render_picture` génère une balise `<picture>` avec des balises `<sou
     webp: true,
     force_jpg: false,
     'object-fit': 'cover',
-    widths: [360, 768, 1024, 1440, 1920],
-    aspect_ratio: [16, 9]
+    image_widths: [360, 768, 1024, 1440, 1920],
+    aspect_ratio: '16/9'
 } %}
 
 {{ image.render_picture(post.thumbnail.src, image_properties) }}
@@ -81,8 +81,8 @@ La macro `render_picture` génère une balise `<picture>` avec des balises `<sou
     webp: true,
     force_jpg: false,
     'object-fit': 'cover',
-    widths: [360, 768, 1024, 1440, 1920],
-    aspect_ratio: [16, 9]
+    image_widths: [360, 768, 1024, 1440, 1920],
+    aspect_ratio: '16/9'
 } %}
 
 {{ image.render_picture(post.thumbnail.src, image_properties) }}
@@ -104,8 +104,8 @@ Par défaut, `loading = 'lazy'` et `use_lazysizes = false`donc il n'est pas util
     webp: true,
     force_jpg: false,
     'object-fit': 'cover',
-    widths: [360, 768, 1024, 1440, 1920],
-    aspect_ratio: [16, 9]
+    image_widths: [360, 768, 1024, 1440, 1920],
+    aspect_ratio: '16/9'
 } %}
 
 {{ image.render_picture(post.thumbnail.src, image_properties) }}
@@ -155,7 +155,7 @@ La macro `render_src` génère l'attribut `src` ou `data-src` en fonction des pa
 - `use_webp` : Booléen indiquant si les sources WebP doivent être générées.
 - `src_type` : Type d'attribut ('src' ou 'data-src').
 - `force_jpg` : Booléen indiquant si les images WebP doivent être forcées à se convertir en JPG.
-- `widths` : Liste des largeurs d'images disponibles.
+- `image_widths` : Liste des largeurs d'images disponibles.
 - `aspect_ratio` : Rapport hauteur/largeur de l'image.
 
 ### `render_attributes`

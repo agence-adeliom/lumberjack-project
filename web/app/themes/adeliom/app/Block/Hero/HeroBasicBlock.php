@@ -34,7 +34,6 @@ class HeroBasicBlock extends AbstractBlock
 
     public static function getFields(): ?\Traversable
     {
-
         yield from ContentTab::make()->fields([
             HeadingField::make()->tag(),
             WysiwygField::make()->default(),

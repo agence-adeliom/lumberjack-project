@@ -6,7 +6,7 @@
     {% endif %}
 {% endmacro %}
 
-{% macro render_picture(image_src = null, obj = {}) %}
+{% macro render_picture(obj = {}) %}
     {% import _self as picture_helper %}
 
     {# Default properties for the image #}
@@ -17,7 +17,7 @@
         'class': '',
         'webp': true,
         'loading': 'lazy',
-        'sizes': '100vw',
+        'responsive_sizes': '100vw',
         'srcset': '',
         'crossorigin': '',
         'decoding': '',
@@ -29,6 +29,10 @@
 
     {# Merge the default properties with the user-defined properties #}
     {% set obj = default | merge(obj) %}
+
+    {# Determine the src #}
+    {# TODO: Mise en place d'un placeholder si nécessaire #}
+    {% set image_src = obj.url | default(null) %}
 
     {# Determine lazy loading settings #}
     {% set use_lazysizes = obj.loading == 'lazy' and obj.use_lazysizes | default(false) %}
@@ -45,8 +49,6 @@
         "object-position": {"bottom": "object-bottom", "center": "object-center", "left": "object-left", "left-bottom": "object-left-bottom", "left-top": "object-left-top", "right": "object-right", "right-bottom": "object-right-bottom", "right-top": "object-right-top", "top": "object-top"}
     } | mergeClass({"object-fit": obj["object-fit"], "object-position": obj["object-position"]}, obj.class, lazysizes_classes ) %}
 
-    {# Set classes for the wrapper #}
-    {% set wrapper_class = {base: "mediabox", default: {}} | mergeClass({}, obj.wrapper_class) %}
 
     {# Set the image attributes #}
     {% set image_attributes = {
@@ -63,16 +65,26 @@
         'loading': loading_attr,
     } %}
 
-    {# Render the image if it's available #}
+    {# Check if the image source is an SVG file #}
+    {% set is_svg = image_src|split('.')|last == 'svg' %}
+
+    {# Set classes for the wrapper #}
+    {% set wrapper_class = {base: is_svg ? "svg-container" : "mediabox w-full" , default: {}} | mergeClass({}, obj.wrapper_class) %}
+
+    {# Render the image if it's available and not an SVG #}
     {% if image_src %}
         <div class="{{ wrapper_class }}">
-            {% set image_type = image_src|split('.')|last %}
-            {% set use_webp = (image_type != 'webp') and obj.webp %}
+            {% if is_svg %}
+                    {{ image_src|svg({classes: obj.class, attr: obj.attr ?? {} }) }}
+            {% else  %}
+                {% set image_type = image_src|split('.')|last %}
+                {% set use_webp = (image_type != 'webp') and obj.webp %}
 
-            <picture>
-                {{ picture_helper.render_sources(image_src, image_type, use_webp, obj.force_jpg, use_lazysizes, obj.widths, obj.aspect_ratio, obj.sizes) }}
-                {{ picture_helper.render_image_tag(image_src, image_type, obj.force_jpg, use_lazysizes, low_quality, obj.widths, obj.aspect_ratio, image_attributes) }}
-            </picture>
+                <picture>
+                    {{ picture_helper.render_sources(image_src, image_type, use_webp, obj.force_jpg, use_lazysizes, obj.image_widths, obj.aspect_ratio, obj.responsive_sizes) }}
+                    {{ picture_helper.render_image_tag(image_src, image_type, obj.force_jpg, use_lazysizes, low_quality, obj.image_widths, obj.aspect_ratio, image_attributes) }}
+                </picture>
+            {% endif %}
         </div>
     {% endif %}
 {% endmacro %}
@@ -107,30 +119,38 @@
     {# Render the image source and attributes using the 'render_src' macro from 'picture_helper' #}
     {% set img_src = picture_helper.render_src(image_src, lazy_loading, low_quality, false, 'src', (image_format == 'webp' and force_jpg), available_widths, aspect_ratio) %}
 
+    {# Calculate dimensions (width and height) based on aspect ratio #}
+    {% set dimensions = getAspectRatio(aspect_ratio) %}
+
     {# Calculate width and height attributes based on aspect ratio and the first width in the list of widths #}
-    {% if available_widths is defined and available_widths|length > 0 and aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0 %}
+    {% if dimensions %}
         {% set base_width = available_widths|first %}
-        {% set calculated_height = ((base_width * aspect_ratio[1]) / aspect_ratio[0]) | round %}
-        {% set calculated_width = base_width %}
+        {% if base_width is defined and base_width > 0 %}
+            {% set calculated_height = ((base_width * dimensions['height']) / dimensions['width']) | round %}
+            {% set calculated_width = base_width %}
+        {% else %}
+            {% set calculated_width = dimensions['width'] %}
+            {% set calculated_height = dimensions['height'] %}
+        {% endif %}
 
         {# Merge calculated width and height attributes into the 'image_attributes' dictionary #}
         {% set image_attributes = image_attributes | merge({ 'width': calculated_width, 'height': calculated_height }) %}
-    {% elseif aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0 %}
-        {% set image_attributes = image_attributes | merge({ 'width': aspect_ratio[0], 'height': aspect_ratio[1] }) %}
     {% endif %}
 
     {# Output the 'img' tag with the rendered image source and additional image attributes #}
     <img {{ img_src }} {{ picture_helper.render_attributes(image_attributes) }} />
 {% endmacro %}
 
+{% macro render_src(src, lazy_load = false, low_quality = null, use_webp = false, src_type = 'src', force_jpg = false, image_widths = [], aspect_ratio = null) %}
+    {# Calculate the first width from the list of image_widths #}
+    {% set first_width = image_widths|length > 0 ? image_widths|first : null %}
 
-{% macro render_src(src, lazy_load = false, low_quality = null, use_webp = false, src_type = 'src', force_jpg = false, widths = [], aspect_ratio = null) %}
-    {# Calculate the first width from the list of widths #}
-    {% set first_width = widths|length > 0 ? widths|first : null %}
+    {# Calculate dimensions (width and height) based on aspect ratio #}
+    {% set dimensions = getAspectRatio(aspect_ratio) %}
 
     {# Calculate the height based on the aspect ratio if provided #}
-    {% set height = first_width and aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0
-        ? ((first_width * aspect_ratio[1]) / aspect_ratio[0]) | round
+    {% set height = first_width and dimensions
+        ? ((first_width * dimensions['height']) / dimensions['width']) | round
         : null %}
 
     {# Calculate the lowsrc (fallback image source) based on lazy loading and encoding options #}
@@ -143,23 +163,23 @@
     {# Calculate the main image source based on encoding options #}
     {% set image_src = use_webp ? src | towebp : (force_jpg ? src | tojpg : src) %}
 
-    {# Calculate the default image source based on the first width and aspect ratio if no widths are specified #}
+    {# Calculate the default image source based on the first width and aspect ratio if no image_widths are specified #}
     {% set default_img = first_width
         ? image_src | resize(first_width, height)
-        : (aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0
-        ? image_src | resize(aspect_ratio[0], aspect_ratio[1])
+        : (dimensions
+        ? image_src | resize(dimensions['width'], dimensions['height'])
         : image_src) %}
 
     {# Check if the source is provided #}
     {% if src != '' %}
 
-        {# Generate srcset attributes based on different widths if src_type is 'srcset' #}
-        {% if widths|length > 0 and src_type == 'srcset' %}
+        {# Generate srcset attributes based on different image_widths if src_type is 'srcset' #}
+        {% if image_widths|length > 0 and src_type == 'srcset' %}
             {% set srcset = [] %}
 
-            {% for width in widths %}
-                {% set height = (aspect_ratio is defined and aspect_ratio[0] > 0 and aspect_ratio[1] > 0)
-                    ? ((width * aspect_ratio[1]) / aspect_ratio[0]) | round
+            {% for width in image_widths %}
+                {% set height = dimensions
+                    ? ((width * dimensions['height']) / dimensions['width']) | round
                     : null %}
                 {% set srcset_item = image_src | resize(width, height) ~ ' ' ~ width ~ 'w' %}
                 {% set srcset = srcset | merge([srcset_item]) %}

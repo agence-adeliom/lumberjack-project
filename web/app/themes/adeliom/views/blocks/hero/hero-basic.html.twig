@@ -1,17 +1,24 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
-
         <div class="grid items-center gap-10 lg:gap-6 lg:grid-cols-12">
+            {% import "components/content/media/image.html.twig" as img %}
 
-            {% include "components/content/media/media.html.twig" with {
-                wrapper: {
-                    className: "col-span-full rounded-xl overflow-hidden max-lg:order-1 lg:col-start-8 lg:col-end-13"
-                },
-                className: "w-full object-cover aspect-4/3",
-            } %}
+            {% set image = fields.media.image %}
+
+            {% if image %}
+                {% set image_properties = image | merge({
+                    'responsive_sizes': '(min-width: 1540px) 586px, (min-width: 1280px) 486px, (min-width: 1040px) 376px, (min-width: 780px) 696px, (min-width: 640px) 560px, calc(100vw - 32px)',
+                    'image_widths': [376, 586, 752, 972, 1172, 1392],
+                    'aspect_ratio': '1920 / 1080',
+                    'class': 'w-full',
+                    'object-fit': 'cover',
+                    'wrapper_class': 'col-span-full rounded-xl overflow-hidden max-lg:order-0 lg:col-start-8 lg:col-end-13'
+                }) %}
+
+                {{ img.render_picture(image_properties) }}
+            {% endif %}
 
             <div class="col-span-full lg:row-start-1 lg:col-span-6">
-
                 {% import "components/typography/typography.html.twig" as typography %}
                 {{ typography.textGroup({
                     fields,
@@ -19,10 +26,7 @@
                         size: 2,
                     },
                 }) }}
-
             </div>
-
         </div>
-
     {% endblock %}
 {% endembed %}

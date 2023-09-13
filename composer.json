@@ -42,7 +42,9 @@
         "wpackagist-plugin/w3-total-cache": "*",
         "wpackagist-plugin/wordfence": "*",
         "wpackagist-plugin/worker": "*",
-        "gravityforms/gravityforms": "*"
+        "gravityforms/gravityforms": "*",
+        "ext-simplexml": "*",
+        "ext-libxml": "*"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7",

@@ -1,6 +1,7 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
         {% import "components/typography/typography.html.twig" as typography %}
+        {% import "components/content/media/image.html.twig" as img %}
 
         <div class="grid gap-6 lg:grid-cols-12 lg:gap-10">
             {{ typography.heading({
@@ -11,16 +12,20 @@
             <div class="col-span-full flex flex-wrap justify-center gap-y-6 md:gap-10">
                 {% for item in fields.items %}
                     <div class="flex flex-col items-center gap-4 w-1/2 max-sm:max-w-[160px] sm:w-40 lg:w-48">
-                        <div class="relative overflow-hidden w-full aspect-[100/40]">
-                            {% include "components/content/media/image.html.twig" with {
-                                media: item.image,
-                                className: "contain-full object-center p-4",
-                            } %}
-                        </div>
-                        {{ typography.text({
-                            content: item.title,
-                            className: 'text-center',
-                        }) }}
+                        {% if item.image %}
+                            {% set image_properties = item.image | merge({
+                                'class': 'contain-full p-4 object-center',
+                                'wrapper_class' : 'relative overflow-hidden w-full aspect-[100/40]'
+                            }) %}
+                            {{ img.render_picture(image_properties) }}
+                        {% endif %}
+
+                        {% if item.title %}
+                            {{ typography.text({
+                                content: item.title,
+                                className: 'text-center',
+                            }) }}
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

@@ -1,7 +1,17 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
+        {% import "components/content/media/image.html.twig" as img %}
 
-        {% include "components/content/media/media.html.twig" %}
+        {% set image = fields.media.image %}
 
+        {% if image %}
+            {% set image_properties = image | merge({
+                'responsive_sizes': '(min-width: 1540px) 1440px, (min-width: 1280px) 1200px, (min-width: 1040px) 936px, (min-width: 780px) 696px, (min-width: 640px) 560px, calc(100vw - 32px)',
+                'image_widths': [360, 696, 936, 1200, 1440, 1670, 1872, 2048],
+                'class': 'w-full'
+            }) %}
+
+            {{ img.render_picture(image_properties) }}
+        {% endif %}
     {% endblock %}
 {% endembed %}

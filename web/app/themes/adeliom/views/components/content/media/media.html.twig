@@ -1,48 +1,29 @@
 {% set media = media ?? fields.media %}
+{# Set classes for the wrapper #}
+{% set wrapper_class = {base: "col-span-full", default: {}} | mergeClass({}, wrapper_class) %}
 
-{% set class = {
-    base: "",
-    default: {}
-}|mergeClass({}, className) %}
+{% set image_render  %}
+    {% import "components/content/media/image.html.twig" as image %}
 
+    {%  set image_object = media.type == "video" ? media.video.thumbnail : media.image  %}
 
-<div class="{{ wrapper.className }}">
+    {{ image.render_picture(image_object) }}
+{% endset %}
 
+<div class="{{ wrapper_class }}">
     {% if media.type != "video" %}
-
-        {% if media.image %}
-
-            {% set optionsMedia = {
-                className: class,
-                media: media.image,
-            }|merge(optionsMedia ?? {}) %}
-
-            {% include "components/content/media/image.html.twig" with optionsMedia only %}
-
-        {% endif %}
-
+        {{ image_render }}
     {% else %}
-
-        {% set optionsMedia = {
-            className: class,
-            media: media.video.thumbnail
-        }|merge(optionsMedia ?? {}) %}
-
-        {% set videoURL = "" %}
-
         {% if media.video.is_youtube %}
             {% set videoURL = "https://www.youtube.com/embed/" ~ media.video.id %}
         {% else %}
             {% set videoURL = media.video.file %}
         {% endif %}
 
-        <a class="js-glightbox-video-single relative" href="{{ videoURL }}">
-            <div class="absolute w-full h-full top-0 left-0 bg-black/40"></div>
-            {% include "components/content/media/image.html.twig" with optionsMedia only %}
+        <a class="js-glightbox-video-single relative block" href="{{ videoURL }}">
+            <div class="absolute inset-0 bg-black/40"></div>
+            {{ image_render }}
             {% include "components/action/button/btn-play.html.twig" %}
         </a>
-
     {% endif %}
-
 </div>
-

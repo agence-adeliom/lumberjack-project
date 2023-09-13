@@ -1,19 +1,10 @@
 {% embed "blocks/block.html.twig" %}
     {% block content %}
+        {% set image_object = fields.media.type == "video" ? fields.media.video.thumbnail : fields.media.image %}
 
-        {% if fields.media_ratio.ratio == "auto" or not fields.media_ratio.ratio %}
-            {% set orientation = "paysage" %}
+        {% set media_position = fields.media_position ?? 'left' %}
 
-            {% set image = fields.media.type == "video" ? fields.media.video.thumbnail : fields.media.image %}
-
-            {% if image.height > image.width %}
-                {% set orientation = "portrait" %}
-            {% endif %}
-        {% else %}
-            {% set orientation = fields.media_ratio.ratio %}
-        {% endif %}
-
-        {% set positions = {
+        {% set image_format = {
             portrait: {
                 right: {
                     text: "lg:row-start-1 lg:col-span-6",
@@ -22,7 +13,9 @@
                 left: {
                     media: "lg:col-start-1 lg:col-end-6",
                     text: "lg:col-start-7 lg:col-end-13"
-                }
+                },
+                responsive_sizes: "(min-width: 1540px) 586px, (min-width: 1280px) 486px, (min-width: 1040px) 376px, (min-width: 780px) 696px, (min-width: 640px) 560px, calc(100vw - 32px)",
+                image_widths : [376, 586, 752, 972, 1172, 1392]
             },
             paysage: {
                 right: {
@@ -32,34 +25,46 @@
                 left: {
                     media: "lg:col-span-6",
                     text: "lg:col-start-8 lg:col-end-13"
-                }
+                },
+                responsive_sizes: "(min-width: 1540px) 708px, (min-width: 1280px) 588px, (min-width: 1040px) 456px, (min-width: 780px) 696px, (min-width: 640px) 560px, calc(100vw - 32px)",
+                image_widths : [320, 588, 708, 912, 1176, 1416]
             }
         } %}
 
-        {% set ratio = "" %}
+        {% set conditions = ((fields.media_ratio.ratio == "auto" or not fields.media_ratio.ratio) and image_object.height > image_object.width) or fields.media_ratio.ratio in ["square", "portrait"] %}
+        {% set format = conditions ? image_format.portrait : image_format.paysage %}
 
-        {% if fields.media_ratio.has_ratio %}
+        {% set media_wrapper_class = format[media_position].media %}
+        {% set text_wrapper_class = format[media_position].text %}
+        {% set responsive_sizes = format.responsive_sizes %}
+        {% set image_widths = format.image_widths %}
 
-            {% set ratioFormat = {
-                paysage: "aspect-[4/3]",
-                portrait: "aspect-square"
-            } %}
+        {% import "components/content/media/image.html.twig" as img %}
 
-            {% set ratio = "w-full object-cover " ~ ratioFormat[orientation] %}
+        {% set aspect_ratio = determineMediaAspectRatio(fields.media_ratio) %}
 
+        {% set image_properties = image_object | merge({
+            'responsive_sizes': responsive_sizes,
+            'image_widths': image_widths,
+            'aspect_ratio': aspect_ratio,
+            'class': 'w-full',
+            'object-fit': 'cover'
+        }) %}
+
+        {% if fields.media.type == "video" %}
+            {% set video_properties = fields.media.video %}
+            {% set video_thumbnail_properties = fields.media.video.thumbnail | default({}) %}
+            {% set updated_video_properties = video_properties | merge({'thumbnail': image_properties | merge(video_thumbnail_properties)}) %}
+            {% set media = fields.media | merge({'video': updated_video_properties}) %}
+        {% else %}
+            {% set media = fields.media | merge({'image': image_properties}) %}
         {% endif %}
 
         <div class="grid items-center gap-10 lg:gap-6 lg:grid-cols-12">
 
-            {% include "components/content/media/media.html.twig" with {
-                wrapper: {
-                    className: concat("col-span-full", positions[orientation][fields.media_position].media)
-                },
-                className: ratio
-            } %}
+            {% include "components/content/media/media.html.twig" with {wrapper_class:  media_wrapper_class, media: media} only %}
 
-            <div class="{{ concat("col-span-full", positions[orientation][fields.media_position].text) }}">
-
+            <div class="{{ concat("col-span-full", text_wrapper_class) }}">
                 {% import "components/typography/typography.html.twig" as typography %}
                 {{ typography.textGroup({
                     fields,
@@ -67,11 +72,7 @@
                         size: 2,
                     },
                 }) }}
-
             </div>
-
         </div>
-
-
     {% endblock %}
 {% endembed %}
