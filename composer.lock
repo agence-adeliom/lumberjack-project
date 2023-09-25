@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bec8fe8e627a7b7cf324c31a60d253e6",
+    "content-hash": "8c28ba2c330a39cefe4a037f8a0cb68b",
     "packages": [
         {
             "name": "agence-adeliom/lumberjack-admin",
@@ -92,6 +92,59 @@
                 "source": "https://github.com/agence-adeliom/lumberjack-assets/tree/1.0.53"
             },
             "time": "2023-05-30T09:00:34+00:00"
+        },
+        {
+            "name": "agence-adeliom/lumberjack-cli",
+            "version": "1.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/agence-adeliom/lumberjack-cli.git",
+                "reference": "b77c531cdb553a593c00c9fb10d7346ac2d3978b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/agence-adeliom/lumberjack-cli/zipball/b77c531cdb553a593c00c9fb10d7346ac2d3978b",
+                "reference": "b77c531cdb553a593c00c9fb10d7346ac2d3978b",
+                "shasum": ""
+            },
+            "require": {
+                "blast/facades": "^1.0",
+                "icanboogie/inflector": "^2.0",
+                "jawira/case-converter": "^3.4",
+                "php": "^7.1|^8.0",
+                "rareloop/lumberjack-core": "*",
+                "symfony/console": "^5.4"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Adeliom\\WP\\CLI\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Arnaud Ritti",
+                    "email": "ari@adeliom.com",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://github.com/agence-adeliom/lumberjack-cli",
+            "keywords": [
+                "adeliom-wp-cli",
+                "aritti"
+            ],
+            "support": {
+                "source": "https://github.com/agence-adeliom/lumberjack-cli/tree/v1.1.7"
+            },
+            "time": "2022-07-27T14:40:26+00:00"
         },
         {
             "name": "agence-adeliom/lumberjack-cron",
@@ -2311,6 +2364,70 @@
             "time": "2017-03-17T15:46:19+00:00"
         },
         {
+            "name": "icanboogie/inflector",
+            "version": "v2.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ICanBoogie/Inflector.git",
+                "reference": "0288676d1cd48899386f8bbe50643d3ade5dc13b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ICanBoogie/Inflector/zipball/0288676d1cd48899386f8bbe50643d3ade5dc13b",
+                "reference": "0288676d1cd48899386f8bbe50643d3ade5dc13b",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.1"
+            },
+            "conflict": {
+                "icanboogie/common": "<2.0"
+            },
+            "require-dev": {
+                "icanboogie/common": "^2.0",
+                "phpstan/phpstan": "^0.12.92",
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "lib/helpers.php"
+                ],
+                "psr-4": {
+                    "ICanBoogie\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Olivier Laviale",
+                    "email": "olivier.laviale@gmail.com",
+                    "homepage": "http://www.weirdog.com/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Multilingual inflector that transforms words from singular to plural, underscore to camel case, and more.",
+            "homepage": "http://icanboogie.org/",
+            "keywords": [
+                "camelize",
+                "hyphenate",
+                "inflect",
+                "multilingual",
+                "pluralize",
+                "singularize",
+                "underscore"
+            ],
+            "support": {
+                "issues": "https://github.com/ICanBoogie/Inflector/issues",
+                "source": "https://github.com/ICanBoogie/Inflector"
+            },
+            "time": "2023-03-12T18:39:52+00:00"
+        },
+        {
             "name": "illuminate/collections",
             "version": "v9.52.10",
             "source": {
@@ -2554,6 +2671,73 @@
                 "source": "https://github.com/ircmaxell/SecurityLib/tree/master"
             },
             "time": "2015-03-20T14:31:23+00:00"
+        },
+        {
+            "name": "jawira/case-converter",
+            "version": "v3.5.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jawira/case-converter.git",
+                "reference": "2be05b98dcb743bef60ab6f849145bd3434ed003"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jawira/case-converter/zipball/2be05b98dcb743bef60ab6f849145bd3434ed003",
+                "reference": "2be05b98dcb743bef60ab6f849145bd3434ed003",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.4"
+            },
+            "require-dev": {
+                "behat/behat": "^3.0",
+                "phpstan/phpstan": "^1.0",
+                "phpunit/phpunit": "^9.0",
+                "vimeo/psalm": "^4.0"
+            },
+            "suggest": {
+                "pds/skeleton": "PHP Package Development Standards",
+                "phing/phing": "PHP Build Tool"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jawira\\CaseConverter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jawira Portugal",
+                    "email": "dev@tugal.be"
+                }
+            ],
+            "description": "Convert strings between 13 naming conventions: Snake case, Camel case, Pascal case, Kebab case, Ada case, Train case, Cobol case, Macro case, Upper case, Lower case, Sentence case, Title case and Dot notation.",
+            "homepage": "https://jawira.github.io/case-converter/",
+            "keywords": [
+                "Ada case",
+                "Cobol case",
+                "Macro case",
+                "Train case",
+                "camel case",
+                "dot notation",
+                "kebab case",
+                "lower case",
+                "pascal case",
+                "sentence case",
+                "snake case",
+                "title case",
+                "upper case"
+            ],
+            "support": {
+                "issues": "https://github.com/jawira/case-converter/issues",
+                "source": "https://github.com/jawira/case-converter/tree/v3.5.1"
+            },
+            "time": "2022-08-14T11:40:18+00:00"
         },
         {
             "name": "jean85/pretty-package-versions",
@@ -14044,5 +14228,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
