@@ -30,7 +30,7 @@
         "fork-ts-checker-webpack-plugin": "^7.2.13",
         "glob": "^8.0.3",
         "mjml": "^4.13.0",
-        "postcss": "^8.4.16",
+        "postcss": "^8.4.31",
         "postcss-import": "^15.0.0",
         "postcss-loader": "^7.0.1",
         "tailwind-css-extensions": "^1.0.0",
