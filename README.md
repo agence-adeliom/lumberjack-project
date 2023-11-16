@@ -31,7 +31,7 @@ _Vou pouvez trouver les clés sur le [codex](https://codex.adeliom.com/books/wor
 
 ## 💡Technos utilisées :
 
-- PHP : **8.1**
+- PHP : **8.2**
 - MariaDB : **10.4**
 - Environnement de développement : **Ddev**
 - Stack : **Wordpress - Lumberjack - Bedrock**
@@ -191,7 +191,7 @@ Pour améliorer les performances de l'environnement local, il peut être intére
 
 Pour l'activer : 
 - accéder au fichier `.ddev/config.yaml`
-- passer la ligne `mutagen_enabled` à `true`
+- passer la ligne `performance_mode` à `mutagen`
 - `ddev restart`
 
 Par défaut, les dossiers des vendors (composer) et des node_modules (npm) sont exclus.
