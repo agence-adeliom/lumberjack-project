@@ -7,7 +7,6 @@
         "php": ">=8.0.2",
         "ext-dom": "*",
         "ext-json": "*",
-        "wpengine/advanced-custom-fields-pro": "^6.0",
         "agence-adeliom/lumberjack-admin": "^1.0",
         "agence-adeliom/lumberjack-assets": "^1.0",
         "agence-adeliom/lumberjack-cron": "^1.0",
@@ -17,6 +16,7 @@
         "composer/installers": "^1.0 | ^2.0",
         "djboris88/timber-debugger": "^1.1",
         "doctrine/annotations": "^1.6",
+        "junaidbhura/gravityforms": "*",
         "koodimonni-language/fr_fr": "*",
         "oscarotero/env": "^2.1",
         "rareloop/lumberjack-core": "^6.0",
@@ -37,12 +37,13 @@
         "symfony/polyfill-php81": "^1.26",
         "vlucas/phpdotenv": "^5.3",
         "wp-cli/wp-cli-bundle": "*",
+        "wpackagist-plugin/advanced-custom-fields-font-awesome": "^4.0",
         "wpackagist-plugin/disable-comments": "*",
         "wpackagist-plugin/seo-by-rank-math": "*",
         "wpackagist-plugin/w3-total-cache": "*",
         "wpackagist-plugin/wordfence": "*",
         "wpackagist-plugin/worker": "*",
-        "gravityforms/gravityforms": "*"
+        "wpengine/advanced-custom-fields-pro": "^6.0"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
@@ -73,15 +74,15 @@
         {
             "type": "package",
             "package": {
-                "name": "gravityforms/gravityforms",
-                "version": "2.7.7",
+                "name": "junaidbhura/gravityforms",
+                "version": "2.7.15.2",
                 "type": "wordpress-plugin",
                 "dist": {
                     "type": "zip",
-                    "url": ".plugins/gravityforms.zip"
+                    "url": "https://www.gravityforms.com/"
                 },
                 "require": {
-                    "composer/installers": "^1.0 || ^2.0"
+                    "junaidbhura/composer-wp-pro-plugins": "*"
                 }
             }
         },
@@ -114,8 +115,8 @@
             "koodimonni/composer-dropin-installer": true,
             "roots/wordpress-core-installer": true,
             "dealerdirect/phpcodesniffer-composer-installer": true,
-            "arnaud-ritti/gravityforms-installer": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "junaidbhura/composer-wp-pro-plugins": true
         }
     },
     "extra": {
@@ -135,8 +136,9 @@
                 "type:wordpress-muplugin",
                 "roots/wp-stage-switcher",
                 "soberwp/intervention",
-                "agence-adeliom/acf-icon-picker",
-                "wpengine/advanced-custom-fields-pro"
+                "wpengine/advanced-custom-fields-pro",
+                "wpackagist-plugin/advanced-custom-fields-font-awesome",
+                "junaidbhura/gravityforms"
             ],
             "web/app/plugins/{$name}/": [
                 "type:wordpress-plugin"
@@ -154,10 +156,10 @@
         "setup": [
             "Adeliom\\Installer\\Install::buildEnv"
         ],
-        "post-update-cmd": [
+        "pre-install-cmd": [
             "@setup"
         ],
-        "post-install-cmd": [
+        "pre-update-cmd": [
             "@setup"
         ],
         "test": [

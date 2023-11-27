@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd /var/www/html/web/app/themes/adeliom
-npm install
+npm install $*
