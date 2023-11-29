@@ -18,6 +18,27 @@ set('bin/wp', function () {
     return '{{bin/php}} {{deploy_path}}/.dep/wp-cli.phar';
 });
 
+// Task to set the repository URL based on the Git configuration
+task('set:repository', static function (): void {
+    $remoteRepo = runLocally('git config --get remote.origin.url');
+
+    // Case 1: RunLocally returns an address in the 'git@github.com:...' format
+    if (str_starts_with($remoteRepo, 'git@github.com:')) {
+        $repo = trim($remoteRepo);
+    }
+    // Case 2: RunLocally successfully returns the correct value
+    elseif (str_starts_with($remoteRepo, 'https://github.com/')) {
+        // Modify the URL to match the 'git@github.com:' format while retaining '.git' at the end
+        $repo = str_replace('https://github.com/', 'git@github.com:', trim($remoteRepo));
+    }
+    // Case 3: RunLocally returns nothing or encounters an error, prompting the user to enter the repository URL
+    else {
+        $repo = ask('Please enter the repository URL: ', 'adeliom');
+    }
+
+    set('repository', $repo); // Set the repository URL
+});
+
 // Set the default theme name, prompting user if not set in the .env file
 set('theme', function () {
     // Define the path to the .env file
@@ -82,27 +103,6 @@ set('writable_recursive', false);
 
 // Hosts
 import('.inventory.yaml');
-
-// Task to set the repository URL based on the Git configuration
-task('set:repository', static function (): void {
-    $remoteRepo = runLocally('git config --get remote.origin.url');
-
-    // Case 1: RunLocally returns an address in the 'git@github.com:...' format
-    if (str_starts_with($remoteRepo, 'git@github.com:')) {
-        $repo = trim($remoteRepo);
-    }
-    // Case 2: RunLocally successfully returns the correct value
-    elseif (str_starts_with($remoteRepo, 'https://github.com/')) {
-        // Modify the URL to match the 'git@github.com:' format while retaining '.git' at the end
-        $repo = str_replace('https://github.com/', 'git@github.com:', trim($remoteRepo));
-    }
-    // Case 3: RunLocally returns nothing or encounters an error, prompting the user to enter the repository URL
-    else {
-        $repo = ask('Please enter the repository URL: ', 'adeliom');
-    }
-
-    set('repository', $repo); // Set the repository URL
-});
 
 // Task to set environment variables and configuration
 task('dotenv:set-env', static function (): void {
