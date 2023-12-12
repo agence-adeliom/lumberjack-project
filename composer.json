@@ -7,7 +7,6 @@
         "php": ">=8.0.2",
         "ext-dom": "*",
         "ext-json": "*",
-        "wpengine/advanced-custom-fields-pro": "^6.0",
         "agence-adeliom/lumberjack-admin": "^1.0",
         "agence-adeliom/lumberjack-assets": "^1.0",
         "agence-adeliom/lumberjack-cron": "^1.0",
@@ -17,6 +16,7 @@
         "composer/installers": "^1.0 | ^2.0",
         "djboris88/timber-debugger": "^1.1",
         "doctrine/annotations": "^1.6",
+        "gravityforms/gravityforms": "*",
         "koodimonni-language/fr_fr": "*",
         "oscarotero/env": "^2.1",
         "rareloop/lumberjack-core": "^6.0",
@@ -38,11 +38,11 @@
         "vlucas/phpdotenv": "^5.3",
         "wp-cli/wp-cli-bundle": "*",
         "wpackagist-plugin/disable-comments": "*",
-        "wpackagist-plugin/seo-by-rank-math": "*",
         "wpackagist-plugin/w3-total-cache": "*",
         "wpackagist-plugin/wordfence": "*",
+        "wpackagist-plugin/wordpress-seo": "^21.7",
         "wpackagist-plugin/worker": "*",
-        "gravityforms/gravityforms": "*"
+        "wpengine/advanced-custom-fields-pro": "^6.0"
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7",
