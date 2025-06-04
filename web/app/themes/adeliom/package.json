@@ -16,7 +16,7 @@
     "devDependencies": {
         "@babel/core": "^7.19.1",
         "@babel/preset-env": "^7.19.1",
-        "@symfony/webpack-encore": "^4.0.0",
+        "@symfony/webpack-encore": "^5.1.0",
         "@types/alpinejs": "^3.7.1",
         "@types/micromodal": "^0.3.3",
         "@typescript-eslint/eslint-plugin": "^5.36.2",
