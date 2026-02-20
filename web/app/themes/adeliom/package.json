@@ -46,6 +46,6 @@
         "glightbox": "^3.2.0",
         "lint-staged": "^13.2.3",
         "micromodal": "^0.4.10",
-        "swiper": "^10.0.4"
+        "swiper": "^12.1.2"
     }
 }
