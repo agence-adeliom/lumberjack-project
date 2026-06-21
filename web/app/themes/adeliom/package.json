@@ -14,7 +14,7 @@
         "not op_mini all"
     ],
     "devDependencies": {
-        "@babel/core": "^7.19.1",
+        "@babel/core": "^7.29.6",
         "@babel/preset-env": "^7.19.1",
         "@symfony/webpack-encore": "^4.0.0",
         "@types/alpinejs": "^3.7.1",
