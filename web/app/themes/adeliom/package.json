@@ -29,7 +29,7 @@
         "file-loader": "^6.2.0",
         "fork-ts-checker-webpack-plugin": "^7.2.13",
         "glob": "^8.0.3",
-        "mjml": "^4.13.0",
+        "mjml": "^5.0.0",
         "postcss": "^8.4.16",
         "postcss-import": "^15.0.0",
         "postcss-loader": "^7.0.1",
